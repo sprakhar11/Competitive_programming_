@@ -38,36 +38,67 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
-
-int rand(int a , int b)
-{
-    return a + rand() % (b - a + 1);
-}
-
+int t,ii;
 void prakhar()
 {   
-    int t  = 60;
-    cout << t << endl;
-    for (int i = 0; i < t; i++)
+    string s , p ;
+    cin >> s >> p;
+    int n = s.length();
+    int n2 = p.length();
+
+    int i = 0 ;
+    int j = 0 ;
+    int f = 0 ;
+    int q = 0 ;
+    int w = 0 ;
+
+    while(true)
     {
-        int k = rand(10e4, 10e7);
-        cout << k << endl;
+        // cout << i << " " << j << " " << endl;
+        if(s[i] == p[j])
+        {
+            // cout << s[i] << " " << p[j] << " " << endl;
+            
+            q++;
+            i++;
+            j++;
+        }
+        else
+        {
+            j++;
+            w++;
+        }
+        if( i == n || j == n2 )
+        break;
     }
-    
+
+    if(q == n)
+    {
+        if( n < n2 )
+        {
+            w = w+(n2 -j );
+        }
+        cout << "Case #" << ii+1 << ": " << w << endl;
+    }
+    else
+    {
+        cout << "Case #" << ii+1 << ": " << "IMPOSSIBLE"<< endl;
+    }
+
+
 }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
-    // freopen("input.txt", "r", stdin);
-    freopen("input.txt", "w", stdout);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     freopen("error.txt", "w", stderr);
     #endif
-    srand(time(0));
-    ll t = 1 ;
-    // cin >> t ;
-    for (int i = 0; i < t; i++)
+    // ll t = 1 ;
+    cin >> t ;
+    for ( ii = 0; ii < t; ii++)
     {
         prakhar();
     }

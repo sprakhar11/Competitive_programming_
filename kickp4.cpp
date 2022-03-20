@@ -24,7 +24,7 @@
 using namespace std;
 //prakhar_0007
 #define watch(x) cout << (#x) << " = " << (x) << endl
-const int MOD = 1e9 + 7;
+const int MOD = 9;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
 ll mult(ll x, ll y) {ll res = x * y;return (res >= MOD ? res % MOD : res);}
 ll factorial(ll v){ll ans=1;for(int i=2;i<=v;i++){ans*=i;ans%=MOD;}return ans;}
@@ -38,36 +38,60 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
-
-int rand(int a , int b)
+int t,ii;
+int digsum(int n)
 {
-    return a + rand() % (b - a + 1);
+    int s = 0 ;
+    while(n != 0) {
+        s = s + ( n % 10 ) ;
+        n /=10;
+    }
+    return s;
 }
+int digpro(int n){
+    int s = 1 ;
+    while(n != 0) {
+        s = s *( n % 10 ) ;
+        n /=10;
+    }
+    return s;
 
+}
 void prakhar()
 {   
-    int t  = 60;
-    cout << t << endl;
-    for (int i = 0; i < t; i++)
+    int a , b ;
+    cin >> a >> b ;
+    int ans = 0 ;
+
+    for (int i = a; i <=b; i++)
     {
-        int k = rand(10e4, 10e7);
-        cout << k << endl;
+
+        if(digpro(i) % digsum(i) == 0)
+        {
+            ans++;
+            // cout << i << " " << digpro(i) << " " << digsum(i) << endl;
+        }
+        
+        
     }
     
+    cout << "Case #" << ii+1 << ": " <<ans  <<endl;
+    
+
+
 }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
-    // freopen("input.txt", "r", stdin);
-    freopen("input.txt", "w", stdout);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     freopen("error.txt", "w", stderr);
     #endif
-    srand(time(0));
-    ll t = 1 ;
-    // cin >> t ;
-    for (int i = 0; i < t; i++)
+    // ll t = 1 ;
+    cin >> t ;
+    for ( ii = 0; ii < t; ii++)
     {
         prakhar();
     }
