@@ -25,6 +25,7 @@ using namespace std;
 //prakhar_0007
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
+const int N = 1000000;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
 ll mult(ll x, ll y) {ll res = x * y;return (res >= MOD ? res % MOD : res);}
 ll factorial(ll v){ll ans=1;for(int i=2;i<=v;i++){ans*=i;ans%=MOD;}return ans;}
@@ -39,6 +40,17 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 int  t ;
+bool cmp1(const pair<int,int> &a,
+              const pair<int,int> &b)
+{
+    return (a.ff > b.ff);
+}
+bool cmp2(const pair<int,int> &a,
+              const pair<int,int> &b)
+{
+    return (a.ss < b.ss);
+}
+
 void prakhar(int caseq )
 {   
     // vi a, b , c ;
@@ -77,24 +89,24 @@ void prakhar(int caseq )
             {
                 for (int l = 0; l < 3; l++)
                 {
-                    if( a < arr[i][0] )
+                    if( a > arr[i][0] )
                     a = arr[i][0];
-                    if( b < arr[j][0] )
-                    b = arr[j][0];
-                    if( c < arr[k][0] )
-                    c = arr[k][0];
-                    if( d < arr[l][0] )
-                    d = arr[l][0];
+                    if( b > arr[j][1] )
+                    b = arr[j][1];
+                    if( c > arr[k][2] )
+                    c = arr[k][2];
+                    if( d > arr[l][3] )
+                    d = arr[l][3];
 
                     // if( i !=j && i !=k && i !=l && j != k && j != l && k != l)
                     // {
-                        int p = (arr[i][0] + arr[j][1] + arr[k][2] + arr[l][3]);
+                        // int p = (arr[i][0] + arr[j][1] + arr[k][2] + arr[l][3]);
 
-                        if( p == 1000000 && arr[i][0] !=0 && arr[j][1] !=0 && arr[k][2] !=0 && arr[l][3]!= 0)
-                        {
-                            cout << arr[i][0] << " " << arr[j][1] << " " << arr[k][2] << " " << arr[l][3] << endl;
-                            return;
-                        }
+                        // if( p == 1000000 && arr[i][0] !=0 && arr[j][1] !=0 && arr[k][2] !=0 && arr[l][3]!= 0)
+                        // {
+                        //     cout << arr[i][0] << " " << arr[j][1] << " " << arr[k][2] << " " << arr[l][3] << endl;
+                        //     return;
+                        // }
                     // }
                 }
                 
@@ -104,23 +116,118 @@ void prakhar(int caseq )
         
     }
     
-    vii pv ;
-    pv.pb({a , 1});
-    pv.pb({b , 2});
-    pv.pb({c , 3});
-    pv.pb({d , 4});
+    // cout << a << " " << b << " " << c << " " << d << endl;
 
-    sort(all(pv));
-
-    int arr2[4];
-
-    for(auto it:pv)
+    if( a >= N )
     {
-        if( it )
+        cout << N << " " << 0 << " " << 0 << " " << 0 << endl;
+        return;
     }
-    
+    if( b >= N )
+    {
+        cout << 0 << " " << N << " " << 0 << " " << 0 << endl;
+        return;
+    }  
+    if( c >= N)
+    {
+        cout << 0 << " " << 0 << " " << N << " " << 0 << endl;
+        return;
+    }  
+    if( d >= N)
+    {
+        cout << 0 << " " << 0 << " " << 0 << " " << N << endl;
+        return;
+    }
 
-    cout << "IMPOSSIBLE" << endl;
+
+    vii pv , tmp;
+    pv.pb({a ,1 });
+    pv.pb({b, 2});
+    pv.pb({c, 3 });
+    pv.pb({d , 4 });
+            // cout << pv[0].ff << " " << pv[1].ff << " " << pv[2].ff << " " << pv[3].ff << endl;
+
+
+    sort(all(pv) , cmp1);
+    tmp = pv;
+
+    int s1 = pv[0].ff + pv[1].ff;
+    // cout << s1 << endl;
+
+    if( s1 < N)
+    {
+        // cout << "hi";
+        s1= s1 + pv[2].ff; 
+    }
+    else
+    {
+        // cout << " hu";
+        int dif = N - pv[0].ff;
+        // cout << dif << endl;
+
+        pv[1].ff = dif;
+        pv[2].ff = 0 ;
+        pv[3].ff = 0 ;
+        // print ans
+        // cout << pv[0].ff << " " << pv[1].ff << " " << pv[2].ff << " " << pv[3].ff << endl;
+        sort(all(pv) , cmp2);
+
+        // for(auto it:pv)
+        // {
+        //     cout << it.ff << " ";
+        // }
+        // cout << endl;
+        cout << pv[0].ff << " " << pv[1].ff << " " << pv[2].ff << " " << pv[3].ff << endl;
+        return;
+        
+
+
+
+    }
+
+    if( s1 < N)
+    {
+        s1+=pv[3].ff;
+    }
+    else
+    {
+        int dif = N - pv[0].ff - pv[1].ff;
+
+        pv[2].ff = dif;
+        pv[3].ff = 0 ;
+        // print ans
+        sort(all(pv) , cmp2);
+        cout << pv[0].ff << " " << pv[1].ff << " " << pv[2].ff << " " << pv[3].ff << endl;
+        return;
+
+
+
+    }
+
+    if( s1 < N)
+    {
+        cout << "IMPOSSIBLE" << endl;
+    }
+    else
+    {
+        int dif = N - pv[0].ff - pv[1].ff - pv[2].ff;
+
+        pv[3].ff = dif;
+        // print ans
+        sort(all(pv) , cmp2);
+        cout << pv[0].ff << " " << pv[1].ff << " " << pv[2].ff << " " << pv[3].ff << endl;
+        return;
+
+
+
+    }
+
+
+
+
+
+
+    // cout << "IMPOSSIBLE" << endl;
     
     
 
