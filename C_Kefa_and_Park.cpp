@@ -38,87 +38,64 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
-int  t ;
-void prakhar(int caseq )
+int MAX = 10e5 + 5;
+vi color(MAX, 0);
+
+vector<vector<int>> adj(MAX);
+vector<bool> visited(MAX, false);
+
+
+void addedge(int u , int  v)
+{
+    adj[u].pb(v);
+    adj[v].pb(u);
+}
+int cnt = 0;
+void dfs(int v, int m)
+{
+    visited[v] = true;
+    
+    if(color[v] == 1 )
+    {
+        cnt++;
+    }
+    for(auto u:adj[v])
+    {
+        if(visited[u] ==  false )
+        {
+            if(cnt[0])
+        }
+    }
+
+
+}
+
+void prakhar()
 {   
-    // vi a, b , c ;
-    cout << "Case #" << caseq+1 <<": " ;
-
-    int arr[3][4];
-
-    for (int i = 0; i < 3; i++)
+    
+    int n , m ; 
+    cin >> n >> m;
+    
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < 4; j++)
-        {
-            cin >> arr[i][j] ;
-        }
-        
-    }
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     for (int j = 0; j < 4; j++)
-    //     {
-    //         cout << arr[i][j] << " ";
-    //     }
-    //     cout << endl;
-        
-    // }
-    
-    int a = arr[0][0];
-    int b = arr[0][1];
-    int c = arr[0][2];
-    int d = arr[0][3];
+        int c;
+        cin >> c;
 
-    for (int i = 0; i < 3; i++)
+        color[i+1] = c;
+    }
+
+    for (int i = 0; i < n-1; i++)
     {
-        for (int j = 0; j < 3; j++)
-        {
-            for (int k = 0; k < 3; k++)
-            {
-                for (int l = 0; l < 3; l++)
-                {
-                    if( a > arr[i][0] )
-                    a = arr[i][0];
-                    if( b > arr[j][0] )
-                    b = arr[j][0];
-                    if( c > arr[k][0] )
-                    c = arr[k][0];
-                    if( d > arr[l][0] )
-                    d = arr[l][0];
-
-                    // if( i !=j && i !=k && i !=l && j != k && j != l && k != l)
-                    // {
-                        int p = (arr[i][0] + arr[j][1] + arr[k][2] + arr[l][3]);
-
-                        if( p == 1000000 && arr[i][0] !=0 && arr[j][1] !=0 && arr[k][2] !=0 && arr[l][3]!= 0)
-                        {
-                            cout << arr[i][0] << " " << arr[j][1] << " " << arr[k][2] << " " << arr[l][3] << endl;
-                            return;
-                        }
-                    // }
-                }
-                
-            }
-            
-        }
-        
+            int a , b ;
+            cin >> a >> b;
+            addedge(a,b);
     }
-    
-    int min = a + b + c + d;
-    if ( a != 0 && b != 0 && c != 0 && d != 0 && min == 1000000)
-    {
-        cout << a << " " << b << " " << c << " " << d << endl;
-        return;
-    }
-    
 
-    cout << "IMPOSSIBLE" << endl;
-    
-    
+    dfs( n , m);
+
 
     
     
-
 }
 
 int32_t main() {
@@ -129,11 +106,11 @@ int32_t main() {
     freopen("output.txt", "w", stdout);
     freopen("error.txt", "w", stderr);
     #endif
-    // ll t = 1 ;
+    ll t = 1 ;
     cin >> t ;
     for (int i = 0; i < t; i++)
     {
-        prakhar(i);
+        prakhar();
     }
     
     return 0;
