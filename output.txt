@@ -1,0 +1,5 @@
+AB 2
+AC 1
+BA 2
+CA 1
+BA
