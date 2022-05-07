@@ -22,6 +22,7 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
+//prakhar_0007
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -40,6 +41,71 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 
 void prakhar()
 {   
+    int n;
+    cin >> n;
+    vi v ;
+    vin(v , n);
+
+    int ans = LONG_MAX;
+    vi tmpv = v ;
+
+    for (int i = 0; i < n; i++)
+    {
+        int moves = 0 ;
+        int tmp = v[i];
+        // cout << " i == " << i << endl;
+        v[i] =  0;
+
+        for (int j = i; j > 0; j--)
+        {
+            
+
+            if( v[j-1] > v[j])
+            {
+                moves++;
+                // cout << "hi" << moves << endl;
+            }
+            else
+            {
+                int tmp_moves = floor(v[j] / v[j-1]) + 1;
+                v[j-1] = v[j-1] * tmp_moves;
+                moves+=tmp_moves;
+                // cout << moves << endl;
+
+            }
+        }
+        for (int k = i; k < n - 1; k++)
+        {
+            // cout << " k== " << k << endl;
+            if( v[k+1] > v[k] )
+            {
+                moves++;
+                // cout << " yes " << v[k+1]  << " " << v[k] << endl;
+            }
+            else
+            {
+                int tmp_moves = floor(v[k] / v[k+1]) + 1;
+
+                v[k+1] = v[k+1] * tmp_moves;
+                moves+=tmp_moves;
+                // cout << tmp_moves << "iam tmp_move right" << endl;
+            }
+        }
+        // cout << moves << endl;
+
+        if( moves <= ans)
+        {
+            ans = moves;
+
+        }
+
+        
+        v.clear();
+        v = tmpv;
+        
+        
+    }
+    cout << ans << endl;
     
 }
 
@@ -52,7 +118,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++)
     {
         prakhar();

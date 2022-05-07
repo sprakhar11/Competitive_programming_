@@ -22,6 +22,7 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
+//prakhar_0007
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -40,6 +41,146 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 
 void prakhar()
 {   
+    int n ;
+    cin >> n;
+
+    string str ;
+    cin >> str;
+
+    int st = 0 ;
+    int en = n-1;
+    vector<char> s;
+
+
+    for (int i = 0; i < n; i++)
+    {
+        // if( s[i] != 'W')
+        // {
+        //     st = i;
+        //     break;
+        // }
+        s.pb(str[i]);
+
+
+    }
+
+
+    // for (int i = n-1; i >= 0; i++)
+    // {
+    //     if( s[i] !='W')
+    //     {
+    //         en = i;
+    //         break;
+    //     }
+    // }
+    vector<char>::iterator ip;
+
+
+    ip = std::unique(s.begin(), s.end());
+    s.resize(std::distance(s.begin(), ip));
+
+    vector<char> newch;
+
+    for (ip = s.begin(); ip != s.end(); ++ip) {
+        
+        newch.pb(*ip);
+        // cout << *ip << " ";
+    }
+    // cout <<  endl;
+    // cout << sz(newch) << endl;
+
+    if(sz(newch) == 1)
+    {
+        if(newch[0] == 'W')
+        cout << "YES" << endl;
+        else
+        cout << "NO" << endl;
+        return;
+    }
+
+
+    for (int i = 0; i < sz(newch); i++)
+    {
+        int a = 0;
+        int b = 0;
+        if( i > 0)
+        {
+            if(newch[i] == 'B')
+            {
+                if(newch[i-1] == 'R')
+                a++;
+            }
+
+            if(newch[i] == 'R')
+            {
+                if(newch[i-1] == 'B')
+                a++;
+            }
+        }
+
+        if( i < n-1)
+        {
+            if(newch[i] == 'B')
+            {
+                if(newch[i+1] == 'R')
+                b++;
+            }
+
+            if(newch[i] == 'R')
+            {
+                if(newch[i+1] == 'B')
+                b++;
+            }
+        }
+        a = a+ b;
+        if(newch[i] != 'W')
+        if( a == 0)
+        {
+            cout << "NO" << endl;
+            return;
+        }
+
+
+    }
+    cout << "YES" << endl;
+    
+
+
+
+
+
+
+    
+
+    // for(int i = st ; i<= en ; i++)
+    // {
+    //     int cnt = 0;
+
+    //     if(s[i] == 'W')
+    //     {
+    //         for (int k = i; k <= en; k++)
+    //         {
+    //             if(s[i] == 'W'){
+    //             cnt++;
+    //             i++;
+    //             }
+    //             else
+    //             break;
+    //         }
+    //         if( cnt % 2 !=0)
+    //         {
+                
+    //         }
+            
+    //     }
+    // }
+
+    
+    
+
+
+    
+
     
 }
 

@@ -22,6 +22,7 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
+//prakhar_0007
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -37,9 +38,35 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
-
+// For Division 1: 1900≤rating
+// For Division 2: 1600≤rating≤1899
+// For Division 3: 1400≤rating≤1599
+// For Division 4: rating≤1399
 void prakhar()
 {   
+    int n ;
+    cin >> n;
+
+    vi v;
+    vin(v , n);
+    map<int , int> mp;
+
+    for (int i = 0; i < n; i++)
+    {
+        mp[v[i]]++;
+    }
+
+    for(auto it:mp)
+    {
+        if(it.ss >= 3)
+        {
+            cout << it.ff << endl;
+            return;
+        }
+    }
+    cout << -1 << endl;
+    
+
     
 }
 

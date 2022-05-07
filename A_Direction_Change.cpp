@@ -22,6 +22,7 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
+//prakhar_0007
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -40,7 +41,54 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 
 void prakhar()
 {   
-    
+    int n , m ; 
+    cin >> n >> m;
+    if( n ==1 && m==1 )
+    {
+        cout << 0 << endl;
+        return;
+    }
+
+    if( (n == 1 && m == 2 ) || (n == 2 && m == 1))
+    {
+        cout << 1 << endl;
+        return;
+    }
+    if( n == 1 || m == 1)
+    {
+        cout << -1 << endl;
+        return;
+    }
+    int mx = max(n, m);
+    int mn = min(m, n);
+
+
+     mx = mx - 2;
+    int ans = 0;
+    if(mn == mx+2 )
+    {
+        ans = mx + 1;
+        ans = ans * 2 ;
+
+    }
+    else
+    {
+        if( mx % 2 == 0 )
+        {
+            ans = mx * 2 + 1;
+            if(mn % 2 == 0)
+            ans++;
+        }
+        else
+        {
+            ans = mx * 2 +1;
+            if( mn % 2 !=0)
+            {
+                ans++;
+            }
+        }
+    }
+    cout << ans << endl;
 }
 
 int32_t main() {

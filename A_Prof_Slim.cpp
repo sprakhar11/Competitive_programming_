@@ -40,6 +40,50 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 
 void prakhar()
 {   
+    int n;
+
+    cin >> n;
+    vi v;
+    vin(v, n);
+
+    int neg = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if( v[i] < 0 )
+        {
+            neg++;
+        }
+        v[i] = abs(v[i]);
+    }
+
+
+    for (int i = 0; i < neg; i++)
+    {
+        v[i] = v[i] * -1;
+    }
+
+    int f = 0 ;
+
+    for (int i = 1; i < n; i++)
+    {
+        if( v[i] < v[i-1] )
+        {
+            cout << "NO" << endl;
+            return;
+        }
+    }
+    cout << "YES" << endl;
+    
+
+
+    
+
+    
+    
+
+
+
     
 }
 

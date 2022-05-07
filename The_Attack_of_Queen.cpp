@@ -40,7 +40,17 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 
 void prakhar()
 {   
-    
+    int n, x, y;
+    cin >> n >> x >> y;
+
+    int xn = x - 1;
+    int xp = n - x;
+    int yn = n - y;
+    int yp = y - 1;
+
+    int ans = min(xn , yn) + min(xn, yp) + min(xp , yp) + min(xp, yn) + xn + xp + yn + yp;
+    cout << ans << endl;
+
 }
 
 int32_t main() {

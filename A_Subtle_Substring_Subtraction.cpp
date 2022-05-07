@@ -22,6 +22,7 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
+//prakhar_0007
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -40,7 +41,76 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 
 void prakhar()
 {   
-    
+    string s = "";
+    cin >> s;
+    int ans =  0;
+
+    if(s.length() == 1)
+    {
+        cout << "Bob " << s[0] - 96 << endl;
+    }
+
+    if( s.length() % 2 == 0 )
+    {
+        cout << "Alice " ;
+
+        
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            // cout << (int)s[i]- (96) << " " << endl;
+            ans += ((int)s[i] - (96));
+
+        }
+        cout<< ans << endl;
+        
+    }
+    else
+    {
+        // cout << "Bob ";
+        int ans1 = 0 ;
+        int ans2 = 0 ;
+        for (int i = 0; i < s.length(); i++)
+        {
+            // cout << (int)s[i]- (96) << " " << endl;
+            ans += ((int)s[i] - (96));
+
+        }
+        for (int i = 0; i < s.length()-1; i++)
+        {
+            // cout << (int)s[i]- (96) << " " << endl;
+            ans1 += ((int)s[i] - (96));
+
+        }
+        for (int i = 1; i < s.length(); i++)
+        {
+            // cout << (int)s[i]- (96) << " " << endl;
+            ans2 += ((int)s[i] - (96));
+
+        }
+        if(ans2 > ans1){
+        if( ans2 > ((int)s[0] - (96)))
+        {
+            cout << "Alice ";
+
+            cout << ans2 - ((int)s[0] - (96)) << endl;
+            return;
+        }}
+        else{
+        if( ans1 > ((int)s[s.length()-1] - (96)))
+        {
+            cout  << "Alice ";
+
+            cout << ans1 - ((int)s[s.length()-1] - (96))<< endl; 
+            return;
+        }}
+
+        
+
+        // cout << max(ans1, ans2) << endl;
+
+
+    }
 }
 
 int32_t main() {
