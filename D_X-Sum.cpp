@@ -37,15 +37,123 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
+int cost(string s , string b, int l)
+{
 
+    int cst =  0 ;
+
+    for (int i = 0; i < l; i++)
+    {
+        
+        cst = cst + abs(s[i] - b[i]);
+    }
+    return cst;
+    
+}
 void prakhar()
 {   
-    int n ;
-    cin >> n;
-    vi v;
-    vin(v, n);
+   int n, m ;
+   cin >> n >> m;
+   int ar[n][m];
 
-    
+   for (int i = 0; i < n; i++)
+   {
+       for (int j = 0; j < m;j++)
+       {
+           int x;
+           cin >> x;
+           ar[i][j] = x;
+       }
+       
+   }
+    for (int i = 0; i < n; i++)
+   {
+       for (int j = 0; j < m;j++)
+       {
+        //    cout << ar[i][j] << " ";
+       }
+    //    cout << endl;
+       
+   }
+   int ans = LONG_MIN;
+
+   for (int i = 0; i < n; i++)
+   {
+       for (int j = 0; j < m; j++)
+       {
+           int sum = 0;
+           sum += ar[i][j];
+           int lp = 0;
+           int a, b;
+
+           
+
+           // up left;
+           lp = min (i - 0 , j - 0);
+           a= i-1 ; b = j-1;
+           for (int k = 0; k < lp; k++)
+           {
+               if(a !=i && b !=j)
+               sum +=ar[a][b];
+               a--; b--;
+           }
+
+           // up right;
+           lp = min (i - 0 , m - j - 1  );
+        //    if(ar[i][j] == 4)
+        //    cout << "up right" <<  lp << endl;
+           a= i-1 ; b = j+1;
+           for (int k = 0; k < lp; k++)
+           {
+               if(a !=i && b !=j)
+               sum +=ar[a][b];
+               a--; b++;
+           }
+
+           //down left
+           lp = min(n - i  - 1 , j - 0);
+           a= i+1 ; b = j-1;
+           for (int k = 0; k < lp; k++)
+           {
+               if(a !=i && b !=j)
+               sum +=ar[a][b];
+               a++; b--;
+           }
+           //down right
+           lp = min (n- i-1   , m - j - 1  );
+        //    if(i == 0 && j == 0)
+        //    cout << "lp = " << lp << endl;
+        //    if( ar[i][j] == 4)
+        //    cout << lp << endl;
+           a= i+1 ; b = j+1;
+           for (int k = 0; k < lp; k++)
+           {
+            //    if(i == 0 && j == 0)
+                // cout << "a = " << a << " b = " << b <<endl;
+               if(a !=i && b !=j)
+               sum +=ar[a][b];
+            //    cout << sum << endl;
+               a++; b++;
+           }
+        //    cout << "i " << i << " j " << j << endl;
+        //    if(i == 0 && j == 0)
+        //    cout << sum << endl;
+
+           if(sum > ans)
+           ans = sum;
+
+       }
+           
+           
+
+
+    }
+       
+   
+   cout << ans << endl;
+
+
+   
 }
 
 int32_t main() {

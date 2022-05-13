@@ -37,14 +37,39 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
+void prakhar {
 
-void prakhar()
-{   
-    int n ;
-    cin >> n;
+    int n , k;
+
+    cin >> n >> k;
     vi v;
-    vin(v, n);
+    vin(v , n);
 
+    set<int> valid_elements;
+
+    map<int,int> freq;
+
+    for (int i = 0; i < n; i++)
+    {
+        freq[v[i]]++;
+    }
+    for(auto it:mp)
+    {
+        if(it.ss >= k)
+        valid_elements.insert(it.ff);
+    }
+
+
+    int l = 0;
+    int r = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        while(true)
+        {
+            if(freq[v[i]])
+        }
+    }
     
 }
 
