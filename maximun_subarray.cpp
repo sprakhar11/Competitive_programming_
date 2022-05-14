@@ -42,9 +42,32 @@ void prakhar() {
     int n ;
     cin >> n;
     vi v;
-    vin(v, n);
+    vin(v , n);
+
+    int ans = 0;
+    int chk = 0;
+
+    if(v.length() == 1)
+    {
+        int mx = *max_element(all(v));
+        cout<< mx << endl;
+        return;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        ans = max(0, ans) + v[i];
+
+        chk = max(ans, chk);
+
+        
+
+    }
+    cout<< chk << endl;
+
 
     
+
 }
 
 int32_t main() {

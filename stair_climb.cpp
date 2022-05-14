@@ -38,13 +38,44 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 
-void prakhar() {   
-    int n ;
-    cin >> n;
-    vi v;
-    vin(v, n);
+vector<string> calc(int n) {
 
+    if(n == 0) {
+        
+    }
+
+    vector<string> p1 = calc(n-1);
+    vector<string> p2 = calc(n-2);
     
+
+    for(auto it:p1) {
+        it = it + '1';
+    }
+    
+}
+map<int,int> mp;
+int tolSteps(int n) {
+
+    if(n == 0) {
+        return 1;
+    }
+    if(n < 0) {
+        return 0;
+    }
+    if(mp.find(n) != mp.end()) {
+        return mp[n];
+    }
+    int a = tolSteps(n-1);
+    int b = tolSteps(n-2);
+    mp[n] = a + b;
+
+    return a + b;
+}
+void prakhar() {   
+    int steps ;
+    cin >> steps;
+
+    cout << tolSteps(steps) << endl;
 }
 
 int32_t main() {
@@ -56,8 +87,9 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
-    for (int i = 0; i < t; i++) {
+    // cin >> t ;
+    for (int i = 0; i < t; i++)
+    {
         prakhar();
     }
     
