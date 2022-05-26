@@ -41,29 +41,62 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 
 void prakhar()
 {   
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int ans =  0;
-    int l;
-    l = n / 2 ;
-    // l--;
-    int last = n-1;
-
-    // cout << l << endl;
-
-    for (int i = 0; i < l; i++)
+    int n = 0 ;
+    cin >> n ;
+    string s ; 
+    cin >> s ;
+    int cnt_1 = count( all(s) , '1');
+    int cnt_0 = count(all(s) , '0');
+    int dif = abs(cnt_0 - cnt_1);
+    // cout << "cnt_0 " << cnt_0 << " " << dif << " cnt_1 " << cnt_1 << " " <<endl;
+    if ( n % 2 != 0 )
     {
-        // cout << s[i] << " " << s[last] << endl;
-        if( s[last]  != s[i]) {
-            ans++;
-        }
-        last--;
-    }
-    ans = (ans+ 1 )/2;
-    cout << ans << endl;
+        // if( dif == 1 )
+        // {
+        //     cout << "YES" << endl;
+        //     return;
+        // }
+        // if ( cnt_0 == 0 || cnt_1 == 0 )
+        // {
+        //     cout << "YES" << endl;
+        //     return;
+        // }
 
+        // if( cnt_0 > cnt_1 )
+        // cnt_0--;
+        // else
+        // cnt_1--;
+
+        // if ( (cnt_0 % 2 == 0  && cnt_1 % 2 == 0) || (cnt_0 % 2 == 0  && cnt_1 == 0) ||(cnt_0 == 0  && cnt_1 % 2 == 0) )
+        // {
+        //     cout << "YES" << endl;
+        // } 
+        // else
+        
+            cout << "YES" << endl;
+        
+    }
+    else
+    {
+        if ( cnt_0 == 0 || cnt_1 == 0 )
+        {
+            cout << "YES" << endl;
+            return;
+        }
+        if ( cnt_0 == cnt_1 )
+        {
+            cout << "YES" << endl;
+        }
+        else if((cnt_0 % 2 == 0  && cnt_1 % 2 == 0) || (cnt_0 % 2 == 0  && cnt_1 == 0) ||(cnt_0 == 0  && cnt_1 % 2 == 0))
+        {
+            cout << "YES" << endl;
+        }
+        else
+        {
+            cout << "NO" << endl;
+        }
+    }
+    
 }
 
 int32_t main() {

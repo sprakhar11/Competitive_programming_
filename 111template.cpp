@@ -38,17 +38,19 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 
-ll t = 1 ;
-int i;
-
-void prakhar(int case) {   
+void prakhar() {   
     int n ;
     cin >> n;
-    cout << "Cazxszse #" <<  case ;
+<<<<<<< HEAD
+    cout << "Case" <<  case ;
 
     
 
     
+=======
+    vi v;
+    vin(v, n);
+>>>>>>> parent of 68a57ea (smarty_updated)
 
     
 }
@@ -61,9 +63,10 @@ int32_t main() {
     freopen("output.txt", "w", stdout);
     freopen("error.txt", "w", stderr);
     #endif
+    ll t = 1 ;
     cin >> t ;
-    for (i = 0; i < t; i++) {
-        prakhar(i);
+    for (int i = 0; i < t; i++) {
+        prakhar();
     }
     
     return 0;
