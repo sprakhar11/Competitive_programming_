@@ -44,7 +44,7 @@ int i;
 void prakhar(int case) {   
     int n ;
     cin >> n;
-    cout << "Case #" <<  case ;
+    cout << "Cazxszse #" <<  case ;
 
     
 
