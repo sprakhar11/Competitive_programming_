@@ -41,17 +41,6 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 void prakhar() {   
     int n ;
     cin >> n;
-<<<<<<< HEAD
-    cout << "Case" <<  case ;
-
-    
-
-    
-=======
-    vi v;
-    vin(v, n);
->>>>>>> parent of 68a57ea (smarty_updated)
-
     
 }
 
@@ -64,7 +53,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }
