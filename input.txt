@@ -1,9 +1,2 @@
-7
-5
-aeiou
-5
-abcde
-8
-starters
-8
-codechef
+1
+3
