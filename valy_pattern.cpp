@@ -14,7 +14,6 @@
 #define pii pair<int, int>
 #define ff first
 #define ss second
-#define ss second
 #define PI 3.141592653589793238462
 #define set_bits __builtin_popcountll
 #define sz(x) ((int)(x).size())
