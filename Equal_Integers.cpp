@@ -37,35 +37,40 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
-long long lcm(int a, int b)
-{
-    return (a / gcd(a, b)) * b;
-}
 
 void prakhar() {   
+    int x , y;
+    cin >> x >> y ;
 
-    int l;
-    cin >> l;
-
-    int mx = 0;
-    int p,q;
-    for (int i = 0; i < l; i++)
-    {
-        for (int j = 0; j < l; j++)
-        {
-            if(i + j == l) {
-                if(lcm(i, j) - gcd(i, j) > mx){
-                    p = i;
-                    q = j;
-                    mx = lcm(i, j) - gcd(i, j);
-                }
-            }
-        }
-        
+    int ans = 0 ;
+    if ( x == y) {
+        cout << 0 << endl;
+        return;
     }
-    cout << p << " " << q << endl;
-    
-    
+
+    if( x % 2 == y % 2 ) {
+
+        if( x < y) {
+            ans = y - x ;
+        } else {
+
+            ans = x - y ;
+            ans = ans / 2;
+        }
+
+    } else {
+        if( x < y) {
+            ans = y - x ;
+        } else {
+
+            ans = x - y ;
+            // cout << "hi" << endl;
+            // cout << ans;
+            ans = ans / 2;
+            ans+=2;
+        }
+    }
+    cout << ans << endl;
     
     
 }

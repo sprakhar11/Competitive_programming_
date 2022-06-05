@@ -37,33 +37,70 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
-long long lcm(int a, int b)
-{
-    return (a / gcd(a, b)) * b;
-}
 
 void prakhar() {   
+    int n ;
+    cin >> n;
+    vi v;
+    vin(v, n);
 
-    int l;
-    cin >> l;
+    int l = 0 ; 
+    int r = 0;
+    map<int, int> mp;
+    int tmp = 0;
+    int ans = 0;
+    int right = 0;
+    int left = 0;
+    int f = 0;
+    int fans = n - 1;
 
-    int mx = 0;
-    int p,q;
-    for (int i = 0; i < l; i++)
+    
+
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < l; j++)
-        {
-            if(i + j == l) {
-                if(lcm(i, j) - gcd(i, j) > mx){
-                    p = i;
-                    q = j;
-                    mx = lcm(i, j) - gcd(i, j);
-                }
+        mp[v[i]]++; 
+
+        if(mp[v[i]] == 1) {
+
+            tmp++;
+            int tmp_r = tmp;
+            if(tmp > ans) {
+                left = l;
             }
+            ans = max(ans, tmp);
+            f = 0;
+
+        } else {
+            
+            right = left + ans;
+            right = n - right;
+            int tmp_ans = min(left , right) * 2 + max(left, right);
+            fans = min(fans, tmp_ans);
+            mp.clear();
+            mp[v[i]] = 1;
+            tmp = 1;
+            l = i;
+            f = 1;
         }
-        
+
+
     }
-    cout << p << " " << q << endl;
+    if(f == 0) {
+        right = left + ans;
+        right = n - right;
+        int tmp_ans = min(left , right) * 2 + max(left, right);
+        fans = min(fans, tmp_ans);
+    }
+    // cout << " left: " << left << " ";
+    // cout << " ans = " << ans << endl;
+
+    // cout << left<< " " << right << endl;
+    
+
+
+    cout << fans << endl;
+    
+
     
     
     
