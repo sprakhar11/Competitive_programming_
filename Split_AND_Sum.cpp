@@ -38,9 +38,69 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
-//comment
+
 void prakhar() {   
     int n; cin >> n;
+    vi v ;
+    vin(v, n);
+
+    //prre sum
+    for (int i = 1; i < n; i++)
+    {
+        v[i] += v[i-1];
+
+
+    }
+
+    int ans = 0;
+
+
+    // handling case if pre sum is zero
+    if( v[n-1] == 0) {
+        cout << "NO" << endl;
+        return;
+
+    }
+    //handling case if length is 2
+    if( n == 2 ) {
+        
+        if( (v[0] & (v[1] - v[0])) == 0) {
+            cout << "NO" << endl;
+        } else {
+            cout << "YES" << endl << 2 << endl << "1 1" << endl << "2 2" << endl;
+        }
+        return;
+    }
+
+    int f = 0 ;
+    for (int i = 0; i < n; i++)
+    {
+        int sum1 = v[i];
+        int sum2 = v[n-1] - v[i];
+
+        if( (sum1 & sum2) == 0 ) {
+            ans =  i ;
+            f =  1 ;
+            break;
+
+        }
+    }
+
+    if( f == 1) {
+        cout << "YES" << endl;
+        cout << 2 << endl;
+        cout << 1 << " " <<  ans+1 << endl;
+        cout << ans+ 2 << " " << n << endl;
+    } else {
+        cout << "NO" << endl;
+    }
+
+
+
+    
+    
+
+
 }
 
 int32_t main() {
