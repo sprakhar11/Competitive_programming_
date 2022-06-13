@@ -40,9 +40,11 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 //comment
 void prakhar() {   
-    int n; cin >> n;
-    vi v;
-    vin(v,n);
+    int a, b ;
+    cin >> a >> b;
+    int k = (a - 1) * (2 * b - a);
+    cout << k << endl;
+
 }
 
 int32_t main() {

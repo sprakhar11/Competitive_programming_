@@ -39,10 +39,34 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 //comment
+
 void prakhar() {   
-    int n; cin >> n;
-    vi v;
-    vin(v,n);
+    int n;
+
+    cin >> n;
+
+    int a = n;
+    int b = 1;
+
+    vi v(n, 0);
+    for (int i = n-1; i >= 0;i--)
+    {
+        v[i] = a;
+        if(i == 0) break;
+        v[--i] = b;
+
+        a--;
+        b++;
+
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+    
+    
 }
 
 int32_t main() {

@@ -40,9 +40,24 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 //comment
 void prakhar() {   
-    int n; cin >> n;
-    vi v;
-    vin(v,n);
+    int a , b;
+    cin >> a >> b;
+    int i = 1;
+    int dif = b - a ;
+
+    if(dif == 1){
+        cout << "YES" << endl;
+        return;
+    }
+
+    dif = dif - 2 ;
+
+    if(dif % 3 == 0){
+        cout << "NO" << endl;
+    } else {
+        cout << "YES" << endl;
+    }
+    
 }
 
 int32_t main() {

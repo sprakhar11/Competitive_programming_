@@ -37,12 +37,43 @@ bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return fa
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
-long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
-//comment
-void prakhar() {   
-    int n; cin >> n;
-    vi v;
-    vin(v,n);
+long long lcm(int a, int b){return (a / gcd(a, b)) * b;}
+
+void prakhar() {
+
+   int a , b ;
+   cin >> a >> b ; 
+   
+   int ans = 0 ;
+   if(a == b ){
+        cout << a << endl;
+   } else {
+        if(a == 0 || b == 0){
+            cout << -1 << endl;
+            return;
+        }
+        int sm = min(a, b);
+        int lr = max(a, b);
+
+        while( sm < lr){
+            sm = sm * 2 ;
+            ans++;
+        }
+        sm = sm / 2 ;
+        if(sm == lr){
+            sm = sm / 2 ;
+            ans--;
+        }
+        int dif = lr - sm;
+        // cout << sm - dif << endl;
+        // cout << lr - sm + dif << endl;
+        ans = ans + (sm - dif) + (lr - (sm - dif));
+        cout << ans << endl;
+
+
+   }
+    
+    
 }
 
 int32_t main() {

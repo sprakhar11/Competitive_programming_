@@ -40,9 +40,51 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 //comment
 void prakhar() {   
-    int n; cin >> n;
-    vi v;
-    vin(v,n);
+    int n;
+    cin >> n;
+    string s , t ;
+    cin >> s >>  t ;
+
+    int i = 0 ;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        if( s[i] != t[i]) {
+            if(t[i] == 'b'){
+                // it should have a 'b' after several 'a's
+                // check here 
+                if(i == n - 2) {
+                    if( s[i+1] != 'b') {
+                        cout << "NO" << endl;
+                        return;
+                    }
+                }
+
+                for (int j = i + 1; j < n; j++)
+                {
+                    if(s[i] == 'a') {
+                        continue;
+                    } else if (s[i] == 'b') {
+                        break;
+                    } else {
+                        cout << "NO" << endl;
+                        return;
+                    }
+                }
+                
+
+            }
+            if(t[i] == 'c'){
+                // it should have a 'c' after several 'b's
+                // check here 
+            }
+
+        }
+    }
+
+    
+    
+
 }
 
 int32_t main() {
