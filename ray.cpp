@@ -49,12 +49,17 @@ void prakhar() {
 
     int p = 1 ;
     map<char, int> pos;
+    map<char, int> frq;
+
     for (int i = 0; i < n; i++)
     {
         if(pos[str[i]] == 0){
             pos[str[i]] = p;
             p++;
         }
+            frq[str[i]]++;
+
+
     }
 
     string  b = "";
@@ -63,13 +68,21 @@ void prakhar() {
     int j = 1;
 
 
+
+
     for (int i = 0; i < n; i++)
     {
         if(pos[s[i]] == j)
         {
             ans = ans + s[i];
+            frq[s[i]]--;
+
+            if(frq[s[i]] == 0)
             j++;
         } else {
+
+            frq[s[i]]--;
+
             b = b + s[i];
         }
     }
