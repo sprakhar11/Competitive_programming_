@@ -81,7 +81,7 @@ void prakhar() {
             j++;
         } else {
 
-            frq[s[i]]--;
+            // frq[s[i]]--;
 
             b = b + s[i];
         }
