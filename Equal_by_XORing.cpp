@@ -38,19 +38,101 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
-//comment
-void prakhar() {   
-    int n; cin >> n;
+
+void prakhar() {  
+    
+    int a , b ,  n;
+
+    cin >> a >> b >> n ;
+    int y = a ^ b ;
+    int x = 1;
+    while(x<n) x*=2;
+    if( a == b) 
+    {
+        cout << 0 << endl;
+        return ;
+    }
+    // cout << a << " " << b << " " << n << endl;
+
+    string ba = to_binary(a);
+    string bb = to_binary(b);
+
+    // cout << ba << " " << bb << endl;
+
+    string need = "";
+
+    for (int i = 0; i <= 31; i++)
+    {
+        char ch;
+
+        if(ba[i] != bb[i]){
+            ch = bb[i];
+        } else {
+            ch = ba[i];
+        }
+        need = need + ch;
+
+    }
+
+    int posOne = -1 ;
+    string tmp = need;
+
+    for (int i = 0; i <=31; i++)
+    {
+
+        if(tmp[i] != ba[i]){
+            posOne = 1;
+            for (int k = i+1; k <=31; k++)
+            {
+                tmp[k] = '0';
+            }
+            for (int k = i - 1; k >= 0; k--)
+            {
+                tmp[k] = '0';
+            }
+            
+            break;
+
+        }
+    }
+    // cout << ba << endl;
+    // cout << tmp << endl;
+    // cout << need << endl;
+
+    int tmpValue = 0 ;
+    int check = 0;
+    int j =  0;
+
+    for (int i = 31; i >= 0; i--)
+    {
+        check = check + pow(2, j) * (need[i] - '0');
+        tmpValue = tmpValue + pow(2, j) * (tmp[i] - '0');
+        j++;
+    }
+    // cout << tmpValue << endl;
+
+    if( y < n )
+    cout << 1 << endl;
+    else if(y < x )
+    cout << 2 << endl;
+    else
+    cout << -1 << endl;
+    // cout << check << endl;
+    
+    
+    
+
+
 }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
-    #endif
+    // #ifndef ONLINE_JUDGE
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    // freopen("error.txt", "w", stderr);
+    // #endif
     ll t = 1 ;
     cin >> t ;
     for (int i = 0; i < t; i++) {

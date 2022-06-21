@@ -38,9 +38,22 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
-//comment
-void prakhar() {   
+
+void prakhar() {  
     int n; cin >> n;
+
+    vector<int> v(n , 0);
+    v[0] = 1 ;
+    v[ n -1 ]  = 1;
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << v[i];
+    }
+    cout << endl ;
+    
+
+
 }
 
 int32_t main() {
