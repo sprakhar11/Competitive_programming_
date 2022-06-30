@@ -11,30 +11,44 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
     #endif
-    lli t=1;
-    cin>>t;
-    while (t--)
+    int n ;
+    cin >> n;
+    vector<int> v;
+    for (int i = 0; i < n; i++)
     {
-        int n , m ;
-        cin >> n >> m;
-        string arr[n];
-        int p=0;
-        for (int i = 0; i < n; i++)
-        {
-            cin >> arr[i];
-            for(auto x:arr[i])
-            p^=(x-'0');
+        int x;
+        cin >> x;;
+        v.push_back(x);
+    }
+    reverse( v.begin(), v.end());
+    vector<bool> ans(n , true);
 
+    for (int i = 0; i < n; i++)
+    {
+
+        if( v[i] !=0 )
+        {   int s = i+1;
+            for (int j =0 ; j < v[i]; j++)
+            {
+                if (s < n)
+                {
+                    ans[s]=false;
+                }
+                s++;
+                
+                
+            }
+            
+          //cout << ans[i] <<" ";  
         }
-        if(p==0){
-            cout << "NO\n";
-        }
-        else
-        {
-            cout << "YES\n";
-        }
-        
         
     }
+    
+    int cans = count(ans.begin() , ans.end() , true);
+   
+    
+    cout <<cans ;
+    
+    
     return 0;
 }

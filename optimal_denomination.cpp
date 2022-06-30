@@ -50,7 +50,7 @@ int main() {
         }
         sort ( v.begin(), v.end());
 
-        //int k = MaxGCD(v , n);
+        int k = MaxGCD(v , n);
         lli sum = 0;
         sum = accumulate(v.begin(), v.end(), sum);
         lli ans = 0;
@@ -61,7 +61,7 @@ int main() {
         //cout << p << "p\n";
         for (int i = 1; i < n; i++)
         {
-            if ((sum - v[i] + d ) % d ==0)
+            if ((sum - v[i] + d ) % d ==0) 
             {
                 ans = (sum - v[i] + d ) / d;
                 p = min(p, ans);
