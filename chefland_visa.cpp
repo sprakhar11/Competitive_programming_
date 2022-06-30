@@ -11,29 +11,19 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
     #endif
-    lli t=1;
+    
+    lli t;
     cin>>t;
     while (t--)
     {
-        int n , m ;
-        cin >> n >> m;
-        string arr[n];
-        int p=0;
-        for (int i = 0; i < n; i++)
+       int x1,x2,y1,y2,z1,z2;
+       cin >>x1>>x2>>y1>>y2>>z1>>z2;
+        if ((x2>=x1) && (y2>=y1) && (z2<=z1))
         {
-            cin >> arr[i];
-            for(auto x:arr[i])
-            p^=(x-'0');
-
-        }
-        if(p==0){
-            cout << "NO\n";
+            cout << "YES" << "\n";
         }
         else
-        {
-            cout << "YES\n";
-        }
-        
+        cout << "NO" << "\n";
         
     }
     return 0;
