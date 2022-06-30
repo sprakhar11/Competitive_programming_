@@ -41,6 +41,8 @@ long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 //comment
 void prakhar() {   
     int n; cin >> n;
+    vi v;
+    vin(v,n);
 }
 
 int32_t main() {
