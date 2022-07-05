@@ -42,7 +42,15 @@ long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 void prakhar() {   
     int n;
     cin >> n;
-    cout << n;
+
+    if(n % 2 != 0){
+        cout << -1 << endl;
+        return;
+    }
+
+    int ans = n / 2 ;
+    cout << 0 << " " << ans << " " << ans <<  endl;
+    
 }
 
 int32_t main() {
