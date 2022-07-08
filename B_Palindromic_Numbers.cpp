@@ -66,37 +66,78 @@ bool checkpalin(int n)
 }
 
 void prakhar() {  
-    int len , n ;
-    cin >> len >> n;
-    
-    int s ,  e ;
-    s = 1 ; 
-    e = 1 ;
-
-    for (int i = 0; i < len; i++)
-    {
-        s = 10 * s;
-        e = 10 * e;
-    }
-    s /=10;
-    e = e - 1;
-
-    
-
-    // cout << s <<  endl<< e << endl;
-    // return;
-
-    for (int i = s; i < e; i++)
-    {
-
-        int tmp = n + i;
-        // cout << "i=" << i << endl;
-        if(checkpalin(tmp))
-        {
-            cout << i << endl;
-            return;
-        }
-    }
+    ll n;
+  cin>>n;
+  string s;
+  cin>>s;
+  string ss=s;
+  reverse(all(ss));
+  //cout<<ss<<"\n";
+  string ans;
+  if(s[0]!='1')
+  {
+    ll carry=0;
+     for(ll i=0;i<n;i++)
+     {
+      ll p=ss[i]-'0';
+      //cout<<"*"<<p<<"\n";
+      ll jj=11-p-carry;
+      if(jj==11)
+      {
+        carry=0;
+        ans.pb('1');
+      }
+      if(jj<10)
+      {
+        char c=jj+'0';
+        //cout<<c<<"\n";
+       carry=1;
+        ans.pb(c);
+      }
+      if(jj==10)
+      {
+        carry=0;
+        ans.pb('0');
+      }
+     }
+  }
+  if(s[0]=='1')
+  {
+    ll carry=0;
+     for(ll i=0;i<n;i++)
+     {
+      ll p=ss[i]-'0';
+      ll jj=13-p-carry;
+        if(jj==13)
+      {
+         carry=0;
+        ans.pb('3');
+      }
+      if(jj==12)
+      {
+         carry=0;
+        ans.pb('2');
+      }
+        if(jj==11)
+      {
+        carry=0;
+        ans.pb('1');
+      }
+      if(jj<10)
+      {
+        char c=jj+'0';
+        carry=1;
+        ans.pb(c);
+      }
+      if(jj==10)
+      {
+        carry=0;
+        ans.pb('0');
+      }
+     }
+  }
+  reverse(all(ans));
+  cout<<ans<<"\n";
 }
 
 int32_t main() {
