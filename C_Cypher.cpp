@@ -7,7 +7,7 @@
 #define vi vector<int>
 #define vii vector<pair<int, int>>
 #define vs vector<string>
-#define vc vector<char>
+#define vc vector<char>ṇ
 #define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -39,31 +39,86 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-void prakhar() {   
+int callfun(vector<int> &v, string p ,int index, int k)
+{
+    int no = v[index];
+    for(int i = 0; i < k ; i++)
+    {
+        if(p[i] == 'U')
+        {
+            if(no == 9){
+                no = 0;
+            }
+            else
+            {
+                no++;
+            }
+        }
+        else
+        {
+            if(no == 0){
+                no = 9;
+            }
+            else
+            {
+                no--;
+            }
+        }
+    }
+
+    return no;
+}
+
+void prakhar() {
+
     int n;
     cin >> n;
-    vi v;
-    vin(v, n);
 
-    sort(all(v));
-    for (int i = 0; i < n; i++)
+    vi ans;
+    vin(ans, n);
+    vi fans;
+
+
+    for(int i = 0 ; i < n; i++)
     {
-        cout <<v[i] << " " ;
+        int k;
+        cin >> k;
+
+        string p;
+        cin >> p ;
+
+        for(int j = 0 ; j < k ; j++)
+        {
+            if(p[j] == 'U')
+            p[j] = 'D';
+            else
+            p[j] = 'U';
+
+        }
+
+        fans.pb(callfun(ans, p, i, k));
+
     }
+
+    for(int i = 0 ; i < n ; i++)
+    {
+        cout << fans[i] <<" ";
+    }
+    cout << endl;
+
     
 }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    // #ifndef ONLINE_JUDGE
-    // freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
-    // freopen("error.txt", "w", stderr);
-    // #endif
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    freopen("error.txt", "w", stderr);
+    #endif
     ll t = 1 ;
-    // cin >> t ;
-    
+    cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

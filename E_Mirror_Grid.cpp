@@ -7,7 +7,7 @@
 #define vi vector<int>
 #define vii vector<pair<int, int>>
 #define vs vector<string>
-#define vc vector<char>
+#define vc vector<char>ṇ
 #define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -39,31 +39,70 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-void prakhar() {   
-    int n;
-    cin >> n;
-    vi v;
-    vin(v, n);
+void rotateright90(vector<vector<int>> &matrixa, vector<vector<int>> matrixb, int n )
+{
+    int r, c , row, col ;
 
-    sort(all(v));
-    for (int i = 0; i < n; i++)
+    r = 0;
+    c = n - 1;
+
+    for(int row = 0 ; row < n ; row++)
     {
-        cout <<v[i] << " " ;
+        r = 0;
+        for(int col = 0; col < n ; col++)
+        {
+            matrixb[r][c] = matrixa[row][col];
+            r++;
+        }
     }
+    col--;
+
+}
+
+void prakhar() {
+
+    int n;
+    cin >> n ;
+    cout << n;
+
+    int matrixa[n][n];
+    int matrixb[n][n];
+
+    for(int i = 0 ; i < n ;i++)
+    {
+        for(int j = 0; j < n ;j++)
+        {
+            int p = 0 ;
+            cin >> p;
+            cout << p;
+            matrixa[i][j] = p;
+
+        }
+    }
+
+    for(int i = 0 ;  i < n ; i++)
+    {
+        for(int j = 0  ; j < n ; j++)
+        {
+            cout << matrixa[i][j];
+
+        }
+    }
+
     
+
 }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    // #ifndef ONLINE_JUDGE
-    // freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
-    // freopen("error.txt", "w", stderr);
-    // #endif
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    freopen("error.txt", "w", stderr);
+    #endif
     ll t = 1 ;
-    // cin >> t ;
-    
+    cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

@@ -7,7 +7,7 @@
 #define vi vector<int>
 #define vii vector<pair<int, int>>
 #define vs vector<string>
-#define vc vector<char>
+#define vc vector<char>ṇ
 #define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -39,31 +39,59 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-void prakhar() {   
-    int n;
-    cin >> n;
-    vi v;
-    vin(v, n);
+void prakhar() {
 
-    sort(all(v));
-    for (int i = 0; i < n; i++)
+    int n ;
+    cin >>  n ; 
+    vector<string> v;
+
+    map<string,int> mp;
+
+
+    for(int i  = 0 ; i  < n; i++)
     {
-        cout <<v[i] << " " ;
+        string s;
+        cin >> s;
+        v.pb(s);
+        mp[s]++;
+
     }
+    int ans = 0;
     
+    for(int i  = 0 ; i  < n; i++)
+    {
+        
+        int len=v[i].length();
+        int f = 0;
+
+        for(int j = 1 ; j < len ; j++)
+        {
+            string s1 = v[i].substr(0, j);
+            string s2 = v[i].substr(j, len);
+
+            if(mp[s1] != 0 && mp[s2] != 0)
+            {
+                f = 1;
+                break;
+            }
+        }
+        cout << f;
+
+    }
+    cout  << endl;
+
 }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    // #ifndef ONLINE_JUDGE
-    // freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
-    // freopen("error.txt", "w", stderr);
-    // #endif
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    freopen("error.txt", "w", stderr);
+    #endif
     ll t = 1 ;
-    // cin >> t ;
-    
+    cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }
