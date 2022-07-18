@@ -39,59 +39,46 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-void rotateright90(vector<vector<int>> &matrixa, vector<vector<int>> matrixb, int n )
-{
-    int r, c , row, col ;
+void prakhar() {   
+    int n , m ;
+    cin >> n >> m ;
 
-    r = 0;
-    c = n - 1;
+    string s = "";
 
-    for(int row = 0 ; row < n ; row++)
+    for (int i = 0; i < m; i++)
     {
-        r = 0;
-        for(int col = 0; col < n ; col++)
-        {
-            matrixb[r][c] = matrixa[row][col];
-            r++;
-        }
-    }
-    col--;
-
-}
-
-void prakhar() {
-
-    int n;
-    cin >> n ;
-    cout << n;
-
-    int matrixa[n][n];
-    int matrixb[n][n];
-
-    
-    for(int i = 0 ; i < n ;i++)
-    {
-        for(int j = 0; j < n ;j++)
-        {
-            int p = 0 ;
-            cin >> p;
-            cout << p;
-            matrixa[i][j] = p;
-
-        }
+        s = s + 'B';
     }
 
-    for(int i = 0 ;  i < n ; i++)
-    {
-        for(int j = 0  ; j < n ; j++)
-        {
-            cout << matrixa[i][j];
+    vi v ;
+    vin(v, n);
+    map<int,int> mp;
 
+    for (int i = 0; i < n; i++)
+    {
+        int p = m - v[i];
+
+        int k = min(v[i] - 1 , p);
+
+        if(mp[k] == 0)
+        {
+            mp[k]++;
+            s[k] = 'A';
+
+        } else {
+            int q = max(v[i] - 1 , p);
+            mp[q]++;
+
+            s[q] = 'A';
         }
+
+        
     }
 
+    cout <<  s << endl;
     
 
+    
 }
 
 int32_t main() {

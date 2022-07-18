@@ -5,6 +5,7 @@
 #define INF 1e18
 #define endl "\n"
 #define vi vector<int>
+#define di deqeue<int>
 #define vii vector<pair<int, int>>
 #define vs vector<string>
 #define vc vector<char>ṇ
@@ -30,6 +31,7 @@ ll factorial(ll v){ll ans=1;for(int i=2;i<=v;i++){ans*=i;ans%=MOD;}return ans;}
 ll power(ll x, ll y){   if (y < 0)return 1;ll res = 1; x %= MOD;while (y!=0) {if ((y & 1)==1)res = mult(res, x); y >>= 1;x = mult(x, x);} return res;}
 vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
 void vin( vector<int> &v , int n ){for (int i = 0; i < n; i++){int x ;cin >> x; v.push_back(x);}}
+void din( deque<int> &d, int n){ for(int i = 0 ; i < n; i++){ int x ; cin >> x; d.push_back(x);}}
 void vout(vector<int> &v){for (int i = 0; i < v.size(); i++){cout << v[i] << " " ;}cout << endl;}
 ll highestPowerof2(ll n){ ll p = (ll)log2(n);   return (ll)pow(2, p);}
 bool isPowerOfTwo(int n){ if(n==0)   return false;   return (ceil(log2(n)) == floor(log2(n)));}
@@ -39,59 +41,20 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-void rotateright90(vector<vector<int>> &matrixa, vector<vector<int>> matrixb, int n )
-{
-    int r, c , row, col ;
-
-    r = 0;
-    c = n - 1;
-
-    for(int row = 0 ; row < n ; row++)
-    {
-        r = 0;
-        for(int col = 0; col < n ; col++)
-        {
-            matrixb[r][c] = matrixa[row][col];
-            r++;
-        }
-    }
-    col--;
-
-}
-
-void prakhar() {
-
+void prakhar() {   
     int n;
-    cin >> n ;
-    cout << n;
+    cin >> n;
+    vi v;
+    vin(v, n);
 
-    int matrixa[n][n];
-    int matrixb[n][n];
+    map<int,int> mp;
 
-    
-    for(int i = 0 ; i < n ;i++)
+    for(auto it:v)
     {
-        for(int j = 0; j < n ;j++)
-        {
-            int p = 0 ;
-            cin >> p;
-            cout << p;
-            matrixa[i][j] = p;
+        mp[it]++;
 
-        }
     }
-
-    for(int i = 0 ;  i < n ; i++)
-    {
-        for(int j = 0  ; j < n ; j++)
-        {
-            cout << matrixa[i][j];
-
-        }
-    }
-
-    
-
+    cout << mp.size();
 }
 
 int32_t main() {
@@ -103,7 +66,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

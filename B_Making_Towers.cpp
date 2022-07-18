@@ -39,59 +39,147 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-void rotateright90(vector<vector<int>> &matrixa, vector<vector<int>> matrixb, int n )
+void updatearray(vector<int> &v)
 {
-    int r, c , row, col ;
 
-    r = 0;
-    c = n - 1;
-
-    for(int row = 0 ; row < n ; row++)
+    int len = v.size();
+    for (int i = 0; i < len; i++)
     {
-        r = 0;
-        for(int col = 0; col < n ; col++)
-        {
-            matrixb[r][c] = matrixa[row][col];
-            r++;
-        }
+        v[i] = v[i] % 2;
     }
-    col--;
 
 }
 
-void prakhar() {
+int countone(vector<int> &v)
+{
+    int len = v.size();
+    int cnt = 1;
 
+    for (int i = 0; i < len; i++)
+    {
+        if( v[i] == 1)
+        cnt++;
+    }
+
+    // for (int i=0; i<len; i++)
+    // {
+    //     int curr_cnt =  0 ;
+    //     if( v[i] == 1)
+    //     {
+    //         curr_cnt =  1 ;
+    //         for( int j = i  + 1 ; j < len ; j++)
+    //         {
+    //             if(v[j] == 1)
+    //             {
+    //                 curr_cnt++;
+    //             }
+    //             else
+    //             {
+    //                 i = j;
+    //                 break;
+    //             }
+    //         }
+    //         if(curr_cnt > cnt)
+    //         {
+    //             cnt = curr_cnt;
+    //         }
+    //     }
+    // }
+    return cnt;
+}
+
+void prakhar() {   
     int n;
-    cin >> n ;
-    cout << n;
+    cin >> n;
 
-    int matrixa[n][n];
-    int matrixb[n][n];
+    vi v ;
+    vin(v, n);
 
-    
-    for(int i = 0 ; i < n ;i++)
+    vector<vector<int>> ans;
+
+    for (int i = 0; i < n; i++)
     {
-        for(int j = 0; j < n ;j++)
+        vi p ;
+        ans.pb(p);
+    }
+
+    int lastpos[n];
+    set<int> st;
+
+    for (int i = 0; i < n; i++)
+    {
+        lastpos[i] = -1;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+
+        if(lastpos[v[i] - 1] == -1)
         {
-            int p = 0 ;
-            cin >> p;
-            cout << p;
-            matrixa[i][j] = p;
+            lastpos[v[i] - 1]  = i;
+            st.insert(v[i] - 1);
+
+        }
+        else
+        {
+            ans[v[i] - 1].pb(i - lastpos[v[i] - 1]);
+            lastpos[v[i] - 1]  = i;
 
         }
     }
 
-    for(int i = 0 ;  i < n ; i++)
+    vi fans;
+
+    for (int i = 0; i < n; i++)
     {
-        for(int j = 0  ; j < n ; j++)
+        // cout << i  + 1 << endl;
+
+        // for (int j = 0; j < ans[i].size(); j++)
+        // {
+        //     cout << ans[i][j] << " ";
+        // }
+        // if( ans[i].size() == 0)
+        // {
+        //     cout << 0 ;
+        // }
+        //  cout << endl;
+        updatearray(ans[i]);
+
+        int f_ans = countone(ans[i]);
+        if(st.find(i) ==st.end() )
         {
-            cout << matrixa[i][j];
+            fans.pb(0);
+
+        }
+        else if(st.find(i) !=st.end() && f_ans == 0)
+        {
+            fans.pb(1);
+        }
+        else
+        {
+            fans.pb(f_ans);
 
         }
     }
 
+    for (int i = 0; i < n; i++)
+    {
+        cout << fans[i] << " ";
+
+    }
+    cout << endl;
+    
+    
+    
     
 
+
+
+    
+
+
+
+    
 }
 
 int32_t main() {
