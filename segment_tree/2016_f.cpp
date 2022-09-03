@@ -18,54 +18,6 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
-
-class SGTree {
-	vector<int> seg;
-public:
-	SGTree(int n) {
-		seg.resize(4 * n + 1);
-	}
-
-	void build(int ind, int low, int high, int arr[]) {
-		if (low == high) {
-			seg[ind] = arr[low];
-			return;
-		}
-
-		int mid = (low + high) / 2;
-		build(2 * ind + 1, low, mid, arr);
-		build(2 * ind + 2, mid + 1, high, arr);
-		seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
-	}
-
-	int query(int ind, int low, int high, int l, int r) {
-		// no overlap
-		// l r low high or low high l r
-		if (r < low || high < l) return INT_MAX;
-
-		// complete overlap
-		// [l low high r]
-		if (low >= l && high <= r) return seg[ind];
-
-		int mid = (low + high) >> 1;
-		int left = query(2 * ind + 1, low, mid, l, r);
-		int right = query(2 * ind + 2, mid + 1, high, l, r);
-		return min(left, right);
-	}
-	void update(int ind, int low, int high, int i, int val) {
-		if (low == high) {
-			seg[ind] = val;
-			return;
-		}
-
-		int mid = (low + high) >> 1;
-		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
-		else update(2 * ind + 2, mid + 1, high, i, val);
-		seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
-	}
-};
-
-
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -83,21 +35,61 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
+void prakhar() {   
+    
 
+    int n , m, d , D;
+    cin >> n >> m >> d >> D;
 
-void prakhar() {
-
-    int n ;
-    cin  >> n ; 
-    int arr[n];
-    for (int i = 0; i < n; i++)
+    if(m < (d*n)  ||  m > (D * n))
     {
-        cin >> arr[i];
+        cout << -1 << endl;
+        return;
     }
-    SGTree sgt(n);
-    sgt.build(0, 0 , n - 1 , arr);
 
-    cout << sgt.query(0, 0 , n - 1 , 2, n -1);
+    for (int i = 1; i <= n; i++)
+    {
+        int j = ((i-1) * d + 1) % n;
+        if( j == 0 )
+        j = n;
+
+        for (int k = 0; k < d; k++)
+        {
+            cout << i << " " << j << endl;
+            j++;
+            if( j == n + 1) 
+            j = 1;
+
+
+        }
+
+    }
+
+    int left = m - d * n;
+    int e = 1;
+
+    while( left != 0){
+
+        for (int i = 1; i <= n; i++)
+        {
+            if( left == 0)
+            {
+                break;
+            }
+            else
+            {
+                int s = ((i * d) + e) % n;
+
+                if(s == 0)
+                s = n;
+
+                cout << i << " " << s <<  endl;
+                left--;
+            }
+        }
+        e++;
+    }
+
     
 
     
@@ -112,7 +104,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

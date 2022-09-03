@@ -18,54 +18,6 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
-
-class SGTree {
-	vector<int> seg;
-public:
-	SGTree(int n) {
-		seg.resize(4 * n + 1);
-	}
-
-	void build(int ind, int low, int high, int arr[]) {
-		if (low == high) {
-			seg[ind] = arr[low];
-			return;
-		}
-
-		int mid = (low + high) / 2;
-		build(2 * ind + 1, low, mid, arr);
-		build(2 * ind + 2, mid + 1, high, arr);
-		seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
-	}
-
-	int query(int ind, int low, int high, int l, int r) {
-		// no overlap
-		// l r low high or low high l r
-		if (r < low || high < l) return INT_MAX;
-
-		// complete overlap
-		// [l low high r]
-		if (low >= l && high <= r) return seg[ind];
-
-		int mid = (low + high) >> 1;
-		int left = query(2 * ind + 1, low, mid, l, r);
-		int right = query(2 * ind + 2, mid + 1, high, l, r);
-		return min(left, right);
-	}
-	void update(int ind, int low, int high, int i, int val) {
-		if (low == high) {
-			seg[ind] = val;
-			return;
-		}
-
-		int mid = (low + high) >> 1;
-		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
-		else update(2 * ind + 2, mid + 1, high, i, val);
-		seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
-	}
-};
-
-
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -83,24 +35,69 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-
-
-void prakhar() {
-
-    int n ;
-    cin  >> n ; 
-    int arr[n];
-    for (int i = 0; i < n; i++)
+vector<int> printDivisors(int n)
+{
+    vector<int> ans;
+    // Note that this loop runs till square root
+    for (int i=1; i<=sqrt(n); i++)
     {
-        cin >> arr[i];
+        if (n%i==0)
+        {
+            // If divisors are equal, print only one
+            if (n == i * i){
+                ans.pb(i);
+            }
+
+            else // Otherwise print both
+            {
+                ans.pb(i);
+                ans.pb(n/i);
+            }
+        }
     }
-    SGTree sgt(n);
-    sgt.build(0, 0 , n - 1 , arr);
+    return ans;
+}
+void prakhar(){
 
-    cout << sgt.query(0, 0 , n - 1 , 2, n -1);
-    
+            int n;
+            cin >> n;
 
-    
+            vi ar;
+            vin(ar, n);
+
+            sort(all(ar));
+
+            int max = *max_element(ar.begin(), ar.end());
+
+
+
+            vi dp(max+1);
+
+            set<int> hs;
+
+            for(int i=0;i<n;i++){
+                int val = ar[i];
+                vi get = printDivisors(val);
+                long ans = 1;
+                for(auto fact:get){
+                    if(hs.find(fact) != hs.end()){
+                        ans = (ans+dp[fact])%MOD;
+                    }
+                }
+                dp[val]=ans;
+                hs.insert(val);
+            }
+            // debug(dp);
+            int fans = 0;
+            for(int i=0; i < dp.size() ; i++){
+                long val = dp[i];
+                fans = (fans+val)%MOD;
+            }
+            cout << fans << endl;
+
+
+        
+
 }
 
 int32_t main() {
@@ -112,7 +109,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

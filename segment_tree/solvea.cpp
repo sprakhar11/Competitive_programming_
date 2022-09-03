@@ -7,7 +7,7 @@
 #define vi vector<int>
 #define vii vector<pair<int, int>>
 #define vs vector<string>
-#define vc vector<char>ṇ
+#define vc vector<char>
 #define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>

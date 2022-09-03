@@ -5,10 +5,6 @@
 #define INF 1e18
 #define endl "\n"
 #define vi vector<int>
-#define vii vector<pair<int, int>>
-#define vs vector<string>
-#define vc vector<char>ṇ
-#define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>
 #define pii pair<int, int>
