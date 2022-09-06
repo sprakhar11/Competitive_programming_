@@ -36,9 +36,10 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
 void prakhar() {   
-    int n;
-    cin >> n;
-    cout << n;
+    int p = -2;
+    int a =  p % MOD;
+    cout << a << endl;
+
     
 }
 
@@ -51,7 +52,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

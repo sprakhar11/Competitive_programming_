@@ -35,61 +35,41 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-void prakhar() {   
-    
-    int n , m, d , D;
-    cin >> n >> m >> d >> D;
+void prakhar() { 
 
-    if(m < (d*n)  ||  m > (D * n))
+    int n ;
+    cin >> n ;
+
+    string s ;
+
+    cin >> s ;
+
+    vector<int> d;
+
+    vin(d, n);
+
+    int cnt = count(all(s), 'B');
+    if( cnt == n)
     {
         cout << -1 << endl;
         return;
     }
 
-    for (int i = 1; i <= n; i++)
+    int flag = 0;
+
+
+    for (int i = n-1; i >= 0; i++)
     {
-        int j = ((i-1) * d + 1) % n;
-        if( j == 0 )
-        j = n;
-
-        for (int k = 0; k < d; k++)
+        int c = 0;
+        if(s[i] == 'B')
         {
-            cout << i << " " << j << endl;
-            j++;
-            if( j == n + 1) 
-            j = 1;
-
-
+            
         }
-
+        
     }
-
-    int left = m - d * n;
-    int e = 1;
-
-    while( left != 0){
-
-        for (int i = 1; i <= n; i++)
-        {
-            if( left == 0)
-            {
-                break;
-            }
-            else
-            {
-                int s = ((i * d) + e) % n;
-
-                if(s == 0)
-                s = n;
-
-                cout << i << " " << s <<  endl;
-                left--;
-            }
-        }
-        e++;
-    }
-
     
+
+
 
     
 }
@@ -103,7 +83,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }
