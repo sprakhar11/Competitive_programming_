@@ -18,55 +18,6 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
-
-class SGTree {
-	vector<int> seg;
-public:
-	SGTree(int n) {
-		seg.resize(4 * n + 1);
-	}
-
-	void build(int ind, int low, int high, int arr[]) {
-		if (low == high) {
-			seg[ind] = arr[low];
-			return;
-		}
-
-		int mid = (low + high) / 2;
-		build(2 * ind + 1, low, mid, arr);
-		build(2 * ind + 2, mid + 1, high, arr);
-		seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
-	}
-
-	int query(int ind, int low, int high, int l, int r) {
-		// no overlap
-		// l r low high or low high l r
-		if (r < low || high < l) return INT_MAX;
-
-		// complete overlap
-		// [l low high r]
-		if (low >= l && high <= r) return seg[ind];
-
-		int mid = (low + high) >> 1;
-		int left = query(2 * ind + 1, low, mid, l, r);
-		int right = query(2 * ind + 2, mid + 1, high, l, r);
-		return min(left, right);
-	}
-	
-	void update(int ind, int low, int high, int i, int val) {
-		if (low == high) {
-			seg[ind] = val;
-			return;
-		}
-
-		int mid = (low + high) >> 1;
-		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
-		else update(2 * ind + 2, mid + 1, high, i, val);
-		seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
-	}
-};
-
-
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -84,25 +35,87 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
+void prakhar() {   
 
+    int n;
+    cin >> n ;
+    vi vt;
+    vin (vt ,n);
 
-void prakhar() {
+    int mxi = 0 ;
 
-    int n ;
-    cin  >> n ; 
-    int arr[n];
+    int mni = 0;
+    vi vmx;
+    vi vmn;
+    vi v;
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
+        if( vt[i] >= vt[mxi])
+        {
+            mxi = i;
+        }
+        if(vt[i] <= vt[mni])
+        {
+            mni = i;
+
+        }
     }
-    SGTree sgt(n);
-    sgt.build(0, 0 , n - 1 , arr);
 
-    cout << sgt.query(0, 0 , n - 1 , 2, n -1);
-    
+    for (int i = 0; i < n; i++)
+    {
+        if(vt[i] == vt[mxi])
+        {
+            vmx.pb(i);
+        }
+        if(vt[i] == vt[mni])
+        {
+            vmn.pb(i);
+        }
+    }
 
+    int ans = vt[n-1] - vt[0];
+
+    vout(vmx);
+    vout(vmn);
+
+    for (int i = 0; i < vmx.size(); i++)
+    {
+        
+        int p = vmx[i] + 1;
+        if( p == n)
+        {
+            p = 0;
+        }
+        int k = max((vt[vmx[i]] - vt[p]), (vt[vmx[i]] - vt[0]));
+        // cout << " k " << k << endl;
+        
+        if( k > ans)
+        {
+            ans = k;
+            // cout << "hit 1 " << ans << endl;
+        }
+    }
+
+    for (int i = 0; i < vmn.size(); i++)
+    {
+
+        int p = vmn[i] - 1;
+        if( p == -1)
+        {
+            p = n-1;
+        }
+        if( max(( vt[p] - vt[vmn[i]]), (vt[n-1] - vt[vmn[i]])) > ans)
+        {
+            ans = max(( vt[p] - vt[vmn[i]]), (vt[n-1] - vt[vmn[i]]));
+        }
+    }
+
+    cout << ans << endl;
     
 }
+
+
+
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -113,7 +126,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }
