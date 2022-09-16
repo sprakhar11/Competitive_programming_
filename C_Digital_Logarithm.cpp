@@ -34,36 +34,153 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
+int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
 
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
+    int n ;
+    cin >> n ; 
 
-    int ans = v[n-1] - v[0];
+    vi a;
+    vi b;
+    vin(a, n);
+    vin(b, n);
 
-    for (int i = 1; i < n; i++)
+    int ans = 0;
+
+    map<int, int> mp1;
+    map<int, int> mp2;
+
+    for (int i = 0; i < n; i++)
     {
-        ans = max(ans, (v[i-1] - v[i]));
+        mp1[a[i]]++;
+        mp2[b[i]]++;
+    }
+    
+    for (auto &it:mp1)
+    {
+        if(mp2.find(it.ff) != mp2.end())
+        {
+            mp2[it.ff]--;
+            mp1[it.ff]--;
+        }
     }
 
-    for (int i = 1; i < n; i++)
+    for(auto &it:mp1)
     {
-        ans = max(ans, v[i] - v[0]);
+        cout << it.ff << " h1 ";
+    }
+    cout << endl;
+    for(auto &it:mp2)
+    {
+        cout << it.ff << " h2 ";
+    }
+    cout << endl;
+
+    for(auto &it:mp1)
+    {
+        int tmp = it.ff;
+
+        if(tmp > 9)
+        {
+            ans++;
+            int p = digits_count(tmp);
+            if(mp1.find(p) != mp1.end())
+            mp1[p] += it.ss;
+            else
+            mp1[p] = it.ss;
+            mp1.erase(tmp);
+        }
+        
     }
 
-    for (int i = 0; i < n-1; i++)
+    for(auto it:mp2)
     {
-        ans = max(ans, v[n-1] - v[i]);
-    }
+        int tmp = it.ff;
+        int sec = it.ss;
+        cout << tmp << " " << sec << endl;
 
-    cout << ans << endl;
+        if(tmp > 9)
+        {
+            ans++;
+
+            int p = digits_count(tmp);
+            cout << ans << " ans " << p << endl;
+
+            // if(mp2.find(p) != mp2.end())
+            // mp2[p] = mp2[p] + sec;
+            // else
+            // mp2[p] = it.ss;
+            auto it2= mp2.find(tmp);
+            
+            mp2.erase(it2);
+        }
+        
+    }
+    for(auto &it:mp1)
+    {
+        cout << it.ff << " h1 ";
+    }
+    cout << endl;
+    for(auto &it:mp2)
+    {
+        cout << it.ff << " h2 ";
+    }
+    cout << endl;
+
+    // for (auto &it:mp1)
+    // {
+    //     if(mp2[it.ff] != 0)
+    //     {
+    //         mp2[it.ff]--;
+    //         mp1[it.ff]--;
+    //     }
+    // }
+
+    // for(auto &it:mp1)
+    // {
+    //     int tmp = it.ff;
+
+    //     if(tmp > 1)
+    //     {
+    //         ans++;
+    //         int p = digits_count(tmp);
+    //         mp1[p] += it.ss;
+    //         mp1.erase(tmp);
+    //     }
+        
+    // }
+
+    // for(auto &it:mp2)
+    // {
+    //     int tmp = it.ff;
+
+    //     if(tmp > 1)
+    //     {
+    //         ans++;
+    //         int p = digits_count(tmp);
+    //         mp2[p] += it.ss;
+    //         mp2.erase(tmp);
+    //     }
+        
+    // }
+
+    // for (auto &it:mp1)
+    // {
+    //     if(mp2[it.ff] != 0)
+    //     {
+    //         mp2[it.ff]--;
+    //         mp1[it.ff]--;
+    //     }
+    // }
+
+    
+
+    // cout << ans <<endl;
+    
+    
+    
 }
-
-
-
 
 int32_t main() {
     ios_base::sync_with_stdio(false);

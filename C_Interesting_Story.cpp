@@ -35,35 +35,81 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
-void prakhar() {   
+int calans(char ch, vector<string> &v, int n)
+{
+    int ans = 0;
+    int tmp = 0;
 
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
+    vi neg;
 
-    int ans = v[n-1] - v[0];
+    for (int i = 0; i < n; i++) {
 
-    for (int i = 1; i < n; i++)
-    {
-        ans = max(ans, (v[i-1] - v[i]));
+        int cntch = count(all(v[i]), ch);
+        int rem = v[i].length() - cntch;
+        int diff = cntch - rem; 
+
+        if ( diff < 0 ) {
+            neg.pb(diff);
+        } else {
+            ans++;
+            tmp += diff;
+        }
     }
 
-    for (int i = 1; i < n; i++)
+    sort(all(neg));
+    
+    // vout(neg);
+
+    if(tmp < 1 )
     {
-        ans = max(ans, v[i] - v[0]);
+        return 0;
     }
 
-    for (int i = 0; i < n-1; i++)
+
+    int l = neg.size();
+
+    for (int i = l-1; i >= 0; i--)
     {
-        ans = max(ans, v[n-1] - v[i]);
+        tmp += neg[i];
+        ans++;
+        if(tmp < 1)
+        {
+            ans--;
+            tmp -= neg[i];
+            break;
+        }
     }
 
-    cout << ans << endl;
+    return ans;
 }
 
+void prakhar() {  
+
+    int n ;
+    cin >> n  ;
+
+    vector<string> vs;
+    for (int i = 0; i < n; i++)
+    {
+        string s ;
+        cin >> s ;
+        vs.pb(s);
+    }
 
 
+    char arch[] = {'a', 'b', 'c', 'd', 'e'};
+    int an = INT_MIN;
+
+    for (int i = 0; i < 5; i++)
+    {
+        int p = calans(arch[i], vs, n);
+        an = max(an, p);
+
+    }
+
+    cout << an << endl; 
+    
+}
 
 int32_t main() {
     ios_base::sync_with_stdio(false);

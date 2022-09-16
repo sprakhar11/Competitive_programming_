@@ -34,37 +34,141 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
+int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-void prakhar() {   
-
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
-
-    int ans = v[n-1] - v[0];
-
-    for (int i = 1; i < n; i++)
+void prakhar(){
+    ll n;
+   cin>>n;
+  vector<ll>a(n),b(n);
+ map<ll,vector<ll>>mp1,mp5;
+  map<ll,ll>mp2,mp3;
+  for(ll &x:a)
+  cin>>x;
+  ll k=0;
+  for(ll &x:b)
+  {
+    cin>>x;
+    mp1[x].pb(k);
+    k++;
+    // ll p=to_string(x).length();
+    // ll pp=to_string(p).length();
+    // mp2[p]+=1;
+    // mp3[pp]+=1;
+  }
+ 
+  ll ans=0;
+  // CASE 0
+  map<ll,ll>ind;
+  map<ll,ll>ind1;
+  for(ll i=0;i<n;i++)
+  {
+    if(!mp1[a[i]].empty())
     {
-        ans = max(ans, (v[i-1] - v[i]));
-    }
-
-    for (int i = 1; i < n; i++)
+      ind[mp1[a[i]][mp1[a[i]].size()-1]]=1;
+      ind1[i]=1;
+      mp1[a[i]].pop_back();
+    } 
+    
+  }
+  
+  vector<ll>vv,vv1;
+  for(ll i=0;i<n;i++)
+  {
+    if(ind1[i]!=1)
+    vv1.pb(a[i]);
+ 
+   if(ind[i]!=1)
+    vv.pb(b[i]);
+ 
+  }
+  ind.clear();
+  ind1.clear();
+  b=vv;
+  a=vv1;
+vv.clear();
+vv1.clear();
+//cout<<ans<<"\n";
+  // CASE 2
+  for(ll &x:a)
+  {
+    if(x>9)
+   {
+      x=to_string(x).length();
+      ans++;
+   }
+  }
+    for(ll &x:b)
+  {
+    if(x>9)
+   {
+      x=to_string(x).length();
+      ans++;
+   }
+  }
+//   for(ll x:a)
+//   cout<<x<<" ";
+ 
+//   endd;
+//    for(ll x:b)
+//   cout<<x<<" ";
+  
+//   endd;
+// cout<<ans<<"\n";
+   k=0;
+  for(ll x:b)
+  {
+    
+    mp5[x].pb(k);
+    k++;
+    // ll p=to_string(x).length();
+    // ll pp=to_string(p).length();
+    // mp2[p]+=1;
+    // mp3[pp]+=1;
+  }
+ 
+   for(ll i=0;i<a.size();i++)
+  {
+    if(!mp5[a[i]].empty())
     {
-        ans = max(ans, v[i] - v[0]);
-    }
-
-    for (int i = 0; i < n-1; i++)
-    {
-        ans = max(ans, v[n-1] - v[i]);
-    }
-
-    cout << ans << endl;
+      ind[mp5[a[i]][mp5[a[i]].size()-1]]=1;
+      ind1[i]=1;
+      mp5[a[i]].pop_back();
+    } 
+    
+  }
+   for(ll i=0;i<a.size();i++)
+  {
+    if(ind1[i]!=1)
+    vv1.pb(a[i]);
+ 
+   if(ind[i]!=1)
+    vv.pb(b[i]);
+ 
+  }
+  a=vv1;
+  b=vv;
+  //  for(ll x:a)
+  // cout<<x<<" ";
+ 
+  // endd;
+  //  for(ll x:b)
+  // cout<<x<<" ";
+  
+  // endd;
+  for(ll x:a)
+  {
+    if(x!=1)
+    ans+=1;
+ 
+  }
+ for(ll x:b)
+  {
+    if(x!=1)
+    ans+=1;
+    
+  }
+ cout<<ans<<"\n";
 }
-
-
-
-
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);

@@ -36,45 +36,110 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
 void prakhar() {   
+    int n , q ;
+    cin >> n >> q ;
 
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
+    int arr[n][n];
 
-    int ans = v[n-1] - v[0];
-
-    for (int i = 1; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        ans = max(ans, (v[i-1] - v[i]));
+        for (int j = 0; j < n; j++)
+        {
+            char ch;
+            cin >> ch;
+
+            arr[i][j] = (ch == '*') ? 1 : 0;
+
+        }
+        
     }
 
-    for (int i = 1; i < n; i++)
+    // pre sum row;
+
+    for (int i = 0; i < n; i++)
     {
-        ans = max(ans, v[i] - v[0]);
+        for (int j = 1; j < n; j++)
+        {
+            arr[i][j] +=arr[i][j-1];
+        }
+        
     }
 
-    for (int i = 0; i < n-1; i++)
+    // pre sum col 
+    for (int i = 0; i < n; i++)
     {
-        ans = max(ans, v[n-1] - v[i]);
+        for (int j = 1; j < n; j++)
+        {
+            arr[j][i] +=arr[j - 1][i];
+        }
+        
     }
 
-    cout << ans << endl;
+
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < n; j++)
+    //     {
+    //         cout <<  arr[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+
+    for (int i = 0; i < q; i++)
+    {
+        int y , x , yy , xx ;
+
+        cin >> y >> x >> yy >> xx ;
+        y--; x-- ; yy-- ; xx--;
+
+        int ans = 0 ;
+
+        // if ( x == xx && y == yy)
+        // {
+        //     cout << 0 << endl;
+        //     continue;
+        // }
+
+        if( min(x , xx) == 0 && min(y , yy) == 0)
+        {
+            ans = arr[max(y , yy)][max(x , xx)];
+            // cout << " hit 1" << endl;
+        }
+        else if(min(x , xx) == 0)
+        {
+            ans = arr[max(y , yy)][max(x , xx)] - arr[min(y , yy) - 1][max(x , xx)];
+            // cout << " hit 2" << endl;
+
+        }
+        else if(min(y, yy) == 0)
+        {
+            ans = arr[max(y , yy)][max(x , xx)] - arr[max(y , yy)][min(x , xx) - 1];
+            // cout << " hit3" << endl;
+
+
+        } else {
+            ans = arr[max(y , yy)][max(x , xx)] - arr[min(y , yy)-1] [max(x , xx)] - 
+                    arr[max(y , yy)][min(x , xx)] + arr[min(y , yy)][min(x , xx)];
+            // cout << " hit 4" << endl;
+            // cout << max(x, xx) << " x and y " << max(y, yy) << endl;
+        }
+
+        cout << ans << endl;
+    }
+
+
 }
-
-
-
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
+    freopen("../input.txt", "r", stdin);
+    freopen("../output.txt", "w", stdout);
+    freopen("../error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

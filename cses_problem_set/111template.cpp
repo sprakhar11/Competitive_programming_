@@ -34,47 +34,28 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
+int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
+
 
 void prakhar() {   
+    int n ;
+    cin >> n;
+    cout << n ;
 
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
 
-    int ans = v[n-1] - v[0];
-
-    for (int i = 1; i < n; i++)
-    {
-        ans = max(ans, (v[i-1] - v[i]));
-    }
-
-    for (int i = 1; i < n; i++)
-    {
-        ans = max(ans, v[i] - v[0]);
-    }
-
-    for (int i = 0; i < n-1; i++)
-    {
-        ans = max(ans, v[n-1] - v[i]);
-    }
-
-    cout << ans << endl;
+    
 }
-
-
-
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
+    freopen("../input.txt", "r", stdin);
+    freopen("../output.txt", "w", stdout);
+    freopen("../error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

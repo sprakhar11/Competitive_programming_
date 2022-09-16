@@ -36,34 +36,22 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
 void prakhar() {   
-
-    int n;
+    
+    int n ; 
     cin >> n ;
-    vi v;
-    vin (v ,n);
+    int a ;
 
-    int ans = v[n-1] - v[0];
 
-    for (int i = 1; i < n; i++)
+    if( n % 2 == 0)
     {
-        ans = max(ans, (v[i-1] - v[i]));
-    }
+         a = n /  2;
 
-    for (int i = 1; i < n; i++)
+    } else
     {
-        ans = max(ans, v[i] - v[0]);
+         a = -1 * ( (n + 1)/  2 );
     }
-
-    for (int i = 0; i < n-1; i++)
-    {
-        ans = max(ans, v[n-1] - v[i]);
-    }
-
-    cout << ans << endl;
+    cout << a  << endl;
 }
-
-
-
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -74,7 +62,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

@@ -36,45 +36,32 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
 void prakhar() {   
+    
+    int a , b, c , d ;
+    cin >> a >> b >> c >> d;
+    int a1 = min({a, c, d});
+    int a2 = min((a - a1), b);
 
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
+    a2 = a2 < 0 ? 0 : a2;
 
-    int ans = v[n-1] - v[0];
-
-    for (int i = 1; i < n; i++)
-    {
-        ans = max(ans, (v[i-1] - v[i]));
-    }
-
-    for (int i = 1; i < n; i++)
-    {
-        ans = max(ans, v[i] - v[0]);
-    }
-
-    for (int i = 0; i < n-1; i++)
-    {
-        ans = max(ans, v[n-1] - v[i]);
-    }
+    int ans = a1 * 256 + a2 *32;
 
     cout << ans << endl;
+
+
+    
 }
-
-
-
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
+    freopen("../input.txt", "r", stdin);
+    freopen("../output.txt", "w", stdout);
+    freopen("../error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }

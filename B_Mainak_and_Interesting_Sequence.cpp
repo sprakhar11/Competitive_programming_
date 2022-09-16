@@ -37,29 +37,45 @@ long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 
 void prakhar() {   
 
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
-
-    int ans = v[n-1] - v[0];
-
-    for (int i = 1; i < n; i++)
+   ll n,m;
+  cin>>n>>m;
+  if(n>m)
+  {
+    cout<<"NO\n";
+    return;
+  }
+  else if(n%2==0 && m%2!=0)
+  {
+    cout<<"NO\n";
+    
+  }
+  else if(n==1)
+  {
+    cout<<"YES\n";
+    cout<<m<<"\n";
+  }
+  else
+  {
+    cout<<"YES\n";
+    if(n%2==0)
     {
-        ans = max(ans, (v[i-1] - v[i]));
+      ll j=n-2;
+      m-=j;
+      for(ll i=0;i<j;i++)
+      cout<<1<<" ";
+      cout<<m/2<<" "<<m/2<<"\n";
+ 
     }
-
-    for (int i = 1; i < n; i++)
+    else if(n%2!=0)
     {
-        ans = max(ans, v[i] - v[0]);
+      ll j=n-1;
+      m-=j;
+      for(ll i=0;i<j;i++)
+      cout<<1<<" ";
+      cout<<m<<"\n";
     }
-
-    for (int i = 0; i < n-1; i++)
-    {
-        ans = max(ans, v[n-1] - v[i]);
-    }
-
-    cout << ans << endl;
+ 
+  }
 }
 
 

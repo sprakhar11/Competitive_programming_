@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
-#define ll long long 
-#define int long long 
+#define ll long long
+#define int long long
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"
 #define vi vector<int>
 #define vii vector<pair<int, int>>
 #define vs vector<string>
-#define vc vector<char>ṇ
+#define vc vector<char>
 #define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -58,14 +58,15 @@ public:
 		int right = query(2 * ind + 2, mid + 1, high, l, r);
 		return (left+right);
 	}
-	void update(int ind, int low, int high, int i, int val) {
+	void update(int ind, int low, int high, int l, int r, int u) {
 		if (low == high) {
-			seg[ind] = val;
+			seg[ind] += u;
 			return;
 		}
 
 		int mid = (low + high) >> 1;
-		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
+
+		if (i <= mid) update(2 * ind + 1, low,);
 		else update(2 * ind + 2, mid + 1, high, i, val);
 		seg[ind] = seg[2 * ind + 1] + seg[2 * ind + 2];
 	}
@@ -107,11 +108,15 @@ void prakhar() {
 
     for (int i = 0; i < q; i++)
     {
-        int c, l , r ;
-        cin >> c >> l >> r ;
+        int c;
+		cin >> c ;
+
 		if( c == 1)
 		{
-			sgt.update(0, 0, n-1, --l, r );
+			int a , b , u ;
+			cin >> a >> b >> u;
+
+			sgt.update(0, 0, n-1, --a, --b,  );
 		}
 		else
         cout << sgt.query(0, 0, n-1, --l , --r ) << endl;

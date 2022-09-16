@@ -34,36 +34,50 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
+int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
+    int n ; 
+    cin >> n ; 
+    string s ;
 
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
+    cin >> s ;
 
-    int ans = v[n-1] - v[0];
-
-    for (int i = 1; i < n; i++)
+    string ans = "";
+    int i ;
+    
+    for ( i = n-1; i >= 0; i--)
     {
-        ans = max(ans, (v[i-1] - v[i]));
+        if( s[i] == '0')
+        {
+            //print i - 1 .... i - 2   ..... i--
+
+            int p = s[i-2] - '0';
+            int q = s[i-1] - '0';
+
+            int k = p * 10 + q;
+            char ch = (char)(k + 96);
+            ans = ans+ch;
+            i-=2;
+        } else
+        {
+            //print i ...... i++
+
+            int p = s[i] - '0';
+            char ch = (char)(p + 96);
+            ans = ans + ch ;
+        }
     }
 
-    for (int i = 1; i < n; i++)
+    for (int i = ans.length() - 1; i >= 0; i--)
     {
-        ans = max(ans, v[i] - v[0]);
+        cout << ans[i] ;
     }
-
-    for (int i = 0; i < n-1; i++)
-    {
-        ans = max(ans, v[n-1] - v[i]);
-    }
-
-    cout << ans << endl;
+    cout << endl;
+    
+    
+    
 }
-
-
-
 
 int32_t main() {
     ios_base::sync_with_stdio(false);

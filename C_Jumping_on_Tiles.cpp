@@ -34,36 +34,92 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
+int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
+bool mysort(pair<int, int> &a, pair<int, int> &b)
+{
+    if( a.ff == b.ff)
+    return a.ss > b.ss;
+    return a.ff < b.ff;
 
-void prakhar() {   
-
-    int n;
-    cin >> n ;
-    vi v;
-    vin (v ,n);
-
-    int ans = v[n-1] - v[0];
-
-    for (int i = 1; i < n; i++)
-    {
-        ans = max(ans, (v[i-1] - v[i]));
-    }
-
-    for (int i = 1; i < n; i++)
-    {
-        ans = max(ans, v[i] - v[0]);
-    }
-
-    for (int i = 0; i < n-1; i++)
-    {
-        ans = max(ans, v[n-1] - v[i]);
-    }
-
-    cout << ans << endl;
 }
+void prakhar() {
+
+    string s ;
+    cin >> s ;
+    int n = s.length();
+
+    vector<pair<int, int>> v ;
+
+    int st = s[0] - 'a' + 1;
+    int ed = s[n-1] - 'a' + 1;
+
+    for (int i = 0; i < n; i++)
+    {
+        int ind = s[i] - 'a'  + 1;
+        v.pb({ind , i});
+
+    }
+
+    sort(all(v), mysort);
+
+    for(auto it:v)
+    {
+        cout << it.ff << " " << it.ss << endl;
+    }
+
+    vi ans;
+    vi seq;
+    int at = abs((s[0] - 'a' + 1 ) - ( s[n-1] - 'a' + 1)) ;
+
+    for(int i = 0 ; i < n ; i++)
+    {
+        if(v[i].ss == 0)
+        {
+            while(v[i].ss != n-1)
+            {
+                ans.pb(v[i].ff);
+                seq.pb(v[i].ss);
+                i++;
+            }
+            ans.pb(v[i].ff);
+            seq.pb(v[i].ss);
 
 
+            break;
+        }
 
+        if(v[i].ss == n-1 )
+        {
+            while(v[i].ss != 0)
+            {
+                ans.pb(v[i].ff);
+                seq.pb(v[i].ss);
+                i++;
+            }
+            ans.pb(v[i].ff);
+            seq.pb(v[i].ss);
+
+
+            break;
+        }
+
+    }
+
+    int a =  0;
+    for (int i = 0; i < ans.size() - 1; i++)
+    {
+        a +=abs(ans[i] - ans[i+1]);
+    }
+    if(seq[0] != 0) 
+    reverse(all(seq));
+    cout << at << " " << seq.size()<<endl;;
+    for(auto &x:seq)
+    {
+        cout << x + 1 << " " ;
+    }
+    cout << endl;
+
+}
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
