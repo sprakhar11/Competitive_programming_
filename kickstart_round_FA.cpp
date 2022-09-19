@@ -35,11 +35,74 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
+bool mysort(pair<pair<string, int>, int> &a, pair<pair<string, int>, int> & b){
+
+    if( ((a.ff.ff.compare(b.ff.ff)) == 0))
+    return a.ss < b.ss;
+
+
+    return ((a.ff.ff.compare(b.ff.ff)) < 0);
+}
+
+bool mysort2(pair<pair<string, int>, int> &a, pair<pair<string, int>, int> & b){
+
+    if(a.ff.ss == b.ff.ss)
+    return (a.ss < b.ss);
+
+    return a.ff.ss < b.ff.ss;
+}
 
 int i = 1;
 void prakhar() {   
 
- cout << "Case #" << i <<": ";
+    int n ;
+    cin >> n ;
+    vector<pair<pair<string, int>, int>> v1;
+    vector<pair<pair<string, int>, int>> v2;
+
+
+    cout << "Case #" << i <<": ";
+
+    for (int j = 0; j < n; j++)
+    {
+        string s ;
+        cin >> s ;
+        int d , u ;
+        cin >> d >> u ;
+
+        v1.pb({{s , d }, u});
+        v2.pb({{s , d}, u});
+        
+    }
+    sort(all(v1), mysort);
+    sort(all(v2), mysort2);
+
+    // cout << endl;
+    // for(auto it:v1)
+    // {
+    //     cout << it.ff << " " << it.ss << endl;
+    // }
+    // cout << endl;
+    // for(auto it:v2)
+    // {
+    //     cout << it.ff << " " << it.ss << endl;
+    // }
+
+    int cnt = 0 ;
+
+
+    for (int j = 0; j < n; j++)
+    {
+        if(v1[j].ss == v2[j].ss)
+        {
+            cnt++;
+        }
+    }
+    cout << cnt << endl;
+    
+    
+
+
  
     
 }

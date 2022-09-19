@@ -36,11 +36,27 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-int i = 1;
 void prakhar() {   
 
- cout << "Case #" << i <<": ";
- 
+    int n , m ;
+    cin >> n >> m ;
+
+    if( n == 1 )
+    {
+        cout << m  -1 ;
+        return;
+    }
+    if( m == 1)
+    {
+        cout << n  - 1 ;
+        return;
+
+    }
+
+    int ans = n * ( m - 1);
+    cout << ans;
+
+
     
 }
 
@@ -53,8 +69,8 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    cin >> t ;
-    for ( i = 1; i <= t; i++) {
+    // cin >> t ;
+    for (int i = 0; i < t; i++) {
         prakhar();
     }
     
