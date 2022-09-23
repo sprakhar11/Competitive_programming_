@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
-#define ll long long
-#define int long long
+#define ll long long 
+#define int long long 
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"
 #define vi vector<int>
 #define vii vector<pair<int, int>>
 #define vs vector<string>
-#define vc vector<char>
+#define vc vector<char>ṇ
 #define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -26,11 +26,13 @@ using namespace std;
 class SGTree {
 	vector<int> seg;
 public:
+
 	SGTree(int n) {
 		seg.resize(4 * n + 1);
 	}
 
 	void build(int ind, int low, int high, int arr[]) {
+
 		if (low == high) {
 			seg[ind] = arr[low];
 			return;
@@ -58,18 +60,19 @@ public:
 		int right = query(2 * ind + 2, mid + 1, high, l, r);
 		return (left+right);
 	}
-	void update(int ind, int low, int high, int l, int r, int u) {
+
+	void update(int ind, int low, int high, int i, int val) {
 		if (low == high) {
-			seg[ind] += u;
+			seg[ind] = val;
 			return;
 		}
 
 		int mid = (low + high) >> 1;
-
-		if (i <= mid) update(2 * ind + 1, low,);
+		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
 		else update(2 * ind + 2, mid + 1, high, i, val);
 		seg[ind] = seg[2 * ind + 1] + seg[2 * ind + 2];
 	}
+	
 };
 
 
@@ -97,13 +100,23 @@ void prakhar() {
     int n,  q ;
     cin  >> n >> q ; 
     int arr[n];
+	int v[n] = {0};
+
+
+	
+
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
+		v[i] = 0;
     }
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << " " ;
+	}
 
     SGTree sgt(n);
-    sgt.build(0, 0 , n - 1 , arr);
+    sgt.build(0, 0 , n - 1 , v);
 
 
     for (int i = 0; i < q; i++)
@@ -111,15 +124,34 @@ void prakhar() {
         int c;
 		cin >> c ;
 
-		if( c == 1)
+		if(c == 1)
 		{
 			int a , b , u ;
-			cin >> a >> b >> u;
+			cin >> a >> b >> u ;
 
-			sgt.update(0, 0, n-1, --a, --b,  );
+			int g = sgt.query(0, 0, n-1, --a , --a );
+			
+			sgt.update(0 , 0 , n-1 , a, (g+ u));
+
+			g = sgt.query(0, 0, n-1, --a , --a );
+			cout << g << " up " endl;
+
+			if(b != n){
+
+			int g = sgt.query(0, 0, n-1, b , b ) ;
+			cout << g << endl;
+			
+			sgt.update(0 , 0 , n-1 , b, (g - u));}
+
+
+		} else
+		{
+			int k ;
+			cin >> k ;
+
+			cout << sgt.query(0, 0, n-1, 0 , --k ) + arr[--k]  << endl;
+
 		}
-		else
-        cout << sgt.query(0, 0, n-1, --l , --r ) << endl;
 
     }
     

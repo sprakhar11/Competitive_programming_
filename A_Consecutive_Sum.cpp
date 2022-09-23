@@ -16,7 +16,7 @@
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
 #define f(i,a,b) for(ll i=a;i<b;i++)
-
+    
 using namespace std;
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
@@ -34,103 +34,55 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
+int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
-    int n , q ;
-    cin >> n >> q ;
 
-    int arr[n][n];
+//  cout << "Case #" << i <<": ";
 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            char ch;
-            cin >> ch;
-
-            arr[i][j] = (ch == '*') ? 1 : 0;
-
-        }
+        int n , k ; 
+        cin >> n >> k; 
         
-    }
+        vi v(n) ;
+        vin(v, n);
+        // vout(v);
 
-    // pre sum row;
+        map<int,vector<int>> mp;
 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 1; j < n; j++)
-        {
-            arr[i][j] +=arr[i][j-1];
-        }
+        for (int i = 0; i < n; i++){
+            int h = (i + 1) % k;
+            
+            mp[h].pb(v[i]);}
         
-    }
-
-    // pre sum col 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 1; j < n; j++)
-        {
-            arr[j][i] +=arr[j - 1][i];
-        }
-        
-    }
-
-    int ar[n+1][n+1];
-
-    for (int i = 0; i <= n; i++)
-    {
-        ar[0][i] = 0;
-        ar[i][0] = 0;
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            ar[i+1][j+1] = arr[i][j];
-        }
-        
-    }
+        int p = 0 ;
     
+        for (int i = 0; i < k; i++)
+        {
+            int mxx = 0;
+
+            for(auto &it:mp[i])
+                mxx = max(mxx, it);
+                
+            p = p + mxx;
+        }
+
+        cout << p << "\n";
+
+ 
     
-
-
-    // for (int i = 0; i <= n; i++)
-    // {
-    //     for (int j = 0; j <= n; j++)
-    //     {
-    //         cout <<  ar[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
-
-    for (int i = 0; i < q; i++)
-    {
-        int y, x , yy, xx;
-        cin >> y >> x >> yy >> xx;
-
-        int ans = ar[max(y , yy)][max(x, xx)] -
-                    ar[max(y, yy)][min(x, xx) - 1] -
-                    ar[min(y, yy) - 1][max(x, xx)] +
-                    ar[min(y , yy) - 1][min(x, xx) - 1];
-        
-        cout << ans << endl;
-    }
-
-
 }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
-    freopen("../error.txt", "w", stderr);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    // cin >> t ;
-    for (int i = 0; i < t; i++) {
+    cin >> t ;
+    for (int i = 1; i <= t; i++) {
         prakhar();
     }
     

@@ -16,7 +16,7 @@
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
 #define f(i,a,b) for(ll i=a;i<b;i++)
-
+    
 using namespace std;
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
@@ -34,103 +34,50 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
+int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
+int ii = 1;
 void prakhar() {   
-    int n , q ;
-    cin >> n >> q ;
 
-    int arr[n][n];
+    //  cout << "Case #" << i <<": ";
+    int k ;
+    cin >> k ;
+    string a , b ; 
+    cin >>a >> b ;
 
-    for (int i = 0; i < n; i++)
+    int p = 0 ;
+    int q = 0 ;
+
+
+    for (int i = 0; i < a.length(); i++)
     {
-        for (int j = 0; j < n; j++)
+        if(a[i] == 'T' && b[i] == 'F')
         {
-            char ch;
-            cin >> ch;
-
-            arr[i][j] = (ch == '*') ? 1 : 0;
-
+            p++;
         }
-        
-    }
-
-    // pre sum row;
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 1; j < n; j++)
+        if(a[i] == 'T' && b[i] == 'T')
         {
-            arr[i][j] +=arr[i][j-1];
+            q++;
         }
-        
-    }
-
-    // pre sum col 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 1; j < n; j++)
-        {
-            arr[j][i] +=arr[j - 1][i];
-        }
-        
-    }
-
-    int ar[n+1][n+1];
-
-    for (int i = 0; i <= n; i++)
-    {
-        ar[0][i] = 0;
-        ar[i][0] = 0;
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            ar[i+1][j+1] = arr[i][j];
-        }
-        
-    }
+    } 
+    cout << k - p ;
     
     
-
-
-    // for (int i = 0; i <= n; i++)
-    // {
-    //     for (int j = 0; j <= n; j++)
-    //     {
-    //         cout <<  ar[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
-
-    for (int i = 0; i < q; i++)
-    {
-        int y, x , yy, xx;
-        cin >> y >> x >> yy >> xx;
-
-        int ans = ar[max(y , yy)][max(x, xx)] -
-                    ar[max(y, yy)][min(x, xx) - 1] -
-                    ar[min(y, yy) - 1][max(x, xx)] +
-                    ar[min(y , yy) - 1][min(x, xx) - 1];
-        
-        cout << ans << endl;
-    }
-
-
+ 
+    
 }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
-    freopen("../input.txt", "r", stdin);
-    freopen("../output.txt", "w", stdout);
-    freopen("../error.txt", "w", stderr);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
     // cin >> t ;
-    for (int i = 0; i < t; i++) {
+    for ( ii = 1; ii <= t; ii++) {
         prakhar();
     }
     

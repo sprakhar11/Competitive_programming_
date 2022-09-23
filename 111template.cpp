@@ -36,10 +36,11 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-int i = 1;
+int ii = 1;
 void prakhar() {   
 
- cout << "Case #" << i <<": ";
+    //  cout << "Case #" << i <<": ";
+    
  
     
 }
@@ -54,7 +55,7 @@ int32_t main() {
     #endif
     ll t = 1 ;
     cin >> t ;
-    for ( i = 1; i <= t; i++) {
+    for ( ii = 1; ii <= t; ii++) {
         prakhar();
     }
     
