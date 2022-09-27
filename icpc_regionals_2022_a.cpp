@@ -16,7 +16,7 @@
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
 #define f(i,a,b) for(ll i=a;i<b;i++)
-
+    
 using namespace std;
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
@@ -36,13 +36,55 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-
+int ii = 1;
 void prakhar() {   
-    int n ;
-    cin >> n;
-    cout << n;
 
+    //  cout << "Case #" << i <<": ";
+    int n, j ;
+    cin >> n >> j ;
+    j--;
 
+    string s ;
+    cin >> s;
+    int f = 0;
+    int i ;
+
+    for ( i = -1; i < n ; i++)
+    {
+        // cout << i << " " << j << endl;
+        if(j == i || i > n)
+        {
+            f = 1;
+            break;
+        }
+        if( j == n-1)
+        {
+            break;
+        }
+        if(s[j+1] == '#')
+        {
+            s[j+1] = '.';
+            
+        } else {
+            j++;
+
+        }
+        
+        
+        
+    }
+
+    if(f == 0 && j == n - 1)
+    {
+        cout << "JAY" << endl;
+    }
+    else
+    {
+        cout << "JEFF" << endl;
+    }
+
+    
+ 
     
 }
 
@@ -55,8 +97,8 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    // cin >> t ;
-    for (int i = 0; i < t; i++) {
+    cin >> t ;
+    for ( ii = 1; ii <= t; ii++) {
         prakhar();
     }
     

@@ -5,6 +5,10 @@
 #define INF 1e18
 #define endl "\n"
 #define vi vector<int>
+#define vii vector<pair<int, int>>
+#define vs vector<string>
+#define vc vector<char>ṇ
+#define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>
 #define pii pair<int, int>
@@ -18,6 +22,56 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
 
 using namespace std;
+
+class SGTree {
+	vector<int> seg;
+public:
+	SGTree(int n) {
+		seg.resize(4 * n + 1);
+	}
+
+	void build(int ind, int low, int high, int arr[]) {
+		if (low == high) {
+			seg[ind] = arr[low];
+			return;
+		}
+
+		int mid = (low + high) / 2;
+		build(2 * ind + 1, low, mid, arr);
+		build(2 * ind + 2, mid + 1, high, arr);
+		seg[ind] = seg[2 * ind + 1] + seg[2 * ind + 2];
+
+        // cout << seg << endl;
+	}
+
+	int query(int ind, int low, int high, int l, int r) {
+		// no overlap
+		// l r low high or low high l r
+		if (r < low || high < l) return 0;
+
+		// complete overlap
+		// [l low high r]
+		if (low >= l && high <= r) return seg[ind];
+
+		int mid = (low + high) >> 1;
+		int left = query(2 * ind + 1, low, mid, l, r);
+		int right = query(2 * ind + 2, mid + 1, high, l, r);
+		return (left+right);
+	}
+	void update(int ind, int low, int high, int i, int val) {
+		if (low == high) {
+			seg[ind] = val;
+			return;
+		}
+
+		int mid = (low + high) >> 1;
+		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
+		else update(2 * ind + 2, mid + 1, high, i, val);
+		seg[ind] = seg[2 * ind + 1] + seg[2 * ind + 2];
+	}
+};
+
+
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -34,15 +88,80 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
-int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 
-void prakhar() {   
-    int n ;
-    cin >> n;
-    cout << n;
+
+void prakhar() {
+
+    int n,  q ;
+    cin  >> n >> q ; 
+    int arr[n];
+    int mx = 0 ;
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];     
+        mx = max(mx , arr[i]);
+    }
+
+    int ar2[mx];
+
+    for (int i = 0; i < mx; i++)
+    {
+        ar2[i] = 0 ;
+
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        ar2[arr[i]]++;
+        
+    }
+
+    // for (int i = 0; i < mx; i++)
+    // {
+    //     cout << ar2[i] << " ";
+    // }
+    // cout << endl;
+    
+    
 
 
+
+
+    SGTree sgt(mx);
+    sgt.build(0, 0 , mx - 1 , ar2);
+
+
+    for (int i = 0; i < q; i++)
+    {
+        char c ;
+        int a , b ;
+        cin >>c >> a >> b ;
+
+		if( c == '!')
+		{
+            int tmp = arr[a-1];
+            arr[a-1] = b;
+            
+            int val_tmp = sgt.query(0, 0, mx-1, tmp, tmp);
+            // cout << "val_tmp = " << val_tmp;
+            sgt.update(0, 0, mx-1, tmp, val_tmp-1);
+        //    cout <<  sgt.query(0, 0, mx-1, tmp, tmp);
+
+            int val2 = sgt.query(0, 0, mx-1, b ,b);
+            sgt.update(0, 0, mx-1, b, val2+1);
+
+		}
+		else{
+
+            // cout << a << " " << b << endl;
+            cout << sgt.query(0, 0, n-1, --a , --b ) << endl;
+        }
+
+    }
+    
+    
     
 }
 

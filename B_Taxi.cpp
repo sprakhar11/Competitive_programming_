@@ -16,7 +16,7 @@
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
 #define f(i,a,b) for(ll i=a;i<b;i++)
-
+    
 using namespace std;
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
@@ -36,14 +36,84 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-
+int ii = 1;
 void prakhar() {   
-    int n ;
-    cin >> n;
-    cout << n;
+
+    //  cout << "Case #" << i <<": ";
+    int n ; 
+    cin >>  n ; 
+
+    vi v ;
+    vin(v, n);
+
+    if( n == 1)
+    {
+        cout << 1 << endl;
+        return;
+    }
+
+    sort(all(v), greater<int>());
+
+    int c4 = count(all(v), 4);
+    int c3 = count(all(v), 3);
+    int c2 = count(all(v), 2);
+    int c1 = count(all(v), 1);
+
+    int ans = 0;
+    ans = c4;
+
+    if(c1 <= c3)
+    {
+
+        ans +=c3;
+        c1 = 0 ;
+
+
+    } else {
+
+        ans +=c3;
+        c1 = c1 - c3 ;
+
+    }
+
+    
+
+    int tmp = 0 ;
+
+    for (int  i = 0; i < c2; i++)
+    {
+
+        tmp += 2;
+        if(tmp == 4)
+        {
+            ans++;
+            tmp = 0 ;
+
+        }
+        
+    }
+
+    for (int i = 0; i < c1; i++)
+    {
+        tmp += 1;
+        if(tmp == 4)
+        {
+            ans++;
+            tmp = 0 ;
+        }
+    }
+    if(tmp != 0)
+    {
+        ans++;
+    }
+
+    
 
 
     
+
+
+    cout << ans << endl;
 }
 
 int32_t main() {
@@ -56,7 +126,7 @@ int32_t main() {
     #endif
     ll t = 1 ;
     // cin >> t ;
-    for (int i = 0; i < t; i++) {
+    for ( ii = 1; ii <= t; ii++) {
         prakhar();
     }
     
