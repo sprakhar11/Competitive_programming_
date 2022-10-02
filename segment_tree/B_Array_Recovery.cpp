@@ -7,7 +7,7 @@
 #define vi vector<int>
 #define vii vector<pair<int, int>>
 #define vs vector<string>
-#define vc vector<char>ṇ
+#define vc vector<char>
 #define vb vector<bool>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -39,50 +39,118 @@ public:
 		int mid = (low + high) / 2;
 		build(2 * ind + 1, low, mid, arr);
 		build(2 * ind + 2, mid + 1, high, arr);
-		seg[ind] = seg[2 * ind + 1] + seg[2 * ind + 2];
+		seg[ind] = max(seg[2 * ind + 1], seg[2 * ind + 2]);
 
         // cout << seg << endl;
 	}
 
-	int query(int ind, int low, int high, int l, int r) {
+	int query(int ind, int low, int high, int l, int r, int val) {
 		// no overlap
 		// l r low high or low high l r
-		if (r < low || high < l) return 0;
+		// if (r < low || high < l) return 0;
 
 		// complete overlap
 		// [l low high r]
-		if (low >= l && high <= r) return seg[ind];
+		// if (low >= l && high <= r) return seg[ind];
+		
+		if(low == high)
+		{
+			cout << "hit 0" ;
+
+			if(seg[ind] >= val)
+			{
+				cout << seg[ind] << " sds  "<< low << endl;
+				cout << "hit 1" ;
+
+				// return low + 1;
+
+			}
+			else
+			{
+				cout << seg[ind] << " sds  "<< low << endl;
+
+				cout << " hit 2" ;
+				// return -1;
+
+			}
+		}
+
+		cout << "hit 4" << endl;
+
 
 		int mid = (low + high) >> 1;
-		int left = query(2 * ind + 1, low, mid, l, r);
-		int right = query(2 * ind + 2, mid + 1, high, l, r);
-		return left+right;
+
+		cout << low << " " << high << endl;
+		cout << mid << endl;
+
+		if(seg[2 * ind + 1] >= val)
+		query(2 * ind + 1, low, mid, l, r, val);
+		else if(seg[2 * ind + 2] >= val)
+		query(2 * ind + 2, mid + 1, high, l, r, val);
+		else
+		return -1;
+
 	}
+
+	int query_value(int ind, int low, int high, int l, int r, int val) {
+		// no overlap
+		// l r low high or low high l r
+		// if (r < low || high < l) return 0;
+
+		// complete overlap
+		// [l low high r]
+		// if (low >= l && high <= r) return seg[ind];
+
+		if(low == high)
+		{
+			if(seg[ind] >= val)
+			{
+				cout << seg[ind] << " sds  "<< low << endl;
+
+				return seg[ind];
+
+			}
+			else
+			{
+				return -1;
+
+			}
+		}
+
+		int mid = (low + high) >> 1;
+
+		if(seg[2 * ind + 1] >= val)
+		query(2 * ind + 1, low, mid, l, r, val);
+		
+		else if(seg[2 * ind + 2] >= val)
+		query(2 * ind + 2, mid + 1, high, l, r, val);
+
+	}
+
 	void update(int ind, int low, int high, int i, int val) {
 		if (low == high) {
-			seg[ind] = val;
+			seg[ind] -= val;
 			return;
 		}
 
 		int mid = (low + high) >> 1;
 		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
 		else update(2 * ind + 2, mid + 1, high, i, val);
-		seg[ind] =  seg[2 * ind + 1] + seg[2 * ind + 2];
+		seg[ind] =  max(seg[2 * ind + 1], seg[2 * ind + 2]);
 	}
+
     void display(int n)
     {
         n = 4 * n + 1;
         for (int i = 0; i < n; i++)
         {
-            cout << seg[i] << " " ;
+            cout << seg[i] << " ";
         }
         cout << endl;
         
     }
 };
 
-
-#define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
 ll mult(ll x, ll y) {ll res = x * y;return (res >= MOD ? res % MOD : res);}
@@ -98,81 +166,47 @@ string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k =
 static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
-
-
+int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {
 
-    int n,  q ;
-    cin  >> n >> q ; 
-    int a1[n];
-	for (int i = 0; i < n; i++)
-	{
-		cin >> a1[i];
-	}
-	
-	int a2[n];
-	int a3[n];
+    int n ;
+    cin >> n ; 
+    vi v;
+    vin(v, n);
 
-	for (int i = 0; i < n; i++)
-	{
-		a2[i] = 0;
-		a3[i] = 0;
-	}
+    vi ans;
+    ans.pb(v[0]);
 
-	SGTree sgt(n);
-   
-    sgt.build(0, 0 , n - 1 , a2);
-	// sgt.display(n);
+    int f = 0 ;
 
-	
-
-
-
-    for (int i = 0; i < q; i++)
+    for (int i = 1; i < n; i++)
     {
-        int q1;
-		cin >> q1 ;
-		if(q1 == 2) {
-			int index;
-			cin >> index;
-			index--;
-			int ans = sgt.query(0, 0, n-1, 0, index) + a1[index];
-			// cout << index << endl;
-			// cout << sgt.query(0, 0, n-1, 0, index) << " sdf "<< endl;
+        // v[i] if  b/w 1 and ans[i-1] - 1 then false
 
-			cout << ans << endl;
+        if( v[i] >= 1 && v[i] < ans[i-1])
+        {
+            cout << -1 << endl;
+            return;
+        }
+        else {
 
-
-		} else {
-			int r, l, v;
-			cin >> l >> r >>v ;
-
-			l--;
-			a3[l] += v;
-			if(r != n)
-			a3[r] -= v;
-
-			// cout << n << "  n "<< endl; 
-
-			// for (int i = 0; i < n; i++)
-			// {
-			// 	cout << a3[i] << " ";
-
-			// }
-			// cout << endl;
-			
-
-			sgt.update(0, 0, n-1, l, a3[l]);
-			if(r != n)
-			sgt.update(0, 0, n-1, r, a3[r]);
-			// sgt.display(n);
-
-
-
-		}
-         
+            ans.pb(ans[i-1] + v[i]);
+        } 
     }
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << ans[i] << " ";
+    }
+    cout << endl;
+
+    
+
+    
+
+
+
 }
 
 int32_t main() {
@@ -184,7 +218,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
     #endif
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     for (int i = 0; i < t; i++) {
         prakhar();
     }
