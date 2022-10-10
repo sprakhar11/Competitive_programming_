@@ -19,7 +19,8 @@
     
 using namespace std;
 #define watch(x) cout << (#x) << " = " << (x) << endl
-const int MOD = 1e9 + 7;
+const int MOD = 998244353;
+ll add(ll a, ll b ) { return( ((a % MOD) + (b % MOD)) % MOD); }
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
 ll mult(ll x, ll y) {ll res = x * y;return (res >= MOD ? res % MOD : res);}
 ll factorial(ll v){ll ans=1;for(int i=2;i<=v;i++){ans*=i;ans%=MOD;}return ans;}
@@ -36,12 +37,73 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
+int calcans(int n)
+{
+    n--;
+    n--;
 
+    int i = 1;
+    int j = 1;
+
+
+
+    for (int k = 0; k < n; k++)
+    {
+        
+            int tmp = j;
+            j = i;
+            i = add(tmp, i);
+        
+    }
+
+    if(i == 1 && n > 0)
+    {
+        return 2;
+    }
+    return i+j;
+    
+}
 void prakhar() {   
 
-    
- 
-    
+    string s;
+    cin >> s ;
+
+
+    vi v;
+
+    int c = 1 ;
+    int n = s.length();
+
+    for (int i = 0; i < n-1; i++)
+    {
+        if(s[i] == s[i+1])
+        {
+            if(c == 1)
+            continue;
+            v.pb(c);
+            c = 1;
+            continue;
+            
+        } else
+        {
+            c++;
+        }
+    }
+    if(c != 1)
+    {
+        v.pb(c);
+    }
+    // cout << " this is v  " << endl;
+    // vout(v);
+    int ans = 1;
+
+    for (int i = 0; i < sz(v); i++)
+    {
+        ans = mult(ans, calcans(v[i]));
+        
+    }
+    cout << ans << endl;
+
 }
 
 int32_t main() {

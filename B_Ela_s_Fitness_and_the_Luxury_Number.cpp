@@ -39,9 +39,62 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
 
+    int l, r;
+    cin >> l >> r;
+
+    if(r-l+1 <= 3){
+        int cnt =0;
+        for (int i = l; i <=r; i++){
+            int p = floor(sqrt(i));
+            if(i % p == 0)
+            {
+                cnt++;
+            }
+        }
+        cout << cnt << endl;
+    } else {
+        int c = 0;
+
+        int p = floor(sqrt(l));
+        int q = floor(sqrt(r));
+        // cout << p << " " << q << endl;
+        if(p * p >= l)
+        {
+            c = 3;
+        } else if(p * (p+1) >= l)
+        {
+            c = 2;
+        } else
+        {
+            c =1;
+        }
+        // cout << c << endl;
+
+
+        if(q * (q+2) <= r)
+        {
+            c += 3;
+        } else if(q * (q+1) <= r)
+        {
+            c += 2;
+        } else
+        {
+            c += 1;
+        }
+        // cout << c << endl;
+
+
+
+
+        if( (p+1) != q)
+        {
+            c += (q - p - 1) * 3;
+        }
+        cout << c << endl;
+    }
+        
     
- 
-    
+
 }
 
 int32_t main() {

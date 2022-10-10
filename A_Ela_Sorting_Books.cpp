@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #define ll long long 
-#define int long long 
+// #define int long long 
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"   
@@ -36,8 +36,58 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
+char findmex(string s)
+{
+    
+    int f = 0;
+    for(char p = 'a' ; p < 'z'; p++)
+    {
+        f = 0;
+        for(auto it:s)
+        {
+            if(it == p)
+            {
+                f= 1;
+                break;
+            }
+        }
+        if(f == 0)
+        return p;
+
+    }
+    return 'z';
+}
+
+bool sortby1(pair<int, char> &a, pair<int, char> &b)
+{
+    if(a.ff == b.ff)
+    {
+        return a.ss > b.ss;
+    }
+    return a.ff < b.ff;
+}
 
 void prakhar() {   
+
+    int n,k;
+    string str;
+
+    cin>>n>>k>>str;
+    vector <int> count_char(26, 0);
+    for (char c: str) count_char[c - 'a']++;
+    string ans = "";
+    for (int i = 0; i < min(25, n/k); i++) {
+    while (k - ans.size() > count_char[i]) {
+        ans.push_back(i + 'a');
+        }
+    }
+
+    char c = 'a' + min(n / k, 25);
+    while (k > ans.size()) {
+    ans += c;
+    }
+    reverse(ans.begin(), ans.end());
+    cout << ans << "\n";
 
     
  

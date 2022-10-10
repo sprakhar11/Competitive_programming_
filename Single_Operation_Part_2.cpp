@@ -39,6 +39,43 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
 
+    int n;
+    cin >> n ;
+
+    string s = "";
+    cin >> s ;
+     
+     int p = -1;
+
+    for (int i = 0; i < n; i++)
+    {
+        if(s[i] == '1')
+        {
+            p = i;
+            break;
+        }
+    }
+    for(int j = p + 1; j < n; j++)
+    {
+        p = -1;
+        if(s[j] == '1')
+        {
+            p = j;
+            break;
+        }
+    }
+    if( p == -1 )
+    {
+        p = n;
+
+    }
+    if(n == 1)
+    {
+        p = 1;
+    }
+    cout << p << endl;
+
+     
     
  
     
