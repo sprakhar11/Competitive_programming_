@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <unordered_set>
 #define ll long long 
 #define int long long 
 #define MOD1 998244353
@@ -36,13 +35,70 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
+int calans(int n)
+{
+    if( n == 1)
+    {
+        return 1;
+    }
 
+    return n * (n+1);
+}
 
 void prakhar() {   
 
+    int n;
+    cin >> n ;
+    vi v;
+
+    v.pb(0);
+    for (int i = 0; i < n; i++)
+    {
+        int x ;
+        cin >> x;
+
+        v.pb(x);
+    }
+
     
- 
-    
+
+    int l = 1;
+    int r = 1;
+
+    int cnt = 2;
+
+    vi v2;
+
+    int f = 0;
+
+    while(true)
+    {
+        r++;
+        if( r == n+1)
+        {
+            break;
+        }
+
+        if(v[r] >= cnt )
+        {
+            cnt++;
+            f = 1;
+
+
+        } else {
+            v2.pb(r - l);
+            cnt = v[r] + 1;
+            l = r - v[r] + 1;
+            f = 0;
+        }
+
+    }
+
+    if( f == 1)
+    v2.pb(r - l);
+
+    vout(v2);
+
 }
 
 int32_t main() {

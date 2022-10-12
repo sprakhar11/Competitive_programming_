@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <unordered_set>
 #define ll long long 
 #define int long long 
 #define MOD1 998244353
@@ -39,6 +38,84 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 
 void prakhar() {   
+    int n ;
+    cin >> n ;
+
+    vi a;
+    vi b;
+    vin(a, n);
+    vin(b, n);
+
+
+    int ca1 = count(all(a), 1);
+    int ca0 = count(all(a), 0);
+
+    int cb1 = count(all(b), 1);
+
+    int cb0 = count(all(b), 0);
+
+    if(ca1 == cb1)
+    {
+        int tmp = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            if( b[i] == 1)
+            {
+                if(a[i] != 1)
+                {
+                    tmp = 1;
+                }
+            } 
+        }
+        cout << tmp << endl;
+
+        return;
+
+    }
+
+    if(ca1 > cb1)
+    {
+        int tmp = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            if( b[i] == 1)
+            {
+                if(a[i] != 1)
+                {
+                    tmp = 1;
+                }
+            } 
+        }
+
+        int ans = tmp + abs(ca1 - cb1);
+
+        cout << ans << endl;
+        
+    } else{
+        // cout << "hit1 " << endl;
+        int tmp = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            if( a[i] == 1)
+            {
+                if(b[i] != 1)
+                {
+                    tmp = 1;
+                    break;
+                }
+            } 
+        }
+        // cout << ca1 << " "  << cb1 << endl;
+        // cout << tmp << endl;
+
+        int ans = tmp + abs(ca1 - cb1);
+
+        cout << ans << endl;
+    }
+
 
     
  

@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <unordered_set>
 #define ll long long 
 #define int long long 
 #define MOD1 998244353
@@ -40,8 +39,41 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
 
+    int n;
+    cin >> n;
+
+    vi v;
+
+    vin(v, n);
+
+    if( n == 1 || n == 2)
+    {
+        cout << "YES" << endl;
+    } else
+    {
+        int f = 0 ;
+
+        for (int i = 1; i < n-1; i++)
+        {
+            if(gcd(v[i-1] , v[i+1]) == 1)
+            {
+
+            } else
+            {
+                f= 1;
+                break;
+            }
+        }
+        if( f == 1)
+        {
+            cout<< "NO" << endl;
+
+        } else
+        {
+            cout << "YES" << endl;
+        }
+    }
     
- 
     
 }
 

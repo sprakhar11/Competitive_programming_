@@ -5,6 +5,7 @@
         "random": "cpp",
         "limits": "cpp",
         "valarray": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "regex": "cpp"
     }
 }
