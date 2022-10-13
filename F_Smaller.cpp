@@ -40,7 +40,132 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
 
+    int q ;
+    cin >> q;
+
+    map<char, int> mp1;
+    map<char, int> mp2;
+
+    for(char p ='a' ; p <= 'z' ; p++)
+    {
+        mp1[p] = 0;
+        mp2[p] = 0;
+
+    }
+    mp1['a'] = 1;
+    mp2['a'] = 1;
+    int lena = 1;
+    int lenb = 1;
+
+    for (int i = 0; i < q; i++)
+    {
+        int d , k ;
+        string s;
+
+        cin >> d >>k >> s;
+
+        if( d == 1)
+        {
+            for (int i = 0; i < s.length(); i++)
+            {
+                mp1[s[i]] += k;
+            }
+            lena += ( k * s.length());
+
+            
+        }
+        else 
+        {
+            for (int i = 0; i < s.length(); i++)
+            {
+                mp2[s[i]] += k;
+            }
+            lenb += ( k * s.length());
+        }
+
+        if(lena == lenb)
+        {
+            int f = 0 ;
+
+            //chek equal 
+            for(char p ='a' ; p <= 'z' ; p++)
+            {
+                if(mp1[p] != mp2[p])
+                {
+                    f = 1;
+
+                }
+            }
+
+            if(f != 1)
+            {
+                f = 0;
+                for(char p ='a' ; p <= 'z' ; p++)
+                {
+                    if(mp1[p] < mp2[p])
+                    {
+                        f = 1;
+                        break;
+                    }
+                }
+                if( f== 1)
+                {
+                    cout << "NO\n";
+                } else
+                {
+                    cout << "YES\n";
+                }
+            } else
+            {
+                cout << "NO" << endl;
+            }
+        } else if(lena > lenb)
+        {
+            int f = 0;
+            for(char p ='a' ; p <= 'z' ; p++)
+            {
+                if(mp1[p] < mp2[p])
+                {
+                    f = 1;
+                    break;
+                }
+            }
+            if( f== 1)
+            {
+                cout << "NO\n";
+            } else
+            {
+                cout << "YES\n";
+            }
+        } else {
+
+            int f = 0;
+            for(char p ='a' ; p <= 'z' ; p++)
+            {
+                if(mp1[p] > mp2[p])
+                {
+                    f = 1;
+                    break;
+                }
+            }
+            if( f == 0)
+            {
+                cout << "YES\n";
+            } else
+            {
+                cout << "NO\n";
+            }
+        }
+
+        
+
+        
+
+        
+    }
     
+
+
     
 }
 

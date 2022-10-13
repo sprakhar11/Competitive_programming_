@@ -40,8 +40,31 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
 
-    
-    
+    int n ;
+    cin >> n;
+    vi v ;
+    vin(v, n);
+
+
+    sort(all(v));
+
+    int f = 0 ;
+
+    for (int i = 0; i < n-1; i++)
+    {
+        if( v[i] == v[i+1])
+        {
+            f= 1;
+            break;
+        }
+    }
+
+    if(f == 1)
+    {
+        cout << "NO" << endl;
+    }
+    else
+    cout << "YES" << endl;
 }
 
 int32_t main() {

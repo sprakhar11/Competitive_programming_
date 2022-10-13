@@ -40,7 +40,66 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
 
+    char s[8][8];
+
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            cin >> s[i][j];
+        }
+        
+    }
+    // for (int i = 0; i < 8; i++)
+    // {
+    //     for (int j = 0; j < 8; j++) 
+    //     {
+    //         cout <<  s[i][j];
+    //     }
+    //     cout << endl;
+        
+    // }
     
+    
+
+    for (int i = 7; i >= 0; i--)
+    {
+        int cnt = 0;
+        for ( int j = 0; j < 8; j++)
+        {
+            if((s[i][j] == 'R' ) && s[i][j] != '.')
+            {
+                cnt++;
+            }
+        }
+        // cout << cnt << endl;
+        if(cnt == 8)
+        {
+            char ans = s[i][0];
+            cout << ans <<  endl;
+            return;
+        }
+        
+    }
+    
+    for (int i = 7; i >= 0; i--)
+    {
+        int cnt = 0;
+
+        for ( int j = 0; j < 8; j++)
+        {
+            if((s[j][i] == 'B') && s[j][i] != '.')
+            {
+                cnt++;
+            }
+        }
+        if(cnt == 8)
+        {
+            cout << s[0][i] << endl;
+            return;
+        }
+        
+    }
     
 }
 

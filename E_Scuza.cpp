@@ -38,7 +38,59 @@ long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 
-void prakhar() {   
+void prakhar() {  
+
+    int n ;
+    int q;
+    cin >> n ;
+    cin >> q;
+
+
+    vi v ;
+
+    vin(v, n);
+
+    vi v2;
+
+    v2 = v;
+
+    for (int i = 1; i < n; i++)
+    {
+       v2[i] += v2[i-1];
+    }
+    
+
+    // for n == 1
+    if( n == 1)
+    {
+        
+    }
+
+    for (int i = 1; i < n; i++)
+    {
+        v[i] = max(v[i], v[i-1]);
+    }
+    // vout(v2);
+
+    for (int i = 0; i < q; i++)
+    {
+        int qq;
+        cin >> qq ;
+
+        vector<int>::iterator upper1;
+        upper1 = upper_bound(v.begin(), v.end(), qq);
+
+        int a = upper1 - v.begin() - 1;
+
+        if( a == -1)
+        cout << 0 << " ";
+        else
+        cout << v2[a] << " ";
+
+    }
+    cout << endl;
+    
+     
 
     
     
