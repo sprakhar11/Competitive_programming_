@@ -37,74 +37,47 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
+void prakhar() {   
+    
+    string s;
+    cin >> s ;
 
-int s1 = 0 ;
-int s2 = 0 ;
+    int f = 0 ;
 
-vi arr;
+    int l = s.length();
 
-int dp(int l,int r,int chance)
-{
-    if( r < l)
+    
+    if(l != 1)
+    for(int  i = 0 ; i < l-1 ; i++)
     {
-        return 0;
-
-    }
-
-    if(chance == 1)
-    {
-        if(arr[l] != arr[r])
+        if(s[i] == 'Y' && s[i+1] == 'e')
         {
-            int mx = max(arr[l], arr[r]);
 
-            if( mx == arr[l])
-            {
-                l++;
-            }
-            else
-            {
-                r--;
-            }
+        }
+        else if(s[i] == 'e' && s[i+1] == 's')
+        {
 
-            s1 += mx + dp(l, r, !chance);
-        } 
+        }
+        else if(s[i] == 's' && s[i+1] == 'Y')
+        {
+
+        }
         else
         {
-            s1 += arr[l] + max(dp(l++, r , !chance), dp(l, r--, !chance));
-
+            f= 1;
+            break;
         }
     }
     else
     {
-        if(arr[l] != arr[r])
-        {
-            int mn = min(arr[l], arr[r]);
-
-            if( mn == arr[l])
-            {
-                l++;
-            }
-            else
-            {
-                r--;
-            }
-
-            s2 += mn + dp(l, r, !chance);
-        } 
+        if( s[0] == 'Y' || s[0] == 'e' || s[0] == 's')
+        f = 0;
         else
-        {
-            s2 += arr[l] + min(dp(l++, r , !chance), dp(l, r--, !chance));
-
-        }
+        f =1;
     }
-}
 
-
-
-void prakhar() {   
-    int n ;
-    cin >> n ; 
-    vin(arr, n);
+    if(f == 0) cout << "YES\n";
+    else cout << "NO\n";
 
     
 

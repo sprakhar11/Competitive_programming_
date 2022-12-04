@@ -37,79 +37,48 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-
-int s1 = 0 ;
-int s2 = 0 ;
-
-vi arr;
-
-int dp(int l,int r,int chance)
-{
-    if( r < l)
-    {
-        return 0;
-
-    }
-
-    if(chance == 1)
-    {
-        if(arr[l] != arr[r])
-        {
-            int mx = max(arr[l], arr[r]);
-
-            if( mx == arr[l])
-            {
-                l++;
-            }
-            else
-            {
-                r--;
-            }
-
-            s1 += mx + dp(l, r, !chance);
-        } 
-        else
-        {
-            s1 += arr[l] + max(dp(l++, r , !chance), dp(l, r--, !chance));
-
-        }
-    }
-    else
-    {
-        if(arr[l] != arr[r])
-        {
-            int mn = min(arr[l], arr[r]);
-
-            if( mn == arr[l])
-            {
-                l++;
-            }
-            else
-            {
-                r--;
-            }
-
-            s2 += mn + dp(l, r, !chance);
-        } 
-        else
-        {
-            s2 += arr[l] + min(dp(l++, r , !chance), dp(l, r--, !chance));
-
-        }
-    }
-}
-
-
-
 void prakhar() {   
     int n ;
     cin >> n ; 
-    vin(arr, n);
+    vi v;
+    vin(v, n);
 
+    int mx = INT_MIN;
+    int mx_pos = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if(mx < v[i])
+        {
+            mx = v[i];
+            mx_pos = i;
+
+        }
+    }
+
+    int second_mx = 0;
+    int tmp = v[mx_pos] ;
+    v[mx_pos] = INT_MIN;
+
+    for (int i = 0; i < n; i++)
+    {
+        if(second_mx < v[i])
+        {
+            second_mx = v[i];
+        }
+    }
+
+    v[mx_pos] = tmp;
     
 
-    
-    
+    for (int i = 0; i < n; i++)
+    {
+        if(i == mx_pos)
+        cout << v[i] - second_mx << " ";
+        else
+        cout << v[i] - mx << " ";
+    }
+    cout << endl;
 }
 
 int32_t main() {

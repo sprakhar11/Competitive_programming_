@@ -6,6 +6,7 @@
         "limits": "cpp",
         "valarray": "cpp",
         "cmath": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "unordered_set": "cpp"
     }
 }

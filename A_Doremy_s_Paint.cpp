@@ -102,13 +102,12 @@ int dp(int l,int r,int chance)
 
 
 void prakhar() {   
-    int n ;
-    cin >> n ; 
-    vin(arr, n);
+    int n;
+    cin >> n ;
+    vi v ;
+    vin(v, n);
 
-    
-
-    
+    cout << 1 << " " << n << endl;
     
 }
 
