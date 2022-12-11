@@ -17,6 +17,9 @@
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
 #define f(i,a,b) for(ll i=a;i<b;i++)
+#define couty cout<<"YES\n";
+#define coutn cout<<"NO\n";
+#define phit cout << "\n Hit here\n";
     
 using namespace std;
 #define watch(x) cout << (#x) << " = " << (x) << endl
@@ -40,6 +43,51 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 void prakhar() {   
     int n ;
     cin >> n ;     
+
+    vi v;
+    vin(v, n);
+
+    if( n == 1)
+    {
+        couty
+        return;
+    }
+
+    if(v[0] == v[1] || v[n-1] == v[n-2])
+    {
+        couty
+        return;
+    }
+
+    
+    
+
+    int f = 0;
+    cout << "f = " << f << endl;
+
+    for (int i = 1; i < n-1; i++)
+    {
+        if(v[i] < v[i-1] && v[i] < v[i+1])
+        {
+            cout << v[i-1] << " " << v[i] << " " << v[i+1] << endl;
+            f = 1;
+            break;
+        }
+    }
+
+    if(f == 1)
+    {
+        couty
+        return;
+    } else
+    {
+        cout << "NO" << endl;
+        return;
+    }
+    
+
+
+
 }
 
 int32_t main() {

@@ -2,6 +2,7 @@
 #include <unordered_set>
 #define ll long long 
 #define int long long 
+// #define int unsigned long long int
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"   
@@ -36,10 +37,47 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
+int vsum(vector<int> & v)
+{
+    int s = 0;
+    for(auto it: v)
+        s += it;
+    
+    return s;
+}
+
+int max_int(vector<int> &v)
+{
+    int s = v[0];
+    for(auto it: v)
+    {
+        if(it > s)
+            s = it;
+    }
+
+    return s;
+}
+
 
 void prakhar() {   
-    int n ;
-    cin >> n ;     
+    int n;
+    cin >> n ;
+    vi a, b;
+    vin(a, n);
+    vin(b, n);
+
+    int ans = vsum(a);
+
+    int sum_b = vsum(b);
+
+    int max_in_b = max_int(b);
+
+    sum_b -= max_in_b;
+
+    ans += sum_b;
+
+    cout << ans << endl;
+      
 }
 
 int32_t main() {
