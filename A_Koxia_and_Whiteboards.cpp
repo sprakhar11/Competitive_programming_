@@ -40,11 +40,64 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
 
-    for (int i = 0; i < 100; i++)
+    int n , m ;
+    cin >> n >> m ;
+
+    vi a;
+    vi b;
+
+    vin(a, n);
+    vin(b, m);
+
+    sort(all(a));
+    // sort(all(b), greater<int>());
+
+    // vout(a);
+    // vout(b);
+
+    int i = 0;
+    int j = 0;
+
+    // while(true)
+    // {
+    //     if( i == n || j == m) {
+    //         break;
+    //     }
+    //     else {
+    //         // cout << a[i] << " " << b[j] << endl;
+    //         a[i] = b[j];
+    //         i++;
+    //         j++;
+    //     }
+    // }
+    bool ch = false;
+    for(int j = 0; j < m ; j++)
     {
-        cout << i << endl;
+        for(int i = 0 ; i < n ; i++)
+        {
+            if(b[j] > a[i])
+            {
+                a[i] = b[j];
+                ch = true;
+                break;
+            }
+        }
+        if(ch == false)
+        a[0] = b[j];
+        else
+        ch = false;
+
+        sort(all(a));
+    }
+    int summ = 0;
+    for (int i = 0; i < n; i++)
+    {
+        summ +=a[i];
     }
     
+    cout << summ << endl;
+
+
        
 }
 
@@ -62,7 +115,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
@@ -72,7 +125,7 @@ int32_t main() {
     auto end = chrono::steady_clock::now();
 
     auto diff = end - start;
-    cerr << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+    // cerr << chrono::duration <double, nano> (diff).count() << " ns" << endl;
     
     return 0;
     

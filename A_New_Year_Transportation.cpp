@@ -38,12 +38,73 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
+
+void dfs(int node, int target, bool &ans, vector<bool> &vis, vector<vector<int>> &adj)
+{
+    vis[node] = true;
+    for(auto it:adj[node])
+    {
+        if(vis[it] == false)
+        {
+            if(it == target)
+            {
+                ans = true;
+                return;
+            }
+            dfs(it, target, ans, vis, adj);
+
+        }
+    }
+
+
+}
+
 void prakhar() {   
 
-    for (int i = 0; i < 100; i++)
+    int n , target;
+
+    cin >> n >> target;
+    vi v;
+    vin(v, n);
+
+    int arr[n+1];
+
+    for (int i = 0; i < n; i++)
     {
-        cout << i << endl;
+        arr[i+1] = i+1;
     }
+
+    vector<bool> vis(n+1, false);
+
+    
+
+
+    vector<vector<int>> adj(n+1);
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        adj[i+1].push_back(i+1+v[i]);
+    }
+
+    // for(auto it:adj)
+    // {
+    //     for(auto it2:it)
+    //     {
+    //         cout << it2 << " ";
+    //     }
+    //     cout << endl;
+    // }
+    bool ans = false;
+
+    dfs(1, target, ans, vis, adj);
+
+    if(ans == false)
+    cout << "NO";
+    else
+    cout << "YES";
+
+
+    
     
        
 }
