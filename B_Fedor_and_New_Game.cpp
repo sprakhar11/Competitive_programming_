@@ -43,93 +43,40 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-void dfs(int m , int node, vector<vector<int>> &adj, vector<int> &cat, vector<int> &vis, int cnt, int &ans_cnt, bool parent_cat)
-{
-    vis[node] = 1;
-    if(cat[node] == 1 && parent_cat == true)
+void prakhar() {   
+    
+    int n , m , k ;
+    cin >> n >> m >> k ;
+    
+    vi v;
+
+    vin(v , m+1);
+
+    int ans = 0 ;
+
+    int player = v[m];
+
+    for (int i = 0; i < m; i++)
     {
-        cnt++;
-        if(cnt >= m+1)
+        int tmp = player ^ v[i];
+
+        int cnt_one = 0 ;
+
+        string tmps = to_binary(tmp);
+        // cout << tmps << endl;
+        
+
+        cnt_one = count(all(tmps) , '1');
+
+        if( cnt_one <= k)
         {
-            return;
-        } 
-    } else {
-        if(cat[node] == 1 && parent_cat == false)
-        cnt = 1;
-        else
-        cnt = 0;
-    }
-
-
-    if(cat[node] == 1 )
-    {
-        parent_cat = true;
-    } else {
-        parent_cat = false;
-    }
-
-    // cout << " Current node  = " << node << endl;
-
-    for(auto it:adj[node])
-    {
-        if(vis[it] == 0)
-        {
-            // cout << m << " here " << cnt << " " << ans_cnt << " " << parent_cat << endl;
-            dfs(m , it, adj, cat, vis, cnt, ans_cnt, parent_cat);
+            ans++;
         }
     }
+
+    cout << ans ;
     
-    // cout << adj[node].size() << endl;
-    if(adj[node].size() == 1 && node!= 1)
-    {
-        ans_cnt++;
-    }
-}
-
-void prakhar()
-{   
-    
-    int n , m ;
-    cin >> n >> m ;
-    vi cat;
-    cat.pb(0);
-    vin(cat , n );
-    
-
-    vector<vector<int>> adj(n+1, vector<int>());
-
-    for (int i = 0; i < n-1; i++)
-    {
-        int u ,v ;
-        cin >> u >> v;
-
-        adj[u].pb(v);
-        adj[v].pb(u);
-    }
-
-    // for (int i = 0; i < n+1; i++)
-    // {
-    //     for(auto it:adj[i]){
-    //         cout << it << " ";
-    //     }
-    //     cout << endl;
-    // }
-    
-
-    vi vis(n+1, 0);
-    // vout(cat);
-    int cnt = cat[1];
-    int ans_cnt = 0;
-    bool parent_cat = false;
-
-
-    dfs(m , 1, adj, cat, vis, cnt, ans_cnt, parent_cat);
-
-    cout << ans_cnt ;
-
-
-
-    
+       
 }
 
 int32_t main() {
