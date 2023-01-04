@@ -45,7 +45,40 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
     
-       
+    int n = 0;
+    cin >> n ; 
+    vi v ;
+    vin(v, n);
+
+    int mn = abs(v[0] - v[1]);
+    int pos1= 0 ; 
+    int pos2 = 1 ;  
+
+    for (int i = 0; i < n; i++)
+    {
+        int sub = 0;
+        if(i+1 == n)
+        {
+            sub = v[0];
+        } else {
+            sub = v[i+1];
+        }
+
+        if( mn > min(abs(v[i] - sub), mn))
+        {
+            mn = min(abs(v[i] - sub), mn);
+            pos1 = i;
+            if( i+1 == n) 
+            pos2 = 0;
+            else
+            pos2 = i +1;
+
+
+        }
+    }
+
+    cout << pos1+ 1 << " " << pos2+1 << endl;
+    
 }
 
 int32_t main() {
@@ -62,7 +95,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";

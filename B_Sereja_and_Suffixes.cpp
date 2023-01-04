@@ -44,8 +44,46 @@ long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
+    int n ,m ;
+    cin >> n >> m ;
+    vi v ;
+    vin(v, n);
+
+    map<int, int> mp;
+
+    vi arr(n, 0);
+
+    for (int i = n-1; i > -1; i--)
+    {
+        if(mp[v[i]] == 0)
+        {
+            arr[i] = 1;
+            mp[v[i]] = 1;
+        }
+    }
+
+    for (int i = 1; i < n; i++)
+    {
+        arr[i] += arr[i-1];
+    }
     
-       
+
+    for (int i = 0; i < m; i++)
+    {
+        int  q ;
+        cin >> q;
+        q--;
+
+        int sub = 0;
+        if(q != 0)
+        sub = arr[q-1];
+
+        int ans = arr[n-1] - sub ;
+
+        cout << ans << endl;
+    }
+    
+    
 }
 
 int32_t main() {
@@ -62,7 +100,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";

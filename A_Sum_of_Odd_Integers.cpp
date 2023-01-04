@@ -45,7 +45,19 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() {   
     
-       
+    int n , k ; 
+    cin >> n >> k;
+    if( k * k > n) {
+        cout << "NO\n";
+        return;
+    }
+    if( n % 2 == 0 && k % 2 == 0 ) {
+        cout << "YES\n";
+    } else if(n % 2 != 0 && k % 2 != 0) {
+        cout << "YES\n";
+    } else {
+        cout << "NO" << endl;
+    }
 }
 
 int32_t main() {
