@@ -42,86 +42,17 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
-string glo = "...........";
-
-void solve( vector<int> cols,
-                vector<int> pridia,
-                vector<int> secdia,
-                int row, 
-                vector<vector<string>> &ans, 
-                int n,
-                vector<string> tmp,
-                int cnt){
-                                    
-       for(int col = 0 ; col < n ; col++ )
-       {
-            cout << col << " This is the column" << endl;
-            cout << cols[col] << " " << pridia[row + col] << " " << secdia[row - col + n - 1] << endl;
-           if(cols[col] == 0 && pridia[row + col] == 0 &&
-                secdia[row - col + n - 1] == 0)
-            {
-                cout << "Insode for loop when col value is= " << col << endl;
-                cols[col] = 1;
-                pridia[row + col] = 1;
-                secdia[row - col + n - 1] = 1;
-
-                string p = glo.insert(col, "Q");
-
-                tmp.push_back(p.substr(0, n));
-                cnt++;
-
-                cout << p.substr(0, n) << " " << cnt << endl;
-                
-                solve(cols, pridia, secdia, row + 1, ans, n , tmp, cnt);
-                cout << "######################" << endl;
-                for(auto it:tmp) cout << it << " " ;
-
-                cout << "\n######################\n";
-                cols[col] = 0;
-                pridia[row + col] = 0;
-                secdia[row - col + n - 1] = 0;
-
-                if(cnt == n)
-                {
-                    ans.push_back(tmp);
-                }
-            }
-       }        
-}
-
-vector<vector<string>> solveNQueens(int n) {
-
-    vector<int> cols(n, 0);
-    vector<int> pridia(2 * n - 1, 0);
-    vector<int> secdia(2 * n - 1, 0);
-    vector<vector<string>> ans;
-    int cnt = 0;
-
-    vector<string> tmp;
-    cout << "Inside SolveNQueen function\n";
-
-
-    solve(cols, pridia, secdia, 0, ans, n , tmp, cnt);
-    return ans;
-
-}
 
 void prakhar() {   
+    
+    int n ;
+    cin >> n ; 
+    n--;
+    int p  = n  % 5 ;
 
-    int n;
-    cin >> n ;
-
-    vector<vector<string>> ans = solveNQueens(n);
-
-
-    for(auto it:ans){
-        for(auto it2: it){
-            cout << it2 << " " ;
-        }
-        cout << endl;
-    }
-
-
+    string arr[]={"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
+    cout << arr[p] ;
+       
 }
 
 int32_t main() {
