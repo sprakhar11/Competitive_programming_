@@ -43,31 +43,44 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-void prakhar() {   
-    
+void prakhar() { 
+
+    string s = "I hate";
+    string p = "I love";
+
+    string end = "it";
+
+    string k = "that";
+
     int n ;
     cin >> n ; 
-    int p  = n  % 5 ;
-    int i = 1;
 
-    while(true)
+    if(n == 1)
     {
-        int p = 5 * pow(2, i - 1);
+        cout << "I hate it";
+        return;
+    }  
 
-        if( n > p)
-        break;
+    int i = 0;
+    while(true) {
+
+        if(i == n - 1 )
+            break;
+
+        if( i % 2 == 0) {
+            cout << s << " " << k << " ";
+        } else {
+            cout << p << " " << k << " ";
+        }
+        i++;
     }
-    i--;
 
-    int k = n - ( 5 * pow(2 , i -1 ));
+    if(n % 2 == 0){
+        cout << p << " " << end ;
+    } else {
+        cout << s << " " << end ;
 
-    int tmp
-
-    for (int j = 1; j < i * 5; j++)
-    {
-        if(j)
     }
-    
     
        
 }
