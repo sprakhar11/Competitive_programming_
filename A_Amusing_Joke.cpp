@@ -92,10 +92,6 @@ void prakhar() {
 
     cout << "YES\n";
     
-
-    
-      
-    
        
 }
 

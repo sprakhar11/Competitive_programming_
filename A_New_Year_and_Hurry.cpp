@@ -43,83 +43,30 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-void prakhar() {   
-    
-    int n ;
-    cin >> n ; 
-    
-    int k = 1;
-    int i = 1;
+void prakhar() { 
 
-    // while(true) {
-    //     k = (pow(2, i) - 1 )* 5;
-    //     // cout << n * 2 << " " << k << endl;
-    //     if((n) <= k)
-    //     {
-    //         break;
-    //     } 
+    int n , time;
 
-    //     i++;
-    // }
+    cin >> n >> time;  
 
-    i = log2((double)n / (double)5) + 1;
+    int k = 0;
 
 
-    cout << i << endl;
-
-    // i--;
-
-    
-
-    int start = (pow(2, i) - 1 ) * 5 + 1;
-
-
-    // i++;
-
-    string s[]= {"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
-
-    int p = 0;
-
-    cout << start << " " << pow(2, i) << endl;
-
-    start--;
-    
-    while (true)
+    for (int i = 1; i <= n; i++)
     {
-        for (int l = 0; l < pow(2,i); l++)
+        k += i * 5;
+
+        if(k + time > 240)
         {
-            start++;
-            if(start == n)
-            {
-                // cout << endl << l << " "<< start << endl;
-                cout << s[p] << endl;;
-                return;
-            }
+            cout << i - 1;
+            return;
         }
-        p++;
     }
-}
 
-void bruteforce()
-{
-    int n;
-    cin >> n;
-    string s[]= {"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
+    cout << n ;
     
-    int i = 1;
-    while (true) {
-        for (int j = 0; j < 5; j++)
-            if (n > i)
-                n -= i;
-            else {
-                cout << s[j] << endl;    
-                return ;
-            }   
-
-        i *= 2;
-    }
-
-
+    
+       
 }
 
 int32_t main() {
@@ -140,8 +87,7 @@ int32_t main() {
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
-        // prakhar();
-        bruteforce();
+        prakhar();
     }
 
     auto end = chrono::steady_clock::now();

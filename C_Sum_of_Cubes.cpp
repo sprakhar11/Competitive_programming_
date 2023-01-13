@@ -43,83 +43,58 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-void prakhar() {   
-    
-    int n ;
-    cin >> n ; 
-    
-    int k = 1;
-    int i = 1;
+void prakhar() { 
 
-    // while(true) {
-    //     k = (pow(2, i) - 1 )* 5;
-    //     // cout << n * 2 << " " << k << endl;
-    //     if((n) <= k)
-    //     {
-    //         break;
-    //     } 
-
-    //     i++;
-    // }
-
-    i = log2((double)n / (double)5) + 1;
+    int n = 0;
+    cin >> n;
+    // cout << n << endl;
+    vi v;
 
 
-    cout << i << endl;
+    for (int i = 1; i <= 10000; i++){
+        int k = i * i * i;
+        v.pb(k);
+    }
+    // vout(v);
+    for (int i = 1; i <= 10000; i++){
+        int k = i * i * i;
+        int left = n - k;
 
-    // i--;
+        //binary search left in vector v;
 
-    
+        int flag = false;
 
-    int start = (pow(2, i) - 1 ) * 5 + 1;
+        int s = 0 ;
+        int e = 10000;
+
+        while(s <= e){
+
+            int mid = (s + e) / 2;
 
 
-    // i++;
+            if(v[mid] == left){
+                flag = true;
+                break;
+            }
 
-    string s[]= {"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
-
-    int p = 0;
-
-    cout << start << " " << pow(2, i) << endl;
-
-    start--;
-    
-    while (true)
-    {
-        for (int l = 0; l < pow(2,i); l++)
-        {
-            start++;
-            if(start == n)
-            {
-                // cout << endl << l << " "<< start << endl;
-                cout << s[p] << endl;;
-                return;
+            if( v[mid] > left) {
+                e = mid - 1;
+            } else {
+                s = mid + 1;
             }
         }
-        p++;
-    }
-}
 
-void bruteforce()
-{
-    int n;
-    cin >> n;
-    string s[]= {"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
+        if(flag == true) {
+            cout << "YES" << endl;
+            return;
+        }
+    }
+
+    cout << "NO" << endl;
+
+      
     
-    int i = 1;
-    while (true) {
-        for (int j = 0; j < 5; j++)
-            if (n > i)
-                n -= i;
-            else {
-                cout << s[j] << endl;    
-                return ;
-            }   
-
-        i *= 2;
-    }
-
-
+       
 }
 
 int32_t main() {
@@ -136,12 +111,11 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
-        // prakhar();
-        bruteforce();
+        prakhar();
     }
 
     auto end = chrono::steady_clock::now();
