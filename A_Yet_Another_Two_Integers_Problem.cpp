@@ -45,34 +45,22 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() { 
 
-    int n = 0;
-    cin >> n;
+    int a, b;
+    cin >> a >> b;
 
-    vi v;
-    vin(v ,2*n);
-    int ans = 0 ;
-    int p = n;
-    int count = 0;
-
-    for (int i = p; i < 2*n; i++)
+    int d = abs(a - b);
+    int r = d % 10;
+    if(d == 0)
     {
-        if(v[i] <= p)
-        {
-            count++;
-        }
+        cout << 0 << endl;
+        return;
     }
-    
-    for (int i = p; i <2* n; i++)
-    {
-        if(v[i] <= p)
-        {
-            ans += (i - n) + count;
-            count--;
-        }
-    }
+    int f = d / 10;
 
-    cout << ans << endl;
-      
+    if(r != 0)
+    cout << f + 1 << endl;  
+    else
+    cout << f << endl;
     
        
 }
