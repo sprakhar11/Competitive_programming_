@@ -45,36 +45,67 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() { 
 
-    int n;
-    cin >> n ;
-
+    int n ;
+    cin >> n ; 
     vi v;
-    vin(v, n );
-    
-    vi v2 = v;
-    reverse(all(v));
+    vin(v, n);
 
-    int dp[n+1][n+1];
+    int tol = 0 ;
+    map<int, int> mp;
 
-    for (int i = 0; i < n; i++) {
-        dp[0][i] = 0;
-        dp[i][0] = 0;
-    }
-
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
-            if(v[i-1] == v2[j - 1]) {
-                dp[i][j] = 1 + dp[i-1][j-1];
+    for (int i = 0; i < n; i++)
+    {
+        if(v[i] == 100) {
+            int change = 75;
+            if(tol  < 75) {
+                cout << "NO" <<endl;
+                return;
             } else {
-                dp[i][j] = max(dp[i-1][j] , dp[i][j-1]);
+                if(mp[50] >= 1 && mp[25] >= 1) {
+                    mp[100]++;
+
+                    mp[50]--;
+                    mp[25]--;
+                    tol -=75;
+                    tol += 100;
+                } else if(mp[25] >= 3) {
+                    mp[100]++;
+
+                    mp[25] -=3;
+                    tol -=75;
+                    tol += 100;
+                } else {
+                    cout << "NO\n";
+                    return;
+                }
             }
+        } else if(v[i] == 50) {
+
+                // cout << tol << " " << mp[25] << endl;
+                
+                if(tol < 25) {
+                    cout << "NO" <<endl;
+                    return;
+                } else {
+                    if(mp[25] >= 1) {
+                        mp[50]++;
+                        mp[25]--;
+                        tol -= 25;
+                        tol += 50;
+                    } else {
+                        cout << "NO" <<endl;
+                        return;
+                    }
+                }
+        } else {
+            mp[25]++;
+            tol +=25;
         }
     }
 
-    if(dp[n][n] >= 3)
-        cout << "YES\n";
-    else
-        cout << "NO\n";
+    cout << "YES\n" ;
+      
+    
        
 }
 
@@ -92,7 +123,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
