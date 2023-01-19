@@ -45,38 +45,32 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() { 
 
-    // bruteforce solution
-    int n , m ;
+    int n = 0;
+    cin >> n ;
 
-    cin >> n >> m ; 
+    vi v;
+    v.pb(0);
+    vin(v, n );
+    vi tmp(n+1, 0);
 
-    // int k = max(m, n);
-    // int l = min(m, n ) ;
-    // int ans = 0 ;
 
-    // while( k != 0 || l != 0) {
 
-    //     int tmp1 = max(k ,l);
-    //     int tmp2 = min(k, l);
 
-    //     k = tmp1 ;
-    //     l = tmp2 ;
+    for(int i = n; i > 0 ; i--) {
 
-    //     if(k > 1 && l > 0){
-    //         k-=2;
-    //         l-=1;
-    //         ans++;
-    //     } else {
-    //         break;
-    //     }
-    // } 
+        int k = i + v[i];
+        if(k <= n) {
+            tmp[i] = tmp[k] + v[i];
+        } else {
+            tmp[i] = v[i];
+        }
 
-    // cout << ans << endl;
+    }  
+    // vout(tmp);
 
-    //optimized solution
-    int ans = min(min(m , n) , ((m+n) / 3));
+    int ans = *max_element(all(tmp));
     cout << ans << endl;
-        
+    
        
 }
 
