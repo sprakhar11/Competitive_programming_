@@ -43,15 +43,17 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-void prakhar() {   
+void prakhar() { 
 
-    int a = 0 ;
-    int b =1 ;
-    if ( true, true) {
-        cout << "wtf" << endl;
-    } else {
-        cout << "wtf2" << endl;
-    }
+    int n, k, l, c, d, p, nl, np;
+    cin >> n >> k >> l >> c >> d >> p >> nl >> np;
+
+    int p1 = k * l / nl;
+    int p2 = c * d;
+    int p3 = p / np;
+    int kk = min(p1 ,min(p2, p3)) / n;
+    cout << kk << endl;
+
     
        
 }
@@ -67,6 +69,7 @@ int32_t main() {
     auto start = chrono::steady_clock::now();
 
     //  Insert the code that will be timed
+
 
     ll t = 1 ;
     // cin >> t ;

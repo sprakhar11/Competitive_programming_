@@ -45,13 +45,12 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
 void prakhar() { 
 
-    int n=0;
-    cin >> n; 
-    int k = n / 2 ;
-    if( n % 2 == 0) {
-        cout << k  << " " << k << endl;
+    int k;
+    cin >> k; 
+    if( k % 2 == 0) {
+        cout << 8  << " " << k-8 << endl;
     }  else {
-        cout << k -1 << " " << k + 2 << endl;
+        cout << 9 << " " <<  k -9 << endl;
     }
     
        

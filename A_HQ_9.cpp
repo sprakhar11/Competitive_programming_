@@ -48,7 +48,7 @@ void prakhar()
 
     for(auto it:str)
     {
-        if( it == 'H' || it == 'Q' || it == '+' || it == '!')
+        if( it == 'H' || it == 'Q'|| it == '9')
         {
             f = 1 ;
             break ;
