@@ -43,8 +43,38 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-void prakhar() {   
+void prakhar() { 
 
+    int n=0;
+    cin >> n;
+
+    // int x = n;
+
+    // while (n % 2 == 0) {
+    //     n /= 2;
+    // }
+
+    // for (int i = 3; i * i <= x ; i+=2)
+    // {
+    //     if(n % i == 0) {
+    //         cout << "YES\n";
+    //         return;
+    //     }
+    // }
+
+    // if(n != x){
+    //     cout << "YES\n";
+    //     return;
+    // }
+
+    // cout << "NO\n";
+
+    if (n & (n - 1)) {
+        cout << "YES\n";
+    } else {
+        cout << "NO\n";
+    }
+      
     
        
 }
@@ -61,8 +91,9 @@ int32_t main() {
 
     //  Insert the code that will be timed
 
+
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
