@@ -42,48 +42,20 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
-int chkans(int mid ,int n){
-    int x = mid ^ n;
-    int k = ( x + mid ) / 2;
 
-    if( k == n)
-    return 1;
-
-    if(k > n)
-    return 2;
-
-    return 3;
-    
-
-    
-}
 void prakhar() { 
 
-    int n ; 
+    int n ;
     cin >> n ; 
-    int st = 1; 
-    int end = n;
+    int ans = 0;
+   while ( n > 0) {
+        int k = highestPowerof2(n);
+        n -= k;
+        ans++;
+        // cout  << n << endl;
+   }
+   cout << ans << endl;
 
-    while( st <= end ) {
-
-        int mid = (st + end) / 2 ; 
-
-        if(chkans(mid, n) == 1){
-            int x = mid^ n;
-            cout << x << " " << mid << endl;
-            return;
-        }
-
-        if(chkans(mid, n) == 2){
-            end = mid - 1;
-        } else {
-            st  = mid + 1;
-        }
-
-    }
-    cout << -1 << endl;
-    
-       
 }
 
 int32_t main() {

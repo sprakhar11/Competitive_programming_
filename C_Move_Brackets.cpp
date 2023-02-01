@@ -42,46 +42,39 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
-int chkans(int mid ,int n){
-    int x = mid ^ n;
-    int k = ( x + mid ) / 2;
 
-    if( k == n)
-    return 1;
-
-    if(k > n)
-    return 2;
-
-    return 3;
-    
-
-    
-}
 void prakhar() { 
 
-    int n ; 
+    int n ;
     cin >> n ; 
-    int st = 1; 
-    int end = n;
+    string s ;
+    cin >> s;
 
-    while( st <= end ) {
+    int cntLeft = 0;
+    int cntRight = 0;
+    int ans = 0;
 
-        int mid = (st + end) / 2 ; 
-
-        if(chkans(mid, n) == 1){
-            int x = mid^ n;
-            cout << x << " " << mid << endl;
-            return;
-        }
-
-        if(chkans(mid, n) == 2){
-            end = mid - 1;
+    for (int i = 0; i < n; i++)
+    {
+        if(s[i] == ')') {
+            cntRight++;
+            if(cntLeft < cntRight) {
+                // cout << i << " " << cntLeft << " " << cntRight<<endl;
+                ans += cntRight;
+                cntRight = 0;
+            } else {
+                cntRight = 0;
+                cntLeft--;
+            }
         } else {
-            st  = mid + 1;
+            cntRight = 0;
+            cntLeft++;
         }
-
     }
-    cout << -1 << endl;
+
+    cout << ans << endl;
+    
+
     
        
 }
@@ -100,7 +93,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
