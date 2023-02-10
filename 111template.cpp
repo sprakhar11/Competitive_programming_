@@ -43,12 +43,12 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 
-void prakhar() { 
-    
-      
-    
-       
-}
+class Solution {
+public:
+    int function_name() {
+        
+    }
+};
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -64,11 +64,12 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
-        prakhar();
+        return_type ans = Solution().function_name();
+        cout << ans;
     }
 
     auto end = chrono::steady_clock::now();

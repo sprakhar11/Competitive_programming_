@@ -42,29 +42,46 @@ static void removeTrailingCharacters(std::string &str, const char charToRemove) 
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
+vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 
-void prakhar() {   
+void prakhar() { 
+
+    string s ;
+    getline(cin, s);
+    int mx_l = 0;
+        vector<string> tokens = to_token(s);
+        int n = tokens.size();
+
+        
+
+
+        
+        for(int i = 0; i < n; i++){
+            mx_l = mx_l < tokens[i].length() ? tokens[i].length() : mx_l ;
+        }
+        cout << mx_l;
+        return;
+        vector<string> ans(mx_l, "");
+
+        int i = 0;
+        for(int j = 0 ; j < mx_l ; j++) {
+            for(int k = 0 ; k < n; k++) {
+                if(k < tokens[j].length()) {
+                    ans[j] += tokens[j][k];
+                } else {
+                    ans[j] += ' ';
+                }
+            }
+        }
+
+        
+
+        for (int j = 0; j < mx_l; j++)
+        {
+            cout << ans[j] << endl;
+        }
+          
     
-    int n;
-    cin >> n ;
-
-    int l = 0;
-
-    int sm = 0;
-
-    while( n > sm ) {
-        l++:
-        sm = (l * (L + 1)) / 2;
-    }
-
-    l--;
-
-    int p = floor((n-1) / 3);
-
-    int 
-
-
-
        
 }
 
@@ -82,7 +99,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
