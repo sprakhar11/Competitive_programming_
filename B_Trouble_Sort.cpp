@@ -38,49 +38,40 @@ ll highestPowerof2(ll n){ ll p = (ll)log2(n);   return (ll)pow(2, p);}
 bool isPowerOfTwo(int n){ if(n==0)   return false;   return (ceil(log2(n)) == floor(log2(n)));}
 bool chkprime(int n){ for(int i = 2 ; i*i <= n ; i++){ if( n % i == 0) return false;} return true; }
 string to_binary(int n) { string s = ""; for (int i = 31; i >= 0; i--) { int k = n >> i; if (k & 1) s = s + "1";else s = s + "0";}return s ; }
-static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase(str.find_last_not_of(charToRemove) + 1, std::string::npos );}
+static void removeTrailingCharacters(std::string &str, const char charToRemove) {str.erase (str.find_last_not_of(charToRemove) + 1, std::string::npos );}
 static void removeLeadingCharacters(std::string &str, const char charToRemove) {str.erase(0, std::min(str.find_first_not_of(charToRemove), str.size() - 1));}
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
-
+const int N = 1e3 + 5;
+ 
+int n;
+int a[N], b[N];
+ 
 void prakhar() { 
 
-    string s ;
-    getline(cin, s);
-    int mx_l = 0;
-        vector<string> tokens = to_token(s);
-        int n = tokens.size();
-
-        
-
-
-        
-        for(int i = 0; i < n; i++){
-            mx_l = mx_l < tokens[i].length() ? tokens[i].length() : mx_l ;
-        }
-        cout << mx_l;
-        return;
-        vector<string> ans(mx_l, "");
-
-        int i = 0;
-        for(int j = 0 ; j < mx_l ; j++) {
-            for(int k = 0 ; k < n; k++) {
-                if(k < tokens[j].length()) {
-                    ans[j] += tokens[j][k];
-                } else {
-                    ans[j] += ' ';
-                }
-            }
-        }
-
-        
-
-        for (int j = 0; j < mx_l; j++)
-        {
-            cout << ans[j] << endl;
-        }
-          
+    cin >> n;
+    bool sorted = 1, have0 = 0, have1 = 0;
+    for(int i = 1; i <= n; i++)
+    {
+        cin >> a[i];
+        if(i >= 2 && a[i] < a[i - 1])
+            sorted = 0;
+    }
+    for(int i = 1; i <= n; i++)
+    {
+        cin >> b[i];
+        if(!b[i])
+            have0 = 1;
+        else
+            have1 = 1;
+    }
+    if(have0 && have1)
+        cout << "Yes" << endl;
+    else if(sorted)
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;  
     
        
 }
@@ -99,7 +90,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
