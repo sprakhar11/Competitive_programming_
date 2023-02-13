@@ -7,7 +7,7 @@
 #include <unordered_set>
 #include <chrono>
 #define ll long long 
-#define int long long 
+// #define int long long 
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"   
@@ -43,28 +43,63 @@ static void removeLeadingCharacters(std::string &str, const char charToRemove) {
 long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
+bool chkwin(map<char, int> &mp){
+    int od_cnt = 0;
+    int ev_cnt = 0;
 
-void prakhar() {
+    for(auto it:mp){
+        if(it.ss == 0) continue;
+        if(it.ss % 2 != 0)
+            od_cnt++;
+        else
+            ev_cnt++;
+    }
 
-    vector<string> v;
+    if(od_cnt == 1 || od_cnt == 0 )
+        return true;
+    
+    return false;
+}
 
-    for(int i = 0; i < 9; i++){
-        string s;
-        cin >> s;
-        v.pb(s);
-        for(int j = 0 ; j < 9; j++){
-            if(v[i][j] == '8'){
-                v[i][j] = '9';
-            }
+void remOptimally(map<char, int> &mp){
+    for(auto it:mp){
+        if(it.ss == 0) continue;
+
+        if(it.ss % 2 == 0){
+            mp[it.ff]--;
+            return;
         }
-    } 
-    for(int i = 0; i < 9; i++){
-        
-            cout << v[i];
-        
-        cout << endl;
-    }   
-       
+    }
+    for(auto it:mp){
+        if(it.ss == 0) continue;
+
+        mp[it.ff]--;
+        return;
+    }
+
+    return;
+}
+void prakhar() { 
+    int i = 0;
+    string s;
+    cin >> s;
+
+    map<char, int> mp;
+    for(auto it:s)
+        mp[it]++;
+
+    while(true){
+        if(chkwin(mp)){
+            if(i % 2 == 0)
+                cout << "First";
+            else
+                cout << "Second";
+            
+            return;
+        }
+        i++;
+        remOptimally(mp);
+    }       
 }
 
 int32_t main() {
@@ -81,7 +116,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
