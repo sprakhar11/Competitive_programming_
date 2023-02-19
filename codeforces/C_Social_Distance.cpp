@@ -47,33 +47,35 @@ vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (
 
 void prakhar() { 
 
-    int n;
-    cin >> n ;
-    vi v ;
-    vin(v, n);
+    int n, k;
+    cin >> n >> k ;
 
-    int mn = *min_element(all(v));
+    string s ;
+    cin >> s ;
 
-    vi tmp = v ;
+    int ans = 0;
 
-    sort(all(v));
+    int tmp = k;
 
-    for (int i = n-1; i >= 0; i--)
+    for (int i = 0; i < n; i++)
     {
-        if(tmp[i] != v[i])
-        {
-            if(tmp[i] % mn != 0){
-                cout << "NO\n";
-                return;
+        if(s[i] == '0'){
+            if(tmp == k){
+                ans++;
+                tmp = 0;
+            } else {
+                tmp++;
+            }
+        } else  {
+            if(tmp == k){
+                tmp = 0;
+            } else {
+                tmp = 0;
+                ans--;
             }
         }
     }
-
-    cout << "YES\n";
-
-
-    
-      
+    cout << ans << endl;
     
        
 }

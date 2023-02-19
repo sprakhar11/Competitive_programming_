@@ -45,36 +45,101 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() { 
+void dfs(vector<vector<int>> &grid, vector<vector<int>> &vis, int sr, int sc, int dx[], int dy[]) {
 
-    int n;
-    cin >> n ;
-    vi v ;
-    vin(v, n);
+    vis[sr][sc] = 1;
+    int m = grid.size();
+    int n = grid[0].size();
 
-    int mn = *min_element(all(v));
 
-    vi tmp = v ;
+    for(int i = 0; i < 4 ; i++) {
+        int nr = sr + dx[i];
+        int nc = sc + dy[i];
 
-    sort(all(v));
+        if(nr >= 0 && nr < m && nc >= 0 && nc < n && vis[nr][nc] == 0 && grid[nr][nc] 
+            ==0) {
+            dfs(grid, vis, nr, nc, dx, dy);
+        }
+    }
+}
+int closedIsland(vector<vector<int>>& grid) {
 
-    for (int i = n-1; i >= 0; i--)
-    {
-        if(tmp[i] != v[i])
-        {
-            if(tmp[i] % mn != 0){
-                cout << "NO\n";
-                return;
+    int ans = 0;
+
+    int n = grid.size();
+    int m = grid[0].size();
+
+    vector<pair<int, int>> bdr;
+
+    for(int i = 0 ; i < m; i++){
+        if(grid[0][i] == 0)
+            bdr.push_back({0, i});
+        if(grid[n-1][i] == 0)
+            bdr.push_back({n-1, i});
+    }
+    for(int i = 0 ; i < n; i++){
+        if(grid[i][0] == 0)
+            bdr.push_back({i, 0});
+        if(grid[i][m-1] == 0)
+            bdr.push_back({i, m-1});
+    }
+
+    vector<vector<int>> vis(n, vector<int>(m, 0));
+    int dx[] = {-1 ,0, +1, 0};
+    int dy[] = {0, +1, 0, -1};
+
+
+    for(int k = 0 ; k < bdr.size() ; k++) {
+        int i = bdr[k].first;
+        int j = bdr[k].second;
+        if(vis[i][j] == 0) {
+            
+            vis[i][j] == 1;
+            dfs(grid, vis, i, j, dx, dy);
+        }
+        
+    }
+    // for(int i = 0 ; i < n ; i++) {
+    //     for(int j = 0; j < m ; j++ ) {
+    //         cout << vis[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+
+    // return -1;
+
+
+    for(int i = 0 ; i < n ; i++) {
+        for(int j = 0; j < m ; j++ ) {
+            if(grid[i][j] == 0 && vis[i][j] == 0) {
+                ans++; 
+                vis[i][j] == 1;
+                dfs(grid, vis, i, j, dx, dy);
+
             }
         }
     }
 
-    cout << "YES\n";
+    return ans;
+}
 
+void prakhar() { 
 
-    
-      
-    
+    int n , m ;
+    cin >> n >> m ;
+    vector<vector<int>> grid(n , vector<int>(m, 0));
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> grid[i][j];
+        }
+        
+    }
+
+    cout << closedIsland(grid);
+        
        
 }
 
@@ -92,7 +157,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";

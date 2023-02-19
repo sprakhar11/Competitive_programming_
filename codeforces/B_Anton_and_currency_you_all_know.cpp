@@ -44,37 +44,69 @@ long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
+    int minImpossibleOR(vector<int>& nums) {
+            
+            vector<string> v;
+            int n = nums.size();
+            
+            vector<int> v2(32, 0);
+            sort(nums.begin(), nums.end());
+            int prev = -1;
 
-void prakhar() { 
+            
 
-    int n;
-    cin >> n ;
+            for(auto it: nums){
+
+                if(prev == it) continue;
+
+                prev = it;
+                string s = to_binary(it);
+                reverse(s.begin(), s.end());
+                v.push_back(s);  
+                 
+                   
+                cout << s << endl;     
+            }
+
+            int ans = 0;
+            int q = 0;
+            n = v.size();
+            for(int i = 0 ; i < n ; i++){
+
+                for(int j = 0; j < 32 ; j++){
+                    if(v[i][j] == '1'){
+                        v2[j] = 1;
+                    }
+
+                }
+                // check v1 and v2;
+
+                if( v2[q] == 1){
+                    for (int k = q+1; k < 32; k++)
+                    {
+                        if(v2[k] == 1)
+                        {
+                            return pow(2, q);
+                        }
+                    }
+                    
+                } else {
+                    return pow(2, q);
+                }
+                q++;
+                vout(v2);
+            }
+            return pow(2, q);
+            
+            
+        }
+void prakhar() {   
+    int n ; 
     vi v ;
+    cin >> n ;
     vin(v, n);
 
-    int mn = *min_element(all(v));
-
-    vi tmp = v ;
-
-    sort(all(v));
-
-    for (int i = n-1; i >= 0; i--)
-    {
-        if(tmp[i] != v[i])
-        {
-            if(tmp[i] % mn != 0){
-                cout << "NO\n";
-                return;
-            }
-        }
-    }
-
-    cout << "YES\n";
-
-
-    
-      
-    
+    cout << minImpossibleOR(v);
        
 }
 
@@ -92,7 +124,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";

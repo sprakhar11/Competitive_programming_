@@ -45,36 +45,100 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() { 
-
-    int n;
-    cin >> n ;
-    vi v ;
-    vin(v, n);
-
-    int mn = *min_element(all(v));
-
-    vi tmp = v ;
-
-    sort(all(v));
-
-    for (int i = n-1; i >= 0; i--)
-    {
-        if(tmp[i] != v[i])
-        {
-            if(tmp[i] % mn != 0){
-                cout << "NO\n";
-                return;
-            }
+vector<int> char_freq(string v, char ch){
+    int k = 0;
+    int n = v.size();
+    int tmp = 0;
+    vector<int> ans;
+    for(int i = 0; i< n; i++){
+        if(v[i] == ch){
+            tmp++;
+        } else {
+            if(tmp != 0)
+                ans.push_back(tmp);
+             tmp = 0;
         }
     }
-
-    cout << "YES\n";
-
-
+    if(tmp != 0)
+        ans.push_back(tmp);
     
-      
-    
+    return ans;
+}
+
+void prakhar() { 
+
+    int m , s ;
+    cin >> m >> s ;
+
+    vi ans(m, 0);
+
+    int left = m-1;
+    int tmp = s;
+    int i = 0;
+
+    int mx = 9 * m;
+    if( s == 0 && m == 1){
+        cout << 0 << " " << 0 << endl;
+        return;
+    }
+
+    if(s <= 0 || s > mx) {
+        cout << "-1 -1" << endl;
+        return;
+    }
+
+    // finding max
+    while(true){
+
+        while(ans[i] < 9 && tmp > 0){
+            tmp--;
+            ans[i]++;
+        }
+        left--;
+        i++;
+        if(left == -1)
+            break;
+
+    }
+
+    vi ans_l(m, 0);
+
+    left = m -1;
+    i = 0;
+    tmp = s;
+
+    while(true){
+
+        while(ans_l[i] < 9 && ((i < m - 1) ? ((tmp > 1) ? true : false) : true) && tmp > 0){
+
+            ans_l[i]++;
+            tmp--;
+
+        }
+
+        left--;
+        i++;
+
+        if(left == -1)
+            break;
+
+    }
+
+    reverse(all(ans_l));
+
+
+    for (int i = 0; i < m; i++)
+    {
+        cout << ans_l[i];
+    }
+
+    cout << " ";
+
+    for (int i = 0; i < m; i++)
+    {
+        cout << ans[i];
+    }
+    cout << endl;
        
 }
 
@@ -92,7 +156,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
