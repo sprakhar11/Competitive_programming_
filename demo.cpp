@@ -70,9 +70,46 @@ void prakhar() {
     cin >> n ;
 
     string s = to_binary(n);
+    cout << s << endl;
     vector<int> v = char_freq(s, '1');
 
-    for
+    int ans = 0 ;
+    
+    for(auto it: v){
+        if(it > 1){
+            ans += 2;
+        } else {
+            ans++;
+        }
+    }
+    
+        int ans2 = 0;
+
+        vector<int> v2 = char_freq(s, '0');
+        
+        int f = 0;
+
+        if(s[31] == '0'){
+            f = 1;
+        }
+        
+
+        int p = v2.size();
+
+        for(int i = 1 ; i< p ; i++){
+            if(f == 1 && i == p -1 ) continue;
+            ans2 += v[i];
+        }
+        ans2++;
+        ans = min(ans, ans2);
+
+    cout << ans << endl;
+
+
+    
+    
+
+    
 }
 
 int32_t main() {
@@ -89,7 +126,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
