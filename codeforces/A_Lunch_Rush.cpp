@@ -45,99 +45,20 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-vector<int> char_freq(string v, char ch){
-    int k = 0;
-    int n = v.size();
-    int tmp = 0;
-    vector<int> ans;
-    for(int i = 0; i< n; i++){
-        if(v[i] == ch){
-            tmp++;
-        } else {
-            if(tmp != 0)
-                ans.push_back(tmp);
-             tmp = 0;
-        }
-    }
-    if(tmp != 0)
-        ans.push_back(tmp);
+void prakhar() {   
     
-    return ans;
-}
-
-vector<pair<char, int>> char_freq_pair(string v){
-    int k = 0;
-    int n = v.size();
-    vector<pair<char, int>> ans;
-    int i = 0;
-
-    while (true)
+    int n , k ;
+    cin >> n >> k ;
+    int ans = INT_MIN;
+    for (int i = 0; i < n; i++)
     {
-        char ch = v[i];
-        int tmp = 0;
-        while(v[i] == ch && i < n){
-            tmp++;
-            i++;
-        }
-        ans.push_back({ch, tmp});
-        tmp = 0;
-
-        if(i >= n)
-            break;
-
+        int f , t ;
+        cin >> f >> t ;
+        ans = max(ans, t <= k ? f : (f - (t - k)));
     }
-
-    return ans;
-}
-
-void prakhar() { 
-    int n ;
-    cin >> n ;
-
-    string s = to_binary(n);
-    reverse(s.begin(), s.end());
-    removeTrailingCharacters(s, '0');
-    removeLeadingCharacters(s, '0');
-
-    vector<pair<char, int>> v = char_freq_pair(s);
-
-    for(auto it: v){
-        cout << it.ff << " " << it.ss << endl;
-
-    }
-
-    int ans = 0 ;
-
-    int k = v.size();
-
-    if( k == 1){
-        cout << 2 << endl;
-        return;
-
-    }
-
-    for (int i = 0; i < k ; i++)
-    {
-        if(v[i].first == '1' && v[i].second > 1){
-            if(i == k - 2){
-                ans+=2;
-                cout << ans << endl;
-                return;
-            }
-            else if(v[i+1].second > 1){
-                ans += 2;
-            } 
-        } else if(v[i].first == '1' && v[i].second == 1){
-            ans++;
-        }
-    }
-
-    cout << ans  << endl;
-    return;
+    cout << ans << endl;
     
-
-    
-
+       
 }
 
 int32_t main() {
@@ -154,7 +75,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
