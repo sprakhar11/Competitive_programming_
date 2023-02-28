@@ -6,11 +6,11 @@
 #include <bits/stdc++.h>
 #include <unordered_set>
 #include <chrono>
-#define ll long long
-#define int long long
+#define ll long long 
+#define int long long 
 #define MOD1 998244353
 #define INF 1e18
-#define endl "\n"
+#define endl "\n"   
 #define vi vector<int>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -25,6 +25,68 @@
 #define f(i,a,b) for(ll i=a;i<b;i++)
     
 using namespace std;
+
+
+class SGTree {
+	vector<int> seg;
+public:
+	SGTree(int n) {
+		seg.resize(4 * n + 1);
+	}
+ 
+	void build(int ind, int low, int high, int arr[]) {
+		if (low == high) {
+			seg[ind] = arr[low];
+			return;
+		}
+ 
+		int mid = (low + high) / 2;
+		build(2 * ind + 1, low, mid, arr);
+		build(2 * ind + 2, mid + 1, high, arr);
+		seg[ind] = seg[2 * ind + 1] + seg[2 * ind + 2];
+ 
+        // cout << seg << endl;
+	}
+ 
+	int query(int ind, int low, int high, int l, int r) {
+		// no overlap
+		// l r low high or low high l r
+		if (r < low || high < l) return 0;
+ 
+		// complete overlap
+		// [l low high r]
+		if (low >= l && high <= r) return seg[ind];
+ 
+		int mid = (low + high) >> 1;
+		int left = query(2 * ind + 1, low, mid, l, r);
+		int right = query(2 * ind + 2, mid + 1, high, l, r);
+		return left+right;
+	}
+	void update(int ind, int low, int high, int i, int val) {
+		if (low == high) {
+			seg[ind] = val;
+			return;
+		}
+ 
+		int mid = (low + high) >> 1;
+		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
+		else update(2 * ind + 2, mid + 1, high, i, val);
+		seg[ind] =  seg[2 * ind + 1] + seg[2 * ind + 2];
+	}
+    void display(int n)
+    {
+        n = 4 * n + 1;
+        for (int i = 0; i < n; i++)
+        {
+            cout << seg[i] << " " ;
+        }
+        cout << endl;
+        
+    }
+};
+
+
+
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -44,29 +106,45 @@ long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
-
+int sumOfDigits(int n){
+    int s = 0;
+    while( n != 0){
+        int d = n % 10;
+        s += d;
+        n /=10;
+    }
+    return s;
+}
 void prakhar() { 
-    int n ; 
-    cin >> n ;
+
+    int n ;
+    cin >> n;
+    int q ;
+    cin >> q;
+
     vi v;
     vin(v, n);
-    
-    map<int, int> mp;
-    for(auto it:v){
-        mp[it]++;
-    }
+    vi arr(n, 0);
+    SGTree sgt(n);
+    sgt.build(0, 0, n-1, arr);
 
-    vector<int> ans;
+    for (int i = 0; i < q; i++)
+    {
+        int t;
+        cin >> t ;
+        if(t == 1){
+            int l , r ;
+            cin >> l >> r ;
+			sgt.update(0, 0, n-1, --l, r );
 
-    sort(v.begin(), v.end());
-
-
-    for(int i = 0; i < n ; i++){
-        int p = 
-    }
-
-
-
+        } else {
+            int x;
+            cin >> x ;
+            for(int j = 0 ; j  < n ; j++)
+            cout << sgt.query(0, 0, n-1, j-1 , j - 1 ) << " ";
+            cout << endl;
+        }
+    } 
 }
 
 int32_t main() {
@@ -80,16 +158,21 @@ int32_t main() {
     auto start = chrono::steady_clock::now();
 
     //  Insert the code that will be timed
+
+
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
         prakhar();
     }
+
     auto end = chrono::steady_clock::now();
+
     auto diff = end - start;
     cerr << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+    
     return 0;
     
 }
