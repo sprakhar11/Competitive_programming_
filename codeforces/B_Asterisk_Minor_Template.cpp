@@ -45,43 +45,155 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() { 
 
-    int n;
-    cin >> n ;
-
-    vector<pair<int, int>> ans;
-    set<pair<int, int>> st;
-    for(int i = 0 ; i< n; i++){
-        int x ;
-        cin >> x ;
-        st.insert({x, i+1});
-    }  
-
-
-    while(true){
-        auto fst = *st.begin();
-        auto last = *st.rbegin();
-
-        if(fst.ff == last.ff){
-            cout << ans.size() << endl;
-
-            for(auto it:ans){
-                cout << it.ff << " " << it.ss <<endl;
+string printLCSubStr(string X, string Y, int m, int n)
+{
+    // string ans = "";
+    
+    int LCSuff[m + 1][n + 1];
+ 
+    int len = 0;
+ 
+    int row, col;
+ 
+    for (int i = 0; i <= m; i++) {
+        for (int j = 0; j <= n; j++) {
+            if (i == 0 || j == 0)
+                LCSuff[i][j] = 0;
+ 
+            else if (X[i - 1] == Y[j - 1]) {
+                LCSuff[i][j] = LCSuff[i - 1][j - 1] + 1;
+                if (len < LCSuff[i][j]) {
+                    len = LCSuff[i][j];
+                    row = i;
+                    col = j;
+                }
             }
-            return;
+            else
+                LCSuff[i][j] = 0;
         }
-
-        if(fst.ff == 1){
-            cout << -1 << endl;
-            return;
-        }
-
-        st.erase(last);
-        st.insert({((fst.ff + last.ff - 1) / fst.ff), last.ss});
-        ans.pb({last.ss, fst.ss});
-
     }
+ 
+    if (len == 0) {
+        return "-1";
+    }
+ 
+    // char* resultStr = (char*)malloc((len + 1) * sizeof(char));
+    string tmp = "";
+ 
+    while (LCSuff[row][col] != 0) {
+        tmp = X[row - 1] + tmp;
+        // resultStr[--len] = X[row - 1]; 
+ 
+        row--;
+        col--;
+    }
+ 
+    return tmp;
+}
+
+bool endsWith(const std::string &mainStr, const std::string &toMatch)
+{
+    if(mainStr.size() >= toMatch.size() &&
+            mainStr.compare(mainStr.size() - toMatch.size(), toMatch.size(), toMatch) == 0)
+            return true;
+        else
+            return false;
+}
+
+void prakhar() {   
+    
+
+    // cin >> n;
+    string a, b;
+
+    cin >> a >> b ;
+    int n = a.length();
+    int m = b.length();
+
+     if (a.rfind(a[0], 0) == 0 && b.rfind(a[0], 0) == 0) { // pos=0 limits the search to the prefix
+        cout << "YES" <<endl;
+        cout << a[0] << "*" << endl;
+        return;
+
+    } else if(a[n-1] == b[m-1]){
+        cout << "YES" <<endl;
+        cout <<"*" << a[n-1] << endl;
+        return;
+    }
+
+    for (int i = 0; i < n -1 ; i++)
+    {
+        string tmp = a.substr(i, 2);
+        for (int j = 0; j < m -1 ; j++)
+        {
+            // cout << tmp << " "<< b.substr(j,2) << endl;
+            if(tmp == b.substr(j, 2))
+            {
+                cout <<"YES" << endl;
+                cout << "*" << tmp << "*" <<endl;
+                return;
+            }
+        }
+        
+    }
+    cout << "NO" <<endl;
+    return;
+    
+    
+    
+
+    
+    string ans = printLCSubStr(a, b, n, m);
+    // cout << ans << endl;
+    
+    // string tmp = "";
+    
+    // for(auto it:ans){
+    //     if(it > 'a' && it <= 'z')
+    //     tmp += it;
+        
+    // }
+    // cout << ans << endl;
+    // return;
+
+    if(ans == "-1"){
+        cout << "NO";
+        cout << endl;
+            return;
+
+    } else {
+        int star = 2;
+        int len = ans.length();
+
+        if(a == ans && b == ans){
+            cout << "YES" <<endl;
+            cout << a << endl;
+            return;
+        }
+
+        if (a.rfind(ans, 0) == 0 && b.rfind(ans, 0) == 0) { // pos=0 limits the search to the prefix
+            cout << "YES" <<endl;
+            cout << ans << "*" << endl;
+            return;
+
+        } else if(endsWith(a, ans) && endsWith(b, ans)){
+            cout << "YES" <<endl;
+            cout <<"*" << ans << endl;
+            return;
+
+        }
+
+        if(star <= len){
+            cout << "YES" <<endl;
+            cout <<"*" << ans << "*" << endl;
+            return;
+        }
+    }
+    cout << "NO" << endl;
+
+
+       
 }
 
 int32_t main() {

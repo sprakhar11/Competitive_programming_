@@ -45,43 +45,30 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
+bool check(string t , string tmp){
+    // cout << tmp << " " << t << endl;
+    if (t.find(tmp) != string::npos)
+        return true;
+
+    return false;
+}
 void prakhar() { 
 
     int n;
     cin >> n ;
+    string t = "FBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFB";
 
-    vector<pair<int, int>> ans;
-    set<pair<int, int>> st;
-    for(int i = 0 ; i< n; i++){
-        int x ;
-        cin >> x ;
-        st.insert({x, i+1});
-    }  
+    string s;
+    cin >> s ;
 
-
-    while(true){
-        auto fst = *st.begin();
-        auto last = *st.rbegin();
-
-        if(fst.ff == last.ff){
-            cout << ans.size() << endl;
-
-            for(auto it:ans){
-                cout << it.ff << " " << it.ss <<endl;
-            }
-            return;
-        }
-
-        if(fst.ff == 1){
-            cout << -1 << endl;
-            return;
-        }
-
-        st.erase(last);
-        st.insert({((fst.ff + last.ff - 1) / fst.ff), last.ss});
-        ans.pb({last.ss, fst.ss});
-
-    }
+    
+    if(check(t, s) == true)
+        cout << "YES" <<endl;
+    else         
+        cout << "NO" <<endl;
+    
+    
+       
 }
 
 int32_t main() {
