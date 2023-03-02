@@ -47,36 +47,47 @@ vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (
 
 void prakhar() { 
 
-    int n, m ;
-    cin >> n >> m ;
-
+    int n;
+    cin >> n;
     vi v;
     vin(v, n);
-    int ans = 0 ;
 
-    int i = 0;
-    int j = 0;
-    int sm = 0;
+    int mn = 1;
+    int mx = n;
 
-    int mn = *min_element(all(v));
-    if(mn > m) {
-        cout << 0;
-        return;
-    }
-
-    while(i <= j &&  j < n ){
-
-        sm += v[j];
-        while(sm > m){
-            sm -= v[i];
-            i++;
+    int i = 0 ;
+    int j = n-1;
+    int f = 0;
+    while( i < j){
+        //check the low
+        f = 0;
+        if(v[i] == mn || v[i] == mx){
+            f = 1;
+            if(v[i] == mn){
+                i++;
+                mn++;
+            } else {
+                mx--;
+                i++;
+            }
         }
-        // cout << i << " " << j << endl;
-        ans = max(ans, j - i + 1 );
-        j++;
-    }
+        if(v[j] == mn || v[j] == mx){
+            f = 1;
+            if(v[j] == mn){
+                j--;
+                mn++;
+            } else {
+                mx--;
+                j--;
+            }
+        }
+        if(f == 0){
+            cout << i + 1 << " " << j + 1 << endl;
+            return;
+        }
+    }  
 
-    cout << ans;
+    cout << -1 << endl;
     
        
 }
@@ -85,9 +96,9 @@ int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
+    freopen("./input.txt", "r", stdin);
+    freopen("./output.txt", "w", stdout);
+    freopen("./error.txt", "w", stderr);
     #endif
     auto start = chrono::steady_clock::now();
 
@@ -95,7 +106,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";

@@ -47,36 +47,67 @@ vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (
 
 void prakhar() { 
 
-    int n, m ;
-    cin >> n >> m ;
-
-    vi v;
+    int n ;
+    cin >> n ;
+    vi v , w;
     vin(v, n);
-    int ans = 0 ;
+    int m;
+    cin >> m;
+    vin(w, m);
+
+    // map<int, int> mp1;
+    // map<int, int> mp2;
+
+    // for (int i = 0; i < n; i++)
+    // {
+    //     mp1[v[i]]++;
+    // }
+    // for (int i = 0; i < m; i++)
+    // {
+    //     mp2[w[i]]++;
+    // }
+
+    int ans = 0;
+
 
     int i = 0;
     int j = 0;
-    int sm = 0;
-
-    int mn = *min_element(all(v));
-    if(mn > m) {
-        cout << 0;
-        return;
-    }
-
-    while(i <= j &&  j < n ){
-
-        sm += v[j];
-        while(sm > m){
-            sm -= v[i];
+    sort(all(v));
+    sort(all(w));
+    while(i < n && j < m){
+        if(abs(v[i] - w[j]) <= 1){
+            ans++;
             i++;
+            j++;
         }
-        // cout << i << " " << j << endl;
-        ans = max(ans, j - i + 1 );
-        j++;
+        else if(v[i] < w[j]){
+            i++;
+        } else {
+            j++;
+        }
     }
 
+    // for(auto it:mp1){
+    //     while(mp1[it.ff] > 0){
+    //         if(mp2[it.ff + 1] > 0 || mp2[it.ff - 1] > 0 || mp2[it.ff] > 0){
+
+    //             if(mp2[it.ff] > 0){
+    //                 mp2[it.ff]--;
+    //             } else if(mp2[it.ff + 1] > mp2[it.ff - 1]){
+    //                 mp2[it.ff + 1]--;
+    //             } else {
+    //                 mp2[it.ff - 1]--;
+    //             }
+    //             mp1[it.ff]--;
+    //             ans++;
+    //         } else {
+    //             break;
+    //         }
+    //     }
+    // }
     cout << ans;
+    
+    
     
        
 }

@@ -44,39 +44,52 @@ long long lcm(int a, int b){    return (a / gcd(a, b)) * b;}
 int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
-
+bool mysort(pair<int, int> &a, pair<int, int> &b){
+    if(a.ff + a.ss > b.ff + b.ss)
+        return true;
+    return false;
+}
 void prakhar() { 
 
-    int n, m ;
-    cin >> n >> m ;
-
-    vi v;
-    vin(v, n);
-    int ans = 0 ;
-
-    int i = 0;
-    int j = 0;
-    int sm = 0;
-
-    int mn = *min_element(all(v));
-    if(mn > m) {
-        cout << 0;
+    int n ;
+    cin >> n;
+    if(n % 2 == 0){
+        cout << "No\n";
         return;
-    }
+    }  
 
-    while(i <= j &&  j < n ){
+    cout<< "Yes\n";
 
-        sm += v[j];
-        while(sm > m){
-            sm -= v[i];
-            i++;
-        }
-        // cout << i << " " << j << endl;
-        ans = max(ans, j - i + 1 );
+    int i = n ;
+    int j = n + 1;
+
+    vector<pair<int, int>> vp;
+
+    while(i >= 1){
+        vp.pb({i, j});
         j++;
+        i -= 2;
     }
 
-    cout << ans;
+    i = 2 ;
+    j = 2 * n;
+
+    while(i < n){
+
+        vp.pb({i, j});
+        j--;
+        i += 2;
+
+    }
+
+    // sort(all(vp), mysort);
+    for(auto it:vp){
+        cout << it.ff << " " << it.ss << endl;
+    }
+
+
+
+
     
        
 }
@@ -95,7 +108,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
