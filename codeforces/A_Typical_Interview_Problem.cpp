@@ -1,16 +1,12 @@
 
-
-// dheere dheere re mana, dheere sab kuch hoye
-// mali seenche so ghara, ritu aaye phal hoye 
-
 #include <bits/stdc++.h>
 #include <unordered_set>
 #include <chrono>
-#define ll long long
-#define int long long
+#define ll long long 
+#define int long long 
 #define MOD1 998244353
 #define INF 1e18
-#define endl "\n"
+#define endl "\n"   
 #define vi vector<int>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -24,6 +20,10 @@
 #define all(x) (x).begin(), (x).end()
 #define f(i,a,b) for(ll i=a;i<b;i++)
     
+#define amax(a) *max_element(a, a + n)
+#define amin(a) *min_element(a, a + n)
+#define vmax(a) *max_element(a.begin(), a.end())
+#define vmin(a) *min_element(a.begin(), a.end())
 using namespace std;
 #define watch(x) cout << (#x) << " = " << (x) << endl
 const int MOD = 1e9 + 7;
@@ -45,28 +45,30 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
+bool check(string t , string tmp){
+    // cout << tmp << " " << t << endl;
+    if (t.find(tmp) != string::npos)
+        return true;
+
+    return false;
+}
 void prakhar() { 
-    int n ; 
+
+    int n;
     cin >> n ;
-    vi v;
-    vin(v, n);
+    string t = "FBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFB";
+
+    string s;
+    cin >> s ;
+
     
-    map<int, int> mp;
-    for(auto it:v){
-        mp[it]++;
-    }
-
-    vector<int> ans;
-
-    sort(v.begin(), v.end());
-
-
-    for(int i = 0; i < n ; i++){
-        int p = 
-    }
-
-
-
+    if(check(t, s) == true)
+        cout << "YES" <<endl;
+    else         
+        cout << "NO" <<endl;
+    
+    
+       
 }
 
 int32_t main() {
@@ -80,16 +82,21 @@ int32_t main() {
     auto start = chrono::steady_clock::now();
 
     //  Insert the code that will be timed
+
+
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
         prakhar();
     }
+
     auto end = chrono::steady_clock::now();
+
     auto diff = end - start;
     cerr << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+    
     return 0;
     
 }

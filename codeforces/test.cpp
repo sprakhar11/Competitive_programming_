@@ -6,11 +6,11 @@
 #include <bits/stdc++.h>
 #include <unordered_set>
 #include <chrono>
-#define ll long long
-#define int long long
+#define ll long long 
+#define int long long 
 #define MOD1 998244353
 #define INF 1e18
-#define endl "\n"
+#define endl "\n"   
 #define vi vector<int>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -46,27 +46,44 @@ vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); s
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
 void prakhar() { 
-    int n ; 
+    
+    int n;
     cin >> n ;
     vi v;
-    vin(v, n);
+    vin(v,n);
+
+    sort(all(v));
+
+    vector<int> vis(n, 0);
+
+    int prev_ind = 0;
+    int ans = 0;
+
+    int ind = -1;
     
-    map<int, int> mp;
-    for(auto it:v){
-        mp[it]++;
+    for(int i = 0; i < n; i++){
+        if(vis[i] == 1) continue;
+
+        // cout << i << endl;
+        int fnd = v[i] * 2;
+
+        auto tmp = upper_bound(v.begin()+prev_ind, v.end(), fnd);
+
+        if(tmp != v.end()){
+
+            ind = tmp - (v.begin() + prev_ind);
+            if(vis[ind] == 0){
+                vis[i] = 1;
+                vis[ind] = 1;
+                ans+=2;
+                prev_ind = ind;
+            }
+        }
+
+        // cout << ans << " " << v[i] << " " << v[ind] << endl;
     }
-
-    vector<int> ans;
-
-    sort(v.begin(), v.end());
-
-
-    for(int i = 0; i < n ; i++){
-        int p = 
-    }
-
-
-
+    cout << ans << endl;
+       
 }
 
 int32_t main() {
@@ -80,6 +97,8 @@ int32_t main() {
     auto start = chrono::steady_clock::now();
 
     //  Insert the code that will be timed
+
+
     ll t = 1 ;
     // cin >> t ;
     int ii;
@@ -87,9 +106,12 @@ int32_t main() {
         //  cout << "Case #" << i <<": ";
         prakhar();
     }
+
     auto end = chrono::steady_clock::now();
+
     auto diff = end - start;
     cerr << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+    
     return 0;
     
 }

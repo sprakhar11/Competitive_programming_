@@ -6,11 +6,11 @@
 #include <bits/stdc++.h>
 #include <unordered_set>
 #include <chrono>
-#define ll long long
-#define int long long
+#define ll long long 
+#define int long long 
 #define MOD1 998244353
 #define INF 1e18
-#define endl "\n"
+#define endl "\n"   
 #define vi vector<int>
 #define pb push_back
 #define vvi vector<vector<int>>
@@ -46,27 +46,58 @@ vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); s
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
 void prakhar() { 
-    int n ; 
-    cin >> n ;
-    vi v;
-    vin(v, n);
+
+    int n,m ;
+    cin >> n >> m ;
+
+
     
+
     map<int, int> mp;
-    for(auto it:v){
-        mp[it]++;
+    set<int> s;
+    for (int i = 0; i < n; i++)
+    {
+        s.insert(i+1);
+    }
+    
+
+    vi v;
+    vin(v, m);
+    int mov = 1;
+    int rem = n;
+    for (int i = 0; i < m; i++)
+    {
+        if(s.find(v[i]) != s.end()){
+            mov++;
+        } else {
+            mp[rem] = mov;
+            mov++;
+            s.insert(v[i]);
+            s.erase(rem);
+            rem--;
+        }
     }
 
-    vector<int> ans;
+    vi ans;
 
-    sort(v.begin(), v.end());
-
-
-    for(int i = 0; i < n ; i++){
-        int p = 
+    for (int i = 0; i < n; i++)
+    {
+        if(s.find(i+1) == s.end()){
+            ans.pb(mp[i+1]);
+        } else {
+            ans.pb(-1);
+        }
     }
 
+    for(auto it:ans){
+        cout << it << " ";
+    }
 
-
+    cout << endl;
+    
+     
+    
+       
 }
 
 int32_t main() {
@@ -80,16 +111,21 @@ int32_t main() {
     auto start = chrono::steady_clock::now();
 
     //  Insert the code that will be timed
+
+
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
         prakhar();
     }
+
     auto end = chrono::steady_clock::now();
+
     auto diff = end - start;
     cerr << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+    
     return 0;
     
 }
