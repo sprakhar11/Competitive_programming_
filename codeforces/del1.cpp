@@ -45,11 +45,26 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() {   
+void prakhar() { 
+
+    int n;
+
+    cin >> n ;
+
+    set<int> st;
+
+    st.insert(1);
+    st.
+
+    for (int i = 0; i < n; i++)
+    {
+        if(i + 3 < n){
+            
+        }
+    }
+      
     
-       int n ;
-       cin >> n ;
-       cout << n ;
+       
 }
 
 int32_t main() {

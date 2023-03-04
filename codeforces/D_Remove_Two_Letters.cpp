@@ -45,11 +45,48 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() {   
+void prakhar() { 
+
+    int n ;
+    cin >> n ; 
+    string s ;
+    cin >>s ;
+    // map<string, int> st;
+
+    int i = 0 ;
+    int j = 1 ;
+
+    int cnt = 0;
+    int f = 1;
+
+
+    for (int k = 2; k < n; k++)
+    {
+        // string s1 = s.substr(0, i);
+        // string s2 = s.substr(i+2);
+        // string p = s1 + s2 ;
+        // st[p]++;
+        
+        // if(s[k] == s[i] && s[k+1] == s[j]){
+        //     // cnt++;
+        // } else {
+        //     // f = 0;
+        //     cnt++;
+        //     i = k ;
+        //     j = k+1;
+        // }
+
+        if(s[k-2] == s[k]){
+            cnt++;
+        }
+       
+        // cout << p << endl;
+    }
+    // cout << st.size() <<endl;
+    cout << n - 1 - cnt << endl;
+      
     
-       int n ;
-       cin >> n ;
-       cout << n ;
+       
 }
 
 int32_t main() {

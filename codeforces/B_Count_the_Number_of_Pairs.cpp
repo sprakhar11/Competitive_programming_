@@ -45,11 +45,95 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() {   
+void prakhar() { 
+
+    int n ;
+    cin >> n ; 
+    int k ; 
+    cin >> k;
+
+
+    string s;
+    cin >> s ;
+
+    map<char, int> mp;
+
+    for(auto it: s){
+
+        mp[it]++;
+    }  
+
+    int op = 0;
+    int cnt = 0;
+    map<char, int> done;
     
-       int n ;
-       cin >> n ;
-       cout << n ;
+    for(auto it:mp){
+
+        if(done[it.ff] == 1) continue;
+
+        // cout << it.ff << endl;
+        char ch = it.ff;
+
+        if(ch >= 'A' && ch <= 'Z'){
+
+            char ch1 = tolower(ch);
+            int mn = min(it.ss, mp[ch1]);
+            cnt += mn;
+            // cout << "cnt = " << cnt  << " " << mn << endl ;
+            int mx = max(it.ss, mp[ch1]);
+            // cout << mn << " " << mx ;
+
+            int left = mx - mn ;
+
+            // if(left % 2 != 0);
+                // left--;
+
+            // if(left >= 2){
+                left = left / 2;
+            // }
+
+           if( k > 0 && left > 0){
+                cnt += min(left , k);
+                k -= min(k , left);
+            }
+            done[ch] = 1;
+            done[ch1] = 1;
+            // cout << mn << " " << mx << " " << left << " " <<cnt << endl;
+
+        } else {
+            char ch1 = toupper(ch);
+            // cout << ch1 << endl;
+            int mn = min(it.ss, mp[ch1]);
+            cnt += mn;
+            int mx = max(it.ss, mp[ch1]);
+
+            int left = mx - mn ;
+
+            // if(left % 2 != 0);
+                // left--;
+
+            // if(left >= 2){
+                left  = left / 2;
+            // }
+
+            if( k > 0 && left > 0){
+                cnt += min(left , k);
+                k -= min(k , left);
+            }
+            done[ch] = 1;
+            done[ch1] = 1;
+            // cout << mn << " " << mx << " " << left << " " <<cnt << endl;
+
+        }
+
+    }
+
+    cout << cnt <<endl;
+
+
+
+    
+       
 }
 
 int32_t main() {

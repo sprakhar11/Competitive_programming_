@@ -45,11 +45,67 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() {   
-    
-       int n ;
-       cin >> n ;
-       cout << n ;
+void prakhar() { 
+
+    int n,k;
+    cin >> n >> k;
+
+    string s, t;
+    cin >> s >> t;
+    if( n <= 3){
+
+        if(s == t)
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+
+        return;
+    }
+
+    if( n == 4){
+
+        string tmp1 = s[1] + s[2] + "";
+        string tmp2 = t[1] + t[2] + "";
+
+        if(tmp1 != tmp2) {
+            cout << "NO" <<endl;
+            return;
+        }
+        tmp1 = s[0] + s[3]+ "";
+        tmp2 = t[0] + t[3]+ "";
+        sort(all(tmp1));
+        sort(all(tmp2));
+        if(tmp1 == tmp2)
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+        return;
+    }
+
+    if(n == 5){
+        if(s[2] != t[2])
+        {
+            cout << "NO\n";
+            return;
+        }
+        string tmp1 = s[0] + s[1] + s[3] + s[4]+ "";
+        string tmp2 = t[0] + t[1] + t[3] + t[4]+ "";
+        sort(all(tmp1));
+        sort(all(tmp2));
+        if(tmp1 == tmp2)
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+        return;
+    }
+
+    sort(all(s));
+    sort(all(t));
+    if(s == t)
+        cout << "YES\n";
+    else
+        cout << "NO\n";
+
 }
 
 int32_t main() {
@@ -63,8 +119,7 @@ int32_t main() {
     auto start = chrono::steady_clock::now();
 
     //  Insert the code that will be timed
-
-
+    
     ll t = 1 ;
     cin >> t ;
     int ii;
