@@ -2,7 +2,15 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "cmath": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "bit": "cpp",
+        "*.tcc": "cpp",
+        "complex": "cpp",
+        "list": "cpp",
+        "functional": "cpp",
+        "random": "cpp",
+        "limits": "cpp",
+        "variant": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
