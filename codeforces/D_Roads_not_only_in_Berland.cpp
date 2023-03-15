@@ -45,102 +45,137 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void sol(){
-    map<char, vector<pair<int, int>> > mp;
 
-    mp['a'].pb({1, 2});
-    mp['a'].pb({1, 2});
+class DisjointSet
+{
+    vector<int> rank, parent, size, mx, mn;
 
-    mp['a'].pb({1, 2});
+public:
+    DisjointSet(int n)
+    {
+        rank.resize(n + 1, 0);
+        parent.resize(n + 1);
+        size.resize(n + 1);
+        mx.resize(n + 1);
+        mn.resize(n + 1);
 
-    mp['a'].pb({1, 2});
-
-    for(auto it:mp){
-        char ch = it.ff;
-
-        for(auto it2 : it.ss){
-
-            int x = it2.ff;
-            int y = it2.ss;
-
-            cout << x << " " << y << endl;
+        for (int i = 0; i <= n; i++)
+        {
+            parent[i] = i;
+            size[i] = 1;
+            mn[i] = i;
+            mx[i] = i;
         }
-    }   
-
-}
-
-
-vector<int> shortestPath(vector<vector<int>>& edges, int N,int M, int src){
-    //Create an adjacency list of size N for storing the undirected graph.
-        vector<int> adj[N]; 
-        for(auto it : edges) {
-            adj[it[0]].push_back(it[1]); 
-            adj[it[1]].push_back(it[0]); 
-        }
-
-        //A dist array of size N initialised with a large number to 
-        //indicate that initially all the nodes are untraversed.    
-    
-        int dist[N];
-        for(int i = 0;i<N;i++) dist[i] = 1e9;
-        // BFS Implementation.
-        dist[src] = 0; 
-        queue<int> q;
-        q.push(src); 
-        while(!q.empty()) {
-            int node = q.front(); 
-            q.pop(); 
-            for(auto it : adj[node]) {
-                if(dist[node] + 1 < dist[it]) {
-                    dist[it] = 1 + dist[node]; 
-                    q.push(it); 
-                }
-            }
-        }
-        // Updated shortest distances are stored in the resultant array ‘ans’.
-        // Unreachable nodes are marked as -1. 
-        vector<int> ans(N, -1);
-        for(int i = 0;i<N;i++) {
-            if(dist[i] != 1e9) {
-                ans[i] = dist[i]; 
-            }
-        }
-        return ans; 
     }
 
-void prakhar() { 
+    int findUPar(int node)
+    {
+        if (node == parent[node])
+            return node;
+        return parent[node] = findUPar(parent[node]);
+    }
+    int findmin(int node)
+    {
+        return mn[findUPar(node)];
+    }
+    int findmax(int node)
+    {
+        return mx[findUPar(node)];
+    }
+    int findsize(int node)
+    {
+        return size[findUPar(node)];
+    }
 
-    int n, k , d , w ;
-    cin >> n >> k >> d >> w;
-    vi v;
-    vin(v, n);
-    int ans = 0;
+    void unionByRank(int u, int v)
+    {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+
+        if (ulp_u == ulp_v)
+            return;
+        if (rank[ulp_u] < rank[ulp_v])
+        {
+            parent[ulp_u] = ulp_v;
+        }
+        else if (rank[ulp_v] < rank[ulp_u])
+        {
+            parent[ulp_v] = ulp_u;
+        }
+        else
+        {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+
+    void unionBySize(int u, int v)
+    {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+
+        if (ulp_u == ulp_v)
+            return;
+
+        if (size[ulp_u] < size[ulp_v])
+        {
+            // cout << ulp_u << " " << ulp_v << endl;
+            // cout << mn[ulp_u] << " " << mx[ulp_u] << endl;
+            // cout << mn[ulp_v] << " " << mx[ulp_v] << endl;
+
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+            mn[ulp_v] = min(mn[ulp_v], mn[ulp_u]);
+            mx[ulp_v] = max(mx[ulp_v], mx[ulp_u]);
+        }
+        else
+        {
+            // cout << ulp_u << " " << ulp_v << endl;
+            // cout << mn[ulp_u] << " " << mx[ulp_u] << endl;
+            // cout << mn[ulp_v] << " " << mx[ulp_v] << endl;
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+            mn[ulp_u] = min(mn[ulp_v], mn[ulp_u]);
+            mx[ulp_u] = max(mx[ulp_v], mx[ulp_u]);
+        }
+    }
+};
+
+void prakhar() {   
     
-    // if(k != 0 && d != 0)
-    for (int i = 0; i < n; i++){   
+        int n;
+        cin >> n;
 
+        DisjointSet ds(n);
+        vector<pair<int, int>> vp;
+        for (int i = 0; i < n-1; i++)
+        {
+            int u, v;
+            cin >> u >> v;
+            if(ds.findUPar(u) == ds.findUPar(v)){
+                vp.pb({u, v});
+            } else {
+                ds.unionBySize(u, v);
+            }
+        }
         
-        int vc = k;
-        int time = d;
-        ans++;
-        int wt = 0;
-        while(vc != 0 && time != 0 && i < n) {
-            vc--;
-            time--;
-            wt++;
-            i++;
-
-            if(v[i]+ w < w){
-                i--;
-                break;
+        int k = 0;
+        vector<vector<int>> ans;
+        for(int i = 2; i <= n; i++){
+            if(ds.findUPar(i) != ds.findUPar(1)){
+                ans.pb({vp[k].ff , vp[k].ss , 1 , i});
+                ds.unionBySize(i, 1);
+                k++;
             }
-
         }
-    }
 
-    cout << ans <<endl;
-      
-    
+        cout << ans.size() <<endl;
+        for(auto it:ans){
+            for(auto it2:it){
+                cout << it2 << " ";
+            }
+            cout << endl;
+        }
        
 }
 
@@ -162,7 +197,7 @@ int32_t main() {
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
-        sol();
+        prakhar();
     }
 
     auto end = chrono::steady_clock::now();

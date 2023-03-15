@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 class DisjointSet {
-    vector<int> rank, parent, size, mx, mn; 
+    vector<int> rank, parent, size, mx, mn, points; 
 public: 
     DisjointSet(int n) {
         rank.resize(n+1, 0); 
@@ -9,6 +9,8 @@ public:
         size.resize(n+1); 
         mx.resize(n+1); 
         mn.resize(n+1); 
+        points.resize(n+1, 0); 
+
 
         for(int i = 0;i<=n;i++) {
             parent[i] = i; 
@@ -24,18 +26,30 @@ public:
         return parent[node] = findUPar(parent[node]); 
     }
     int findmin(int node){
-        return mn[parent[node]];
+        return mn[findUPar(node)];
     }
     int findmax(int node){
-        return mx[parent[node]];
+        return mx[findUPar(node)];
     }
     int findsize(int node){
-        return size[parent[node]];
+        return size[findUPar(node)];
+    }
+
+    void add_value(int node, int point, int n){
+        int k = findUPar(node);
+        for(int i = 1 ; i <= n ; i++)
+        if( k == findUPar(i))
+            points[k] += point;
+    }
+
+    int getPoint(int node){
+        return points[node];
     }
 
     void unionByRank(int u, int v) {
         int ulp_u = findUPar(u); 
-        int ulp_v = findUPar(v); 
+        int ulp_v = findUPar(v);
+
         if(ulp_u == ulp_v) return; 
         if(rank[ulp_u] < rank[ulp_v]) {
             parent[ulp_u] = ulp_v; 
@@ -56,14 +70,20 @@ public:
         if(ulp_u == ulp_v) return; 
 
         if(size[ulp_u] < size[ulp_v]) {
+            // cout << ulp_u << " " << ulp_v << endl;
+            // cout << mn[ulp_u] << " " << mx[ulp_u] << endl;
+            // cout << mn[ulp_v] << " " << mx[ulp_v] << endl;
+
             parent[ulp_u] = ulp_v; 
             size[ulp_v] += size[ulp_u]; 
             mn[ulp_v] = min(mn[ulp_v], mn[ulp_u]);
             mx[ulp_v] = max(mx[ulp_v], mx[ulp_u]);
-
+            
         }
         else {
-
+            // cout << ulp_u << " " << ulp_v << endl;
+            // cout << mn[ulp_u] << " " << mx[ulp_u] << endl;
+            // cout << mn[ulp_v] << " " << mx[ulp_v] << endl;
             parent[ulp_v] = ulp_u;
             size[ulp_u] += size[ulp_v]; 
             mn[ulp_u] = min(mn[ulp_v], mn[ulp_u]);
@@ -80,25 +100,32 @@ int main() {
     freopen("output.txt", "w", stdout);
     freopen("error.txt", "w", stderr);
     #endif
+    int n , q ;
+    cin >> n >> q ;
 
-    DisjointSet ds(5);
-    ds.unionBySize(1, 2); 
-    cout << ds.findmin(3) << " " << ds.findmax(3) << " " << ds.findsize(3) << endl;
-    cout << ds.findmin(2) << " " << ds.findmax(2) << " " << ds.findsize(2) << endl;
+    DisjointSet ds(n);
 
-    ds.unionBySize(2, 3); 
-    cout << ds.findmin(2) << " " << ds.findmax(2) << " " << ds.findsize(2) << endl;
+    for (int i = 0; i < q; i++)
+    {
+        string s;
+        cin >> s;
 
-    ds.unionBySize(1, 3); 
-    cout << ds.findmin(5) << " " << ds.findmax(5) << " " << ds.findsize(5) << endl;
-
-    ds.unionBySize(4, 5); 
-    cout << ds.findmin(5) << " " << ds.findmax(5) << " " << ds.findsize(5) << endl;
-
-
-    ds.unionBySize(4, 1);
-    cout << ds.findmin(5) << " " << ds.findmax(5) << " " << ds.findsize(5) << endl;
-
+        if(s == "join"){
+            int u, v;
+            cin >> u >> v;
+            ds.unionBySize(u, v); 
+        } else if(s == "add"){
+            int u;
+            int x;
+            cin >> u >> x;
+            ds.add_value(u, x, n);
+        } else {
+            int u;
+            cin >> u;
+            // cout << ds.findUPar(u) << endl;
+            cout << ds.getPoint(u) << endl;
+        }
+    }
 
 
 	return 0;

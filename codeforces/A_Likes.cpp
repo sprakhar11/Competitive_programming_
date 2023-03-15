@@ -45,101 +45,74 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void sol(){
-    map<char, vector<pair<int, int>> > mp;
-
-    mp['a'].pb({1, 2});
-    mp['a'].pb({1, 2});
-
-    mp['a'].pb({1, 2});
-
-    mp['a'].pb({1, 2});
-
-    for(auto it:mp){
-        char ch = it.ff;
-
-        for(auto it2 : it.ss){
-
-            int x = it2.ff;
-            int y = it2.ss;
-
-            cout << x << " " << y << endl;
-        }
-    }   
-
-}
-
-
-vector<int> shortestPath(vector<vector<int>>& edges, int N,int M, int src){
-    //Create an adjacency list of size N for storing the undirected graph.
-        vector<int> adj[N]; 
-        for(auto it : edges) {
-            adj[it[0]].push_back(it[1]); 
-            adj[it[1]].push_back(it[0]); 
-        }
-
-        //A dist array of size N initialised with a large number to 
-        //indicate that initially all the nodes are untraversed.    
-    
-        int dist[N];
-        for(int i = 0;i<N;i++) dist[i] = 1e9;
-        // BFS Implementation.
-        dist[src] = 0; 
-        queue<int> q;
-        q.push(src); 
-        while(!q.empty()) {
-            int node = q.front(); 
-            q.pop(); 
-            for(auto it : adj[node]) {
-                if(dist[node] + 1 < dist[it]) {
-                    dist[it] = 1 + dist[node]; 
-                    q.push(it); 
-                }
-            }
-        }
-        // Updated shortest distances are stored in the resultant array ‘ans’.
-        // Unreachable nodes are marked as -1. 
-        vector<int> ans(N, -1);
-        for(int i = 0;i<N;i++) {
-            if(dist[i] != 1e9) {
-                ans[i] = dist[i]; 
-            }
-        }
-        return ans; 
-    }
-
 void prakhar() { 
 
-    int n, k , d , w ;
-    cin >> n >> k >> d >> w;
+
+    int n ;
+    cin >> n ; 
     vi v;
     vin(v, n);
-    int ans = 0;
+
+    vi pos;
+    vi neg;
+
     
-    // if(k != 0 && d != 0)
-    for (int i = 0; i < n; i++){   
 
+    for(auto it:v){
+        if(it > 0 )
+        pos.pb(it);
+        else
+        neg.pb(it);
+    }  
+
+    vi ans1;
+    vi ans2;
+    for(auto it: pos){
+        ans1.pb(it);
+    }
+    for(auto it:neg){
+        ans1.pb(it);
         
-        int vc = k;
-        int time = d;
-        ans++;
-        int wt = 0;
-        while(vc != 0 && time != 0 && i < n) {
-            vc--;
-            time--;
-            wt++;
-            i++;
-
-            if(v[i]+ w < w){
-                i--;
-                break;
-            }
-
-        }
     }
 
-    cout << ans <<endl;
-      
+    int p  = 0 ;
+    int nn = 0 ;
+
+    int k = 0;
+    int i = 0;
+
+    while(p < pos.size() && nn < neg.size() && k < n){
+        
+        ans2.pb(pos[p++]);
+        ans2.pb(neg[nn++]);
+        k++;
+    }
+
+    while(p < pos.size())
+                ans2.pb(pos[p++]);
+
+    
+    while(nn < neg.size())
+        ans2.pb(neg[nn++]);
+    
+    int tmp1 = 0;
+
+    for(auto it:ans1){
+        if(it > 0)
+            cout << ++tmp1 << " ";
+        else
+            cout << --tmp1 << " ";
+    }
+    cout << endl;
+    tmp1 = 0;
+    for(auto it:ans2){
+        if(it > 0)
+            cout << ++tmp1 << " ";
+        else
+            cout << --tmp1 << " ";
+    }
+    cout << endl;
+
     
        
 }
@@ -158,11 +131,11 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
-        sol();
+        prakhar();
     }
 
     auto end = chrono::steady_clock::now();
