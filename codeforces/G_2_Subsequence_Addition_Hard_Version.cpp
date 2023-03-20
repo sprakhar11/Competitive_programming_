@@ -45,114 +45,31 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void vmout(vector<vector<int>> &v)
-{
-    for(auto it:v){
-        for(auto it2:it){
-            cout << it2 << " ";
-        }
-        cout << endl;
+void prakhar() { 
+
+    int n;
+    cin >> n;
+    vi v;
+    vin(v, n);
+
+    sort(all(v));
+
+    int sm = 1;
+    if(v[0] != 1){
+        cout << "NO" << endl;
+        return;
     }
-    cout << endl;
+    for(int i = 1; i< n ; i++){
+        if( v[ i ] <= sm){
+            sm = sm + v[i];
+        } else {
+            cout << "NO" << endl;
+            return;
+        }
+    }
+    cout << "YES" << endl;
     
-}
-
-
-
-
-
-
-
-
-void prakhar() {   
     
-    int n, m;
-    cin >> n >> m ;
-
-    vector<vector<int>> mt(n, vector<int>(m, 0));
-    vector<vector<int>> pri(n, vector<int>(m, 0));
-    vector<vector<int>> sec(n, vector<int>(m, 0));
-
-
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < m; j++){
-            cin >> mt[i][j];
-        }
-    }
-    // vmout(mt);
-
-    for(int i = 0 ; i < m ; i++){
-        sec[0][i] = mt[0][i];
-        pri[0][i] = mt[0][i];
-    }
-    for (int i = 1; i < n; i++){
-        for (int j = 0; j < m; j++)
-        {
-            // cout << mt[i][j] << " " << sec[i-1][j+1] << endl;
-            if(j != m-1)
-                sec[i][j] = mt[i][j] + sec[i-1][j+1];
-            else
-                sec[i][j] = mt[i][j];
-
-            if(j != 0)
-                pri[i][j] = mt[i][j] + pri[i-1][j-1];
-            else
-                pri[i][j] = mt[i][j];
-        }
-    }
-    // vmout(sec);
-    // vmout(pri);
-    
-    int dia = 2 ;
-    int ans = INT_MIN;
-    int max_dia = min(n, m);
-    while(dia <= max_dia){
-
-        int r_l = n - dia;
-        int c_l = m - dia;
-        // int p = min(r_l, c_l);
-
-
-        for (int i = 0; i <= r_l; i++)
-        {
-            for (int j = 0; j <= c_l; j++)
-            {
-                //primary dia sum
-                int fr = i;
-                int fc = j;
-                int center = 0;
-                if(dia % 2 != 0 ){
-                    int  p = dia / 2;
-                    center = mt[i + p ][j + p];
-                }
-                int lr = i + dia - 1;
-                int lc = j + dia - 1;
-
-                int sub = 0;
-                if(fc != 0 && fr != 0)
-                    sub = pri[fr-1][fc - 1];
-                int sum1 = pri[lr][lc] - sub;
-
-                //secondary sum col;
-
-                fr = i;
-                fc = j + dia - 1;
-                lr = i + dia - 1;
-                lc = j;
-                sub = 0 ;
-                if(fr != 0 && fc != m-1 )
-                    sub = sec[fr - 1][fc + 1];
-                
-                int sum2 = sec[lr][lc] - sub;
-
-                // cout << dia << " " << sum1 << " " << sum2 << " " << center<< endl;
-                // cout << fr << " " << fc << " " << lr << " " << lc << endl;
-                ans = max(ans, sum1 + sum2 - center);
-            }
-        }
-        dia++;
-    }
-    cout << ans << endl;
        
 }
 
@@ -168,6 +85,7 @@ int32_t main() {
 
     //  Insert the code that will be timed
 
+
     ll t = 1 ;
     cin >> t ;
     int ii;
@@ -177,8 +95,10 @@ int32_t main() {
     }
 
     auto end = chrono::steady_clock::now();
+
     auto diff = end - start;
     cerr << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+    
     return 0;
     
 }
