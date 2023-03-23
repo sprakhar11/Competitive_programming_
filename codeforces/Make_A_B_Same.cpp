@@ -30,7 +30,7 @@ const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
 ll mult(ll x, ll y) {ll res = x * y;return (res >= MOD ? res % MOD : res);}
 ll factorial(ll v){ll ans=1;for(int i=2;i<=v;i++){ans*=i;ans%=MOD;}return ans;}
-ll power(ll x, ll y){   if (y < 0)return 1;ll res = 1; x %= MOD;while (y!=0) {if ((y & 1)==1)res = mult(res, x); y >>= 1;x = mult(x, x);} return res;}
+ll power(ll a, ll n){ll res = 1;while(n){if(n%2 == 1){res = (res * a)%MOD;n--;}else{a = (a * a)%MOD;n = n/2;}}return res;}
 vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
 void vin( vector<int> &v , int n ){for (int i = 0; i < n; i++){int x ;cin >> x; v.push_back(x);}}
 void vout(vector<int> &v){for (int i = 0; i < v.size(); i++){cout << v[i] << " " ;}cout << endl;}
@@ -45,12 +45,53 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() {   
-    
-       int n ;
-       cin >> n ;
-       cout << n ;
-       int
+void prakhar() { 
+
+    int n;
+    cin >> n ;
+
+    vi a;
+    vi b;
+    vin(a, n);
+    vin(b, n);
+
+    vi v = a;
+    if(a[0] != b[0] || a[n-1] != b[n-1]){
+        cout << "NO" << endl;
+        return;
+    }   
+
+    vi a2 = a;
+
+    for(int i = 1; i < n-1; i++){
+        a[i] = a[i-1] | a[i];
+    }
+    for(int i = n - 2; i > 0; i-- ){
+        a2[i] = a2[i+1] | a2[i];
+    }
+    // vout(a);
+    // vout(a2);
+
+    for(int i = 1; i < n-1; i++){
+        if(b[i] == 1){
+            if(a[i] == 1 || a2[i] == 1){
+
+            }else if( v[i] == 1 ){
+
+            }else {
+                cout << "NO" << endl;
+                return;
+            }
+        } else if ( v[i] == 0 ){
+
+        } else {
+            cout << "NO" << endl;
+            return;
+        }
+    }
+
+    cout << "YES" << endl;
+       
 }
 
 int32_t main() {
