@@ -62,7 +62,7 @@ void prakhar() {
         int cnt = 0;
         char ch = s[i];
 
-        while(i < n && s[i] == ch){
+        while(i < n && s[i] == ch){x
             cnt++;
             i++;
         }
