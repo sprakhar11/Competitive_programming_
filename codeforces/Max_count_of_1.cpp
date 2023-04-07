@@ -47,33 +47,46 @@ vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (
 
 void prakhar() { 
 
-    set<int> st;
-    int n ;
+    int n;
     cin >> n ;
-    vi v;
-    vin(v, n);
 
-    for(auto it:v)
-    st.insert(it);
+    string s;
+    cin >> s;
 
-    for(auto it:st){
-        cout << it << " " ;
+    string ans;
+    string tmp;
+
+    
+    tmp.push_back('0');
+    for(int i = 1 ; i < n; i++){
+        if(s[i-1] != tmp[i-1]){
+            tmp.pb('1');
+        } else {
+            tmp.pb('0');
+        }
     }
-    cout << endl;
 
-    int q ;
-    cin >> q ;
+    int cnt1 = count(all(tmp), '1');
 
-    while(q--){
-        int x ;
-        cin >> x ;
-        auto p = st.lower_bound(1);
-        
-        if(*p > x)
-            cout << "hi" << endl;
+    ans = tmp;
+    tmp.clear();
 
-        cout << *p << endl;
+    tmp.push_back('1');
+    for(int i = 1 ; i < n; i++){
+        if(s[i-1] != tmp[i-1]){
+            tmp.pb('1');
+        } else {
+            tmp.pb('0');
+        }
     }
+
+    int cnt2 = count(all(tmp), '1');
+
+    if(cnt2 > cnt1) 
+        cout << cnt2 << endl;
+    else
+        cout << cnt1 << endl;
+
     
        
 }
@@ -92,7 +105,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";

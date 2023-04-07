@@ -47,33 +47,104 @@ vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (
 
 void prakhar() { 
 
-    set<int> st;
-    int n ;
-    cin >> n ;
-    vi v;
-    vin(v, n);
+    int n, k ;
+    cin >> n >> k ;
 
-    for(auto it:v)
-    st.insert(it);
+    vector<string> a, b;
 
-    for(auto it:st){
-        cout << it << " " ;
+    map<char, int> mp1, mp2;
+    for (int i = 0; i < n; i++)
+    {
+        string h ;
+        cin >> h;
+        a.pb(h);
+
+        for(auto it:h){
+            mp1[it]++;
+        }
     }
-    cout << endl;
 
-    int q ;
-    cin >> q ;
+    for (int i = 0; i < n; i++)
+    {
+        string h;
+        cin >> h;
 
-    while(q--){
-        int x ;
-        cin >> x ;
-        auto p = st.lower_bound(1);
-        
-        if(*p > x)
-            cout << "hi" << endl;
+        b.pb(h);
 
-        cout << *p << endl;
+        for(auto it:h){
+            mp2[it]++;
+        }
+
     }
+
+    for (int i = 0; i < n; i++)
+    {
+        if(b.length() < a.length()){
+            cout << "NO" << endl;
+            return;
+        }
+
+    }
+
+    int cost = 0;
+
+    for(int i = 0; i < n; i++){
+
+        if(a.length() != b.length()){
+
+            int p = b.length() - a.length();
+            int f = 0;
+            int take = 0;
+            if(mp1['0'] != 0){
+                int cnt = mp['0'];
+                if(cnt < p){
+                    mp1['0'] = 0;
+                    take = cnt;
+                    f = 1;
+                } else {
+                    mp1['0'] -= p;
+                    take = p;
+                }
+            }
+
+            if(f == 1){
+
+                int need = p - take;
+
+                cost = cost + need;
+
+            }
+            if(cost  > k){
+                cout << "NO" << endl;
+                return;
+            }
+
+            // analyse the string
+
+            int start = p - 1;
+            int tmp = 0;
+            int nn = a.length();
+            
+            for(int ii = 0; ii < nn ; ii++){
+                if(b[start] != a[tmp]){
+                    // check if the map has the value
+                    if(mp1[b[tmp]] != 0){
+                        mp1[b[tmp]]--;    
+                    } else {
+                        
+                    }
+                }
+            }
+
+        } else {
+
+        }
+
+    }
+
+    
+    
+
     
        
 }
@@ -92,7 +163,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
