@@ -30,7 +30,7 @@ const int MOD = 1e9 + 7;
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
 ll mult(ll x, ll y) {ll res = x * y;return (res >= MOD ? res % MOD : res);}
 ll factorial(ll v){ll ans=1;for(int i=2;i<=v;i++){ans*=i;ans%=MOD;}return ans;}
-ll power(ll x, ll y){   if (y < 0)return 1;ll res = 1; x %= MOD;while (y!=0) {if ((y & 1)==1)res = mult(res, x); y >>= 1;x = mult(x, x);} return res;}
+ll power(ll a, ll n){ll res = 1;while(n){if(n%2 == 1){res = (res * a)%MOD;n--;}else{a = (a * a)%MOD;n = n/2;}}return res;}
 vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
 void vin( vector<int> &v , int n ){for (int i = 0; i < n; i++){int x ;cin >> x; v.push_back(x);}}
 void vout(vector<int> &v){for (int i = 0; i < v.size(); i++){cout << v[i] << " " ;}cout << endl;}
@@ -45,12 +45,80 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
+
+long memo(int idx,int last,int a,int e,int i,int o,int u,int n, ){
+        if(idx==n){
+            return 1;
+        }
+        if(dp[idx][last][a][e][i][o][u]!=-1) return dp[idx][last][a][e][i][o][u];
+
+        long ans = mul(21, memo(idx+1,last,a,e,i,o,u,n));
+        int[] store = {a,e,i,o,u};
+        char ch = 'z';
+        if(last==1) ch='a';
+        else if(last==2) ch='e';
+        else if(last==3) ch='i';
+        else if(last==4) ch='o';
+        else if(last==5) ch='u';
+        int na=a;int ne=e;int ni=i;int no=o;int nu=u;
+        if(ch=='a') na = 1;
+        else if(ch=='e') ne=1;
+        else if(ch=='i') ni=1;
+        else if(ch=='o') no=1;
+        else if(ch=='u') nu = 1;
+        for(int l=0;l<5;l++){
+            char curr = ar[l];
+            if(curr==ch){
+                ans = (ans+memo(idx+1, last, a, e, i, o, u, n))%MOD;
+            }else{
+                if(store[l]!=1){
+                    int nlast = l+1;
+                    ans = (ans+memo(idx+1,nlast,na,ne,ni,no,nu,n))%MOD;
+                }
+            }
+        }
+        return dp[idx][last][a][e][i][o][u]=ans;
+    }
+
 void prakhar() {   
     
-       int n ;
-       cin >> n ;
-       cout << n ;
-       int
+    auto dp = new long [100001][6][2][2][2][2][2];
+    auto cache = new long [100001];
+    for (int i = 0; i < 100001; i++)
+    {
+        cache[i]  = -1;
+    }
+
+    int n;
+    cin >> n ;
+
+    for(int i=0;i<=100000;i++){
+        for(int j=0;j<6;j++){
+            for(int k=0;k<2;k++){
+                for(int l=0;l<2;l++){
+                    for(int m=0;m<2;m++){
+                        for(int p=0;p<2;p++){
+                            for (int q = 0; q < 2; q++)
+                            {
+                                dp[i][j][k][l][m][p][q] = -1;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if(cache[n] != -1){
+        cout << cache[n] << endl;
+        return;
+    }
+    
+    auto ans = memo(0,0,0,0,0,0,0,n);
+    cache[n] = ans;
+    cout << ans << endl;
+       
 }
 
 int32_t main() {

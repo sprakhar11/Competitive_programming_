@@ -45,35 +45,83 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-void prakhar() { 
+class SGTree {
+	vector<int> seg;
+public:
+	SGTree(int n) {
+		seg.resize(4 * n + 1);
+	}
+	void build(int ind, int low, int high, int arr[]) {
+		if (low == high) {
+			seg[ind] = arr[low];
+			return;
+		}
+		int mid = (low + high) / 2;
+		build(2 * ind + 1, low, mid, arr);
+		build(2 * ind + 2, mid + 1, high, arr);
+		seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
+	}
+	int query(int ind, int low, int high, int l, int r) {
+		if (r < low || high < l) return INT_MAX;
+		if (low >= l && high <= r) return seg[ind];
+		int mid = (low + high) >> 1;
+		int left = query(2 * ind + 1, low, mid, l, r);
+		int right = query(2 * ind + 2, mid + 1, high, l, r);
+		return min(left, right);
+	}
+	void update(int ind, int low, int high, int i, int val) {
+		if (low == high) {
+			seg[ind] = val;
+			return;
+		}
+		int mid = (low + high) >> 1;
+		if (i <= mid) update(2 * ind + 1, low, mid, i, val);
+		else update(2 * ind + 2, mid + 1, high, i, val);
+		seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
+	}
+};
 
-    int n;
-    cin >> n;
+void prakhar() {   
+    
     string s;
-    cin >> s;
+    cin >> s ;
+    
+    int q;
+    cin >> q ;
 
-    vi v;
-    for (int i = 0; i < n; i++){
-        v.pb(s[i] - 'A');
-    }
-
-    sort(all(v));
-    int n1 = n / 2;
-    int n2 = n1 + 1;
-    int c1 = 0 ;
-    int c2 = 0 ;
-
-    for (int i = 0; i < n; i++){
-        if(n % 2 == 0){
-            c2 += abs(v[i] - v[n2]);
+    int open[n];
+    int close[n];
+    int i = 0;
+    for(auto it:s){
+        if(it == '('){
+            open[i] = 1;
+            close[i] = 0;
+        } else {
+            open[i] = 0;
+            close[i] = 1;
         }
-        c1 += abs(v[i] - v[n1]);
     }
 
-    if(n % 2 != 0){
-        c2 = c1;
+    int n = s.size();
+    SGTree treeopen(n);
+    SGTree treeclose(n);
+
+    treeopen.build(0, 0, n-1, open);
+    treeopen.build(0, 0, n-1, close);
+
+    for (int i = 0; i < q; i++)
+    {
+        int l ,r;
+        cin >> l >> r ;
+        l--;
+        r--;
+
+        cout << min(treeopen)
     }
-    cout << min(c1, c2) << endl;
+    
+
+
+       
 }
 
 int32_t main() {
@@ -94,7 +142,7 @@ int32_t main() {
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
-        prakhar2();
+        prakhar();
     }
 
     auto end = chrono::steady_clock::now();
