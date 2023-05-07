@@ -46,30 +46,48 @@ vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); s
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
 //SPEED IS NOT THE CRITERIA, CODE SHOULD BE A NO BRAINER, CMP KILLS, KPAP 
-void prakhar() {   
-    int n , m ;
-    cin >> n >> m ;
-    vi a, b;
-    vin(a, n);
-    vin(b, m);
+void prakhar() { 
 
-    sort(all(a));
-    sort(all(b));
+    int n;
+    cin >> n ;
+    vi v;
+    vin(v, n);
 
-    int sum1 = 0;
-    int sm2 = 0;
-    sum1 = accumulate(all(a), sum1);
-    sm2 = accumulate(all(b), sm2);
+    int i = 0 ;
+    int j = n - 1;
+    int f = 0;
+    while(i < j ){
+        if( v[i] != v[j]){
+            f = 1;
+            break;
+        }
+        i++;
+        j--;
+    }  
 
-    cout << sum1 << endl;
-    cout << sm2 << endl;
-    int a = -5;
-    int p = a / 2;
-    cout << p << endl;
+    if( f == 0) {
+        cout << 0 << endl;
+        return;
+    }
 
+    vi tmp;
+    i = 0;
+    j = n -1;
+    while(i < j ){
+        if( v[i] != v[j]){
+            tmp.pb(abs(v[i] - v[j]));
+        }
+        i++;
+        j--;
+    }  
 
-    vout(a);
-    vout(b);
+    int n2 = tmp.size();
+
+    for(int i = 1; i < n2; i++){
+        tmp[i] = gcd(tmp[i-1], tmp[i]);
+    }
+
+    cout << tmp[n2- 1] << endl;
        
 }
 
@@ -87,7 +105,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";

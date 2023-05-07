@@ -3,7 +3,7 @@
 #include <unordered_set>
 #include <chrono>
 #define ll long long 
-#define int long long 
+// #define int long long 
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"   
@@ -18,8 +18,7 @@
 #define set_bits __builtin_popcountll
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
-#define f(i,a,b) for(ll i=a;i<b;i++)
-    
+
 #define amax(a) *max_element(a, a + n)
 #define amin(a) *min_element(a, a + n)
 #define vmax(a) *max_element(a.begin(), a.end())
@@ -46,31 +45,35 @@ vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); s
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
 //SPEED IS NOT THE CRITERIA, CODE SHOULD BE A NO BRAINER, CMP KILLS, KPAP 
-void prakhar() {   
-    int n , m ;
-    cin >> n >> m ;
-    vi a, b;
-    vin(a, n);
-    vin(b, m);
+void prakhar() { 
 
-    sort(all(a));
-    sort(all(b));
+    int n , m;
+    cin >> n >> m;
+    if(m == 1){
+        cout << "YES" << endl;
+        return;
+    }
 
-    int sum1 = 0;
-    int sm2 = 0;
-    sum1 = accumulate(all(a), sum1);
-    sm2 = accumulate(all(b), sm2);
+    if(n == 1){
+        cout << "YES" << endl;
+        return;
+    }
 
-    cout << sum1 << endl;
-    cout << sm2 << endl;
-    int a = -5;
-    int p = a / 2;
-    cout << p << endl;
+    if (m >= n) {
+        cout << "NO" << endl;
+        return;
+    }
+    for (int i = 2; i * i <= n; i++){
+        if (n % i == 0){
+                int k = min(i, n / i);
+                if(k<=m){
+                    cout << "NO" << endl;
+                    return;
+                }
+        }
+    }
+    cout << "YES" << endl;
 
-
-    vout(a);
-    vout(b);
-       
 }
 
 int32_t main() {
@@ -87,7 +90,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";

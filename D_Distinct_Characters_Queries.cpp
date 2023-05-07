@@ -47,30 +47,8 @@ vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (
 
 //SPEED IS NOT THE CRITERIA, CODE SHOULD BE A NO BRAINER, CMP KILLS, KPAP 
 void prakhar() {   
-    int n , m ;
-    cin >> n >> m ;
-    vi a, b;
-    vin(a, n);
-    vin(b, m);
-
-    sort(all(a));
-    sort(all(b));
-
-    int sum1 = 0;
-    int sm2 = 0;
-    sum1 = accumulate(all(a), sum1);
-    sm2 = accumulate(all(b), sm2);
-
-    cout << sum1 << endl;
-    cout << sm2 << endl;
-    int a = -5;
-    int p = a / 2;
-    cout << p << endl;
-
-
-    vout(a);
-    vout(b);
-       
+    
+       f
 }
 
 int32_t main() {
@@ -87,7 +65,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
