@@ -3,7 +3,7 @@
 #include <unordered_set>
 #include <chrono>
 #define ll long long 
-#define int long long 
+// #define int long long 
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"   
@@ -46,30 +46,38 @@ vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); s
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
 //SPEED IS NOT THE CRITERIA CMP KILLS, KP BYS 
-int dp[100000 + 1] = {-1};
-long long fun(vector<vector<int>> &q, ll sum, int n, int ind){
-    if(dp[ind] != -1){
-        cout << ind < endl;
-        return dp[ind];
-    }
-    if(ind >= n)
-        return sum;
-    
-    return dp[ind] = max(fun(q, sum + q[ind][0], n, ind + q[ind][1] + 1), fun(q, sum, n, ind + 1));
-}
+//CHECK THE EDGE CASES 10 TIMES
 void prakhar() { 
 
-    vector<vector<int>> q = {{3, 2}, {4, 3}, {4, 4}, {2, 5}};
-    int n = q.size();
+    int n;
+    cin >> n;
+    int k ;
+    cin >> k ;
+    vi v;
+    vin(v, n);
 
-    ll ans = fun(q, 0, n, 0);
-    for(int i = 0 ;i < n; i++){
-        cout << dp[i] << " ";
+    sort(all(v));
+    int sm = 0;
+    for(int i = 0; i < n; i++){
+        sm += v[i];
     }
-    cout << endl;
+    int ans = sm;
+    int p = 0;
+    for(int i = 0; i < k ; i++){
+        sm -= v[p] + v[p + 1];
+        ans = min(ans , sm);
+        p += 2;
+    }
+    p -= 2;
+    int j = n - 1;
+    for(int i = 0; i < k ; i++){
+        sm = sm + v[p] + v[ p + 1] - v[j];
+        p -= 2;
+        j--;
+        ans = max( ans , sm);
+    }
 
-    cout <<  ans;
-    
+    cout << ans << endl;
        
 }
 

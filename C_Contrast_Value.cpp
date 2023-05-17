@@ -46,29 +46,86 @@ vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); s
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
 //SPEED IS NOT THE CRITERIA CMP KILLS, KP BYS 
-int dp[100000 + 1] = {-1};
-long long fun(vector<vector<int>> &q, ll sum, int n, int ind){
-    if(dp[ind] != -1){
-        cout << ind < endl;
-        return dp[ind];
-    }
-    if(ind >= n)
-        return sum;
-    
-    return dp[ind] = max(fun(q, sum + q[ind][0], n, ind + q[ind][1] + 1), fun(q, sum, n, ind + 1));
-}
 void prakhar() { 
 
-    vector<vector<int>> q = {{3, 2}, {4, 3}, {4, 4}, {2, 5}};
-    int n = q.size();
+    int n;
+    cin >> n;
+    vi v;
+    vin(v, n);
+    if(n == 1){
+        cout << 1 << endl;
+        return;
 
-    ll ans = fun(q, 0, n, 0);
-    for(int i = 0 ;i < n; i++){
-        cout << dp[i] << " ";
     }
-    cout << endl;
+    if(n == 2){
+        if(v[0] == v[1]){
+            cout << 1 << endl;
+        } else {
+            cout << 2 << endl;
+        }
+        return;
 
-    cout <<  ans;
+    }
+
+    vi tmp2 = v;
+
+    sort(all(tmp2));
+    if(tmp2[0] == tmp2[n-1]){
+        cout << 1 << endl;
+        return;
+    }
+
+    int ans = 0;
+    vi tmp;
+
+    int i = 0;
+    int j = 1;
+    tmp.pb(v[0]);
+    while(j < n && i < j){
+        // cout << v[i ] << " " << v[j] << endl;
+        if(v[i] != v[j]){
+            tmp.pb(v[j]);
+            i = j;
+            j++;
+        } else {
+            j++;
+        }
+    }
+    // vout(tmp);
+    v = tmp;
+
+    i = 0;
+    j = 1;
+    int cnt = 0;
+    n = v.size();
+    while(j < n && i < j){
+        if(j == 5){
+            // cout << v[j] << " " << v[i] << endl;
+        }
+        if(j < n && v[j] > v[i]){
+            ans++;
+            while(j < n && v[j] > v[i]){
+                i++;
+                j++;
+            }
+        }
+        // cout << i << " " << j << " " << ans << endl;
+        // if(cnt == 1) return;
+        if(j < n && v[j] < v[i]){
+            ans++;
+            while(j < n && v[j] < v[i]){
+                i++;
+                j++;
+            }
+        }
+        cnt++;
+        // cout << i << " " << j << " * " << ans << endl;
+
+    }
+
+
+    cout << ans + 1 << endl;
+    
     
        
 }
@@ -77,10 +134,12 @@ int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifndef ONLINE_JUDGE
+    ofstream file("output.txt", std::ofstream::out | std::ofstream::trunc);
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
     freopen("error.txt", "w", stderr);
     #endif
+
     auto start = chrono::steady_clock::now();
 
     //  Insert the code that will be timed

@@ -19,6 +19,10 @@
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
 #define f(i,a,b) for(ll i=a;i<b;i++)
+#define cf cout << "YES\n";
+#define cn cout << "NO\n";
+
+
     
 #define amax(a) *max_element(a, a + n)
 #define amin(a) *min_element(a, a + n)
@@ -46,31 +50,52 @@ vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); s
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
 //SPEED IS NOT THE CRITERIA CMP KILLS, KP BYS 
-int dp[100000 + 1] = {-1};
-long long fun(vector<vector<int>> &q, ll sum, int n, int ind){
-    if(dp[ind] != -1){
-        cout << ind < endl;
-        return dp[ind];
-    }
-    if(ind >= n)
-        return sum;
-    
-    return dp[ind] = max(fun(q, sum + q[ind][0], n, ind + q[ind][1] + 1), fun(q, sum, n, ind + 1));
-}
 void prakhar() { 
 
-    vector<vector<int>> q = {{3, 2}, {4, 3}, {4, 4}, {2, 5}};
-    int n = q.size();
+    string s;
+    cin >> s;
+    int n = s.size();
 
-    ll ans = fun(q, 0, n, 0);
-    for(int i = 0 ;i < n; i++){
-        cout << dp[i] << " ";
+    int cnt = 0;
+    int f1 = 0;
+    int f2 = 0;
+    for(int  i = 0; i < n - 1; i++){
+        // cout << i << endl;
+        if(s[i] == 'A' && s[i+1] == 'B' && f1 == 0){
+            cnt++;
+            f1 = 1;
+            i++;
+        }
+        else if(s[i] == 'B' && s[i+1] == 'A' && f2 == 0 && f1 == 1) {
+            cnt++;
+            f2 = 1;
+            i++;
+        }
+    }  
+    if(cnt == 2){
+        cf
+        return;
+    } 
+    f1 = 0;
+    f2 = 0;
+    cnt = 0;
+    for(int  i = 0; i < n - 1; i++){
+        // cout << i << endl;
+        if(s[i] == 'B' && s[i+1] == 'A' && f1 == 0){
+            cnt++;
+            f1 = 1;
+            i++;
+        }
+        else if(s[i] == 'A' && s[i+1] == 'B' && f2 == 0  && f1 == 1) {
+            cnt++;
+            f2 = 1;
+            i++;
+        }
     }
-    cout << endl;
-
-    cout <<  ans;
-    
-       
+    if(cnt == 2)
+        cf
+    else
+        cn
 }
 
 int32_t main() {
@@ -87,7 +112,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    cin >> t ;
+    // cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
