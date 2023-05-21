@@ -7,9 +7,9 @@
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"   
-#define vvi vector<vector<int>>
 #define vi vector<int>
 #define pb push_back
+#define vvi vector<vector<int>>
 #define pii pair<int, int>
 #define ff first
 #define ss second
@@ -47,93 +47,25 @@ vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (
 
 //SPEED IS NOT THE CRITERIA CMP KILLS, KP BYS 
 //CHECK THE EDGE CASES 10 TIMES
-vector<vector<int>> groupOverlappingRanges(vector<vector<int>>& ranges) {
-      
-       sort(ranges.begin(), ranges.end());
-      
-       vector<vector<int>> temp;
-       temp.push_back({ranges[0]});
-       for(int i=1;i<ranges.size();i++){
-           int last_fir = temp[temp.size()-1][0];
-           int last_val = temp[temp.size()-1][1];
-          
-           if(ranges[i][0] > last_val){
-               temp.push_back(ranges[i]);
-           }else{
-               temp.pop_back();
-               int final_last = max(last_val, ranges[i][1]);
-               temp.push_back({last_fir, final_last});
-           }
-       } 
-      
-    //   for(auto it:temp){
-    //       for(auto it2:it){
-    //           cout << it2 << " ";
-    //       }
-    //       cout << endl;
-    //   } 
-       return temp;
-    }
-vector<int> kthSmallestNum(int n, vector<vector<int>>&range, int q, vector<int>queries){
-        //Write your code here
-        vector<int> v;
-        vector<vector<int>> r = groupOverlappingRanges(range);
-        for(int i = 0; i < r.size(); i++){
-            int st = r[i][0];
-            int en = r[i][1];
-            cout << st << " " << en << endl;
-            // return v;
-            for(int j = st; j <= en; j++){
-                cout << j << endl;
-                v.push_back(j);
-                if(j == 1998500282)
-                return v;
-            }
-            return v;
-        }
-        // return v;
-        vector<int> ans;
-        for(int i = 0; i < q ; i++){
-            if(queries[i] > v.size())
-                ans.push_back(-1);
-            else
-                ans.push_back(v[queries[i] - 1]);
-            
-        }
-        return ans;
-    }
 void prakhar() { 
 
     int n;
     cin >> n ;
+    string s;
+    cin >> s ;
 
-    vvi range;
+    set<string> st;
 
-    for(int i = 0 ; i < n ; i++){
-        int a, b ;
-        cin >>a >> b;
-        range.pb({a, b});
-    }
+    for(int i= 0; i < n -1; i++){
+        string tmp;
 
-    int q ;
-    cin >> q ;
-    vi que;
-    for (int i = 0; i < q; i++)
-    {
-        int qq;
-        cin >> qq;
-        que.pb(qq);
-    }
-    // return;
-    vi ans = kthSmallestNum(n, range, q , que);
+        tmp.pb(s[i]);
+        tmp.pb(s[i+1]);
 
-    for(auto it:ans){
-        cout << it << " ";
-    }
-    cout << endl;
+        st.insert(tmp);
+    }  
 
-    
-
+    cout << st.size() << endl;
     
        
 }
@@ -152,7 +84,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
