@@ -74,5 +74,6 @@
     "cmake.configureSettings": {
     
     },
-    "cph.general.defaultLanguage": "cpp"
+    "cph.general.defaultLanguage": "cpp",
+    "cph.general.onceMaintainerMessage": false
 }
