@@ -3,7 +3,7 @@
 #include <unordered_set>
 #include <chrono>
 #define ll long long 
-#define int long long 
+// #define int long long 
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"   
@@ -45,31 +45,32 @@ int digits_count(int n){int d=0;while(n != 0){d++;n /=10;}return d;}
 vector<string> to_token(string s){vector<string> tokens; stringstream chk1(s); string tmp; while(getline(chk1, tmp, ' ')){ tokens.push_back(tmp); } return tokens;}
 vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (n%i == 0){if (n/i == i)v.pb(i);else {v.pb(i);v.pb(n/i);}}}sort(all(v));return v;}
 
-//SPEED IS NOT THE CRITERIA, CODE SHOULD BE A NO BRAINER, CMP KILLS, KPAP 
+//SPEED IS NOT THE CRITERIA CMP KILLS, KP BYS 
+//CHECK THE EDGE CASES 10 TIMES
+bool checkPartition(int i) {
+    int squared = i * i;
+    string squaredStr = to_string(squared);
+    int len = squaredStr.length();
+
+    vector<int> dp(len + 1, 0);
+    dp[0] = 1;
+
+    for (int i = 1; i <= len; i++) {
+        for (int j = i - 1; j >= 0; j--) {
+            if (dp[j] && stoi(squaredStr.substr(j, i - j)) <= i) {
+                dp[i] = 1;
+                break;
+            }
+        }
+    }
+
+    return dp[len];
+}
 void prakhar() {   
-    int n , m ;
-    cin >> n >> m ;
-    vi a, b;
-    vin(a, n);
-    vin(b, m);
+    int n;
+    cin >> n ;
 
-    sort(all(a));
-    sort(all(b));
-
-    int sum1 = 0;
-    int sm2 = 0;
-    sum1 = accumulate(all(a), sum1);
-    sm2 = accumulate(all(b), sm2);
-
-    cout << sum1 << endl;
-    cout << sm2 << endl;
-    int a = -5;
-    int p = a / 2;
-    cout << p << endl;
-
-
-    vout(a);
-    vout(b);
+    cout << checkPartition(n) << endl;
        
 }
 
@@ -87,7 +88,7 @@ int32_t main() {
 
 
     ll t = 1 ;
-    // cin >> t ;
+    cin >> t ;
     int ii;
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
