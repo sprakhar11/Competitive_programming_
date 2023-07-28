@@ -3,7 +3,7 @@
 #include <unordered_set>
 #include <chrono>
 #define ll long long 
-// #define int long long
+#define int long long 
 #define MOD1 998244353
 #define INF 1e18
 #define endl "\n"   
@@ -47,111 +47,27 @@ vector<int> findFactors(int n){vector<int> v;for (int i=1; i<=sqrt(n); i++){if (
 
 //SPEED IS NOT THE CRITERIA CMP KILLS, KP BYS 
 //CHECK THE EDGE CASES 10 TIMES
-
-class Solution{
-  public:
-    //Function to find triplets with zero sum.
-    bool findTriplets(ll arr[], ll n)
-    { 
-        vector<ll> pos(1000001, 0);
-        vector<ll> neg(1000001, 0); 
-        
-        for(ll i = 0; i < n; i++){
-            if(arr[i] >=0)
-                pos[arr[i]]++;
-            else
-                neg[arr[i]]++;
-            
-        }
-        
-        for(ll i = 0; i < n; i++){
-            
-            if(arr[i] >=0)
-                pos[arr[i]]--;
-            else
-                neg[arr[i]]--;
-            
-            for(ll j = i + 1; j < n ; j++){
-                
-                if(arr[j] >=0)
-                    pos[arr[j]]--;
-                else
-                    neg[arr[j]]--;
-                
-                ll p = arr[i] + arr[j];
-                
-                ll find = -1 * p;
-                
-                if(find >= 0 && find <= 1000000)
-                    if(pos[find] > 0)
-                        return 1;
-                        
-                if(find < 0 && find >= -1000000)
-                    if(neg[find] > 0)
-                        return 1;
-                    
-                if(arr[j] >=0)
-                    pos[arr[j]]++;
-                else
-                    neg[arr[j]]++;
-            }
-            if(arr[i] >=0)
-                pos[arr[i]]++;
-            else
-                neg[arr[i]]++;
-        }
-        
-        return 0;
-    }
-};
-
-
-
-
-
-
-
-
-void solve() { 
-
-    double n, b, h;
-    cin >> n >> b >> h;
-
-    vector<double> v;
-    for (ll i = 0; i <  n; i++)
-    {
-        double tmp;
-        cin >> tmp;
-        v.pb(tmp);
-    }
+void solve() {   
     
-    sort(all(v));
-    reverse(all(v));
+    double a, b, c;
 
+    cin >> a >> b >> c;
 
-    double ans = 0;
+    a = 8 * a;
+    b = 5 * b + (7 * (0.2 * a));
+    c = 8 * c + 4 * (1.1 * c);
 
-    ans =  ((b * h)) / 2.0;
+    double tol = a + b + c;
 
-    for (int i = 1; i < n; i++)
-    {
-        if((v[i-1] - v[i]) < h ){
-            double hei = (v[i-1] - v[i]); // 1
-            double upb = (h - (v[i - 1] - v[i])) * 2.0; // 2
-            double tmp =( b - upb) / 2.0; // 1
-            double ar = upb * hei + tmp * tmp;
-            ans += ar;
-        } else {
-            ans += (((b * h)) / 2.0);
-        }
-        cout << ans << endl;
-    }
-    
-    cout << ans << endl;
+    cout << a << " " << b << " " << c << " " << tol << endl;
 
-    
-    
-    
+    double p = 30.0 /31.0;
+    double q = 371.0 / 859.0;
+    double r = a /c;
+    double s = b / tol;
+
+    cout <<abs(p - r) << endl;
+    cout << abs(q- s) << endl;
        
 }
 
@@ -171,6 +87,10 @@ int32_t main() {
     ll t = 1 ;
     cin >> t ;
     int ii;
+
+    cout << 30.0 /31.0 << endl;
+    cout << 371.0 / 859.0 << endl;
+
     for ( ii = 1; ii <= t; ii++) {
         //  cout << "Case #" << i <<": ";
         solve();
