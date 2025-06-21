@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.*;
 import java.io.*;
 //import java.util.logging.LogManager;
-public class Vaibhav {
+public class Prakhar {
 
     static long bit[];
     static boolean prime[];
