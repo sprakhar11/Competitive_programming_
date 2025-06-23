@@ -1,13 +1,13 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Solution {
+public class LeetCode455 {
+    static FastScanner fs = null;
+
     static class FastScanner {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer("");
+
 
         String next() {
             while (!st.hasMoreTokens()) try {
@@ -59,6 +59,7 @@ public class Solution {
             return Long.parseLong(next());
         }
     }
+
     static class Pair<T, V> {
         T first;
         V second;
@@ -68,70 +69,6 @@ public class Solution {
             this.second = second;
         }
     }
-    static FastScanner fs = null;
-    public static void main(String[] args) {
-        // Uncomment the following lines for local testing with files
-        try {
-            System.setIn(new FileInputStream("input.txt"));
-            System.setOut(new PrintStream("output.txt"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
-
-        fs = new FastScanner();
-        int t = 1;
-//        t = fs.nextInt();
-        while(t-- > 0){
-//            solve();
-            String caption = fs.nextLine();
-            System.out.println(minSwaps(new int[]{1, 2, 2}));
-        }
-    }
-
-    static public int minSwaps(int[] nums) {
-        List<Integer> even = new ArrayList<>();
-        List<Integer> odd = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] % 2 == 0) {
-                even.add(i);
-            } else {
-                odd.add(i);
-            }
-        }
-        if (Math.abs(even.size() - odd.size()) > 1) {
-            return -1;
-        }
-
-        // check if swap needed
-        int a = solve(even, odd);
-        int b = solve(odd, even);
-        if (a == 0) {
-            return b;
-        } else if (b == 0) {
-            return a;
-        }
-        return Math.min(a, b);
-    }
-
-    static int solve(List<Integer> even, List<Integer> odd) {
-        int temp = 0;
-        int oddIndexCompleted = 0;
-        int ans = 0;
-        for (int i = 1; i < even.size(); i++) {
-            if (even.get(i) - even.get(i - 1) == 1) {
-                // put an odd number at i + temp
-                ans += Math.abs(odd.get(oddIndexCompleted++) - (i + temp));
-                temp++;
-            }
-
-            if (even.get(i) > 2) {
-                oddIndexCompleted++;
-            }
-        }
-        return ans;
-    }
-
 
     static char toUpper(char c) {
         if (c >= 'a' && c <= 'z') {
@@ -172,18 +109,91 @@ public class Solution {
         return true;
     }
 
-    static public String generateTag(String caption) {
-        String[] tag = caption.split(" ");
-        StringBuilder ans = new StringBuilder("#" + toLower(tag[0].charAt(0)) + makeAllLowerCase(tag[0].substring(1)));
-        for (int i = 1; i < tag.length ; i++) {
-            String s = toUpper(tag[i].charAt(0)) + makeAllLowerCase(tag[i].substring(1));
-            ans.append(s);
+    public static void main(String[] args) {
+        // Uncomment the following lines for local testing with files
+        try {
+            System.setIn(new FileInputStream("input.txt"));
+            System.setOut(new PrintStream("output.txt"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
         }
 
-        return ans.substring(0, Math.min(ans.length(),100) );
+        fs = new FastScanner();
+        int t = 1;
+//        t = fs.nextInt();
+        while(t-- > 0){
+//            System.out.println(Arrays.toString(findCoins(new int[]{0, 1, 0, 2, 0, 3, 0, 4, 0, 5}).toArray()));
+        }
     }
 
-    static void solve(int t) {
+    public static boolean isPrime(long n) {
+        if(n < 2) return false;
+        if(n == 2 || n == 3) return true;
+        if(n%2 == 0 || n%3 == 0) return false;
+        long sqrtN = (long)Math.sqrt(n)+1;
+        for(long i = 6L; i <= sqrtN; i += 6) {
+            if(n%(i-1) == 0 || n%(i+1) == 0) return false;
+        }
+        return true;
+    }
 
+    static public boolean checkPrimeFrequency(int[] nums) {
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (freq.containsKey(nums[i])) {
+                freq.put(nums[i], freq.get(nums[i]) + 1);
+            } else {
+                freq.put(nums[i], 1);
+            }
+        }
+        for (int i : freq.keySet()) {
+            if (isPrime(freq.get(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static public int coinSelectWaysInfiniteSupply(int s, List<Integer> arr) {
+        int n = arr.size();
+        int[][] memo = new int[n + 1][s + 1];
+        memo[0][0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= s; j++) {
+                memo[i][j] += memo[i - 1][j];
+
+                if ((j - arr.get(i - 1)) >= 0) {
+                    memo[i][j] += memo[i][j - arr.get(i - 1)];
+                }
+            }
+        }
+        return memo[n][s];
+    }
+
+    public List<Integer> findCoins(int[] numWays) {
+        List<Integer> formedArray = new ArrayList<>();
+
+        for (int i=0;i<numWays.length;i++){
+            int amount = i + 1;
+            if (amount == 1 && numWays[i] >= 2) {
+                return new ArrayList<>();
+            }
+            if (amount == 1 && numWays[i] == 1) {
+                formedArray.add(1);
+                continue;
+            }
+
+            int totalWaysFromExistingArray = coinSelectWaysInfiniteSupply(amount, formedArray);
+            int diff = numWays[i] - totalWaysFromExistingArray;
+            if (diff < 0 || diff > 1) {
+                return new ArrayList<>();
+            }
+
+            if (diff == 1) {
+                formedArray.add(amount);
+            }
+        }
+        return formedArray;
     }
 }
