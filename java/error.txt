@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at Template2.solve(Template2.java:22)
+	at Template2.run(Template2.java:52)
+	at Template2.main(Template2.java:158)
